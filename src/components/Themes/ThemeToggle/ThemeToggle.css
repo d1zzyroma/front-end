@@ -1,0 +1,14 @@
+/* src/components/Themes/ThemeToggle.css */
+
+.color-item {
+  margin-bottom: 10px;
+}
+
+.color-box {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 1px solid #ccc; /* Додаємо обводку для кращої видимості */
+  vertical-align: middle; /* Вирівнюємо квадрати з текстом */
+}
