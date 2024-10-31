@@ -74,6 +74,14 @@ const MainDashBoard = ({ boardId }) => {
                   </div>
                 </div>
               ))}
+              <button className={s.addCardBtn}>
+                <span className={s.btnWrapper}>
+                  <span className={s.btnIconWrapper}>
+                    <SvgIcon id="icon-plus" className={s.columnIcons} />
+                  </span>
+                  <span>Add another card</span>
+                </span>
+              </button>
             </div>
           </div>
         ))}
