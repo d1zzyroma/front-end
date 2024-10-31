@@ -1,4 +1,50 @@
 .cont {
-  background: #18b434;
+  /* background: var(--primary-light); */
+  background: #f6f6f7;
   width: 100%;
+  height: 100vh;
+}
+
+.boardTitleBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-left: 14px;
+  padding-right: 14px;
+  margin-bottom: 40px;
+}
+
+.boardTitle {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  /* padding-left: 20px; */
+  /* padding-top: 14px; */
+}
+
+.filterBox {
+  display: flex;
+  gap: 2px;
+}
+
+.filter {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  color: var(--text-secondary);
+}
+
+.filterIcon {
+  height: 16px;
+  width: 16px;
+  fill: none;
+  stroke: var(--text-primary);
+  stroke-opacity: 0.8;
+  stroke-width: 1.5;
+  stroke-linecap: "round";
+  stroke-linejoin: "round";
 }
