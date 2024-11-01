@@ -1,29 +1,72 @@
 import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./MainDashBoard.module.css";
+import EllipsisText from "react-ellipsis-text";
 
 const MainDashBoard = ({ boardId }) => {
   const columns = [
     {
       columnTitle: "Column title 1",
       cards: [
-        { cardTitle: "Card 1", cardDescr: "Card descr" },
-        { cardTitle: "Card 2", cardDescr: "Card descr" },
-        { cardTitle: "Card 3", cardDescr: "Card descr" },
-        { cardTitle: "Card 4", cardDescr: "Card descr" },
-        { cardTitle: "Card 5", cardDescr: "Card descr" },
-        { cardTitle: "Card 6", cardDescr: "Card descr" },
+        {
+          cardTitle: "Card 1",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
+        {
+          cardTitle: "Card 2",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
+        {
+          cardTitle: "Card 3",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
+        {
+          cardTitle: "Card 4",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
+        {
+          cardTitle: "Card 5",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
+        {
+          cardTitle: "Card 6",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
       ],
     },
     {
       columnTitle: "Column title 2",
-      cards: [{ cardTitle: "Card 1", cardDescr: "Card descr" }],
+      cards: [
+        {
+          cardTitle: "Card 1",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
+      ],
     },
     {
       columnTitle: "Column title 3",
       cards: [
-        { cardTitle: "Card 1", cardDescr: "Card descr" },
-        { cardTitle: "Card 2", cardDescr: "Card descr" },
-        { cardTitle: "Card 3", cardDescr: "Card descr" },
+        {
+          cardTitle: "Card 1",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
+        {
+          cardTitle: "Card 2",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
+        {
+          cardTitle: "Card 3",
+          cardDescr:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+        },
       ],
     },
   ];
@@ -35,9 +78,9 @@ const MainDashBoard = ({ boardId }) => {
           {columns.map((column, index) => (
             <div key={index} className={s.columnWrapper}>
               <div className={s.columnNameBox}>
-                <div className={s.columnName}>
+                <h2 className={s.columnName}>
                   {column.columnTitle} {boardId}
-                </div>
+                </h2>
                 <div className={s.iconsBox}>
                   <SvgIcon id="icon-pencil" className={s.columnIcons} />
                   <SvgIcon id="icon-trash" className={s.columnIcons} />
@@ -48,7 +91,12 @@ const MainDashBoard = ({ boardId }) => {
                   <div key={cardIndex} className={s.card}>
                     <div className={s.cardStatusSpanWrapper}></div>
                     <h3 className={s.cardTitle}>{card.cardTitle}</h3>
-                    <p className={s.cardDescr}>{card.cardDescr}</p>
+                    <EllipsisText
+                      className={s.cardDescr}
+                      text={card.cardDescr}
+                      length="115"
+                    />
+                    {/*  */}
                     <div className={s.cardDivider}></div>
                     <div className={s.cardEditsInfo}>
                       <div className={s.cardInfo}>
