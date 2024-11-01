@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 
-import Header from "./components/Header/Header.jsx";
+import SideBar from "../SideBar/SideBar.jsx";
 
 export const Layout = ({ children }) => {
   return (
-    <div style={{ margin: "0 auto" }}>
-      <Header />
+    <div style={{ margin: "0 auto", display: "flex" }}>
+      <SideBar />
       <Suspense fallback={null}>{children}</Suspense>
     </div>
   );

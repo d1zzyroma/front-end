@@ -9,10 +9,11 @@ import AuthPage from "./pages/AuthPage/AuthPage.jsx";
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
 import RegisterForm from "./components/RegisterForm/RegisterForm.jsx";
 import ScreensPage from "./pages/ScreensPage/ScreensPage.jsx";
-import { RestrictedRoute } from "./RestrictedRoute.jsx";
+
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import { ThemeProvider } from "./components/Themes/ThemeContext/ThemeContext.jsx";
 import InfoForTeam from "./info/InfoForTeam/InfoForTeam.jsx";
+import { RestrictedRoute } from "./components/Routes/RestrictedRoute.jsx";
 // // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 
 function App() {

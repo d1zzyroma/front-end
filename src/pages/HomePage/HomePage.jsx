@@ -1,5 +1,6 @@
-import SideBar from "../../components/SideBar/SideBar.jsx";
-import { Layout } from "../../Layout.jsx";
+import Header from "../../components/Header/Header.jsx";
+
+import { Layout } from "../../components/Layout/Layout.jsx";
 import ScreensPage from "../ScreensPage/ScreensPage.jsx";
 import s from "./HomePage.module.css";
 
@@ -8,7 +9,8 @@ const HomePage = () => {
     <div className={s.cont}>
       <Layout>
         <div className={s.testcont}>
-          <SideBar />
+          {/* <SideBar /> */}
+          <Header />
           <ScreensPage />
         </div>
       </Layout>
