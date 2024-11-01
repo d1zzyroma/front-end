@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/tastProApi';
 
-// GET columns
+// GET columns - Відправляє запит до API для отримання списку колонок.
 export const getColumns = createAsyncThunk(
   'columns/getColumns',
   async (_, thunkAPI) => {
@@ -14,7 +14,7 @@ export const getColumns = createAsyncThunk(
   }
 );
 
-// POST columns
+// POST columns - Відправляє запит для створення нової колонки з даними, що передаються в параметрах.
 export const addColumn = createAsyncThunk(
   'columns/addColumn',
   async (data, thunkAPI) => {
@@ -27,7 +27,7 @@ export const addColumn = createAsyncThunk(
   }
 );
 
-// PUT columns/:id
+// PUT columns/:id - Відправляє запит для оновлення колонки за її ID, передаючи нові дані.
 export const updateColumn = createAsyncThunk(
   'columns/updateColumn',
   async ({ id, data }, thunkAPI) => {
@@ -40,7 +40,7 @@ export const updateColumn = createAsyncThunk(
   }
 );
 
-// DELETE columns/:id
+// DELETE columns/:id - Відправляє запит для видалення колонки за її ID.
 export const deleteColumn = createAsyncThunk(
   'columns/deleteColumn',
   async (id, thunkAPI) => {

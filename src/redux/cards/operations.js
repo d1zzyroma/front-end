@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/tastProApi';
 
-// GET cards
+// GET cards -  Отримує список карток для певної дошки (board).
 export const getCards = createAsyncThunk(
   'cards/getCards',
   async (boardId, thunkAPI) => {
@@ -14,7 +14,7 @@ export const getCards = createAsyncThunk(
   }
 );
 
-// POST cards
+// POST cards - Додає нову картку до дошки з ідентифікатором boardId. Дані картки передаються в data.
 export const addCard = createAsyncThunk(
   'cards/addCard',
   async ({ boardId, data }, thunkAPI) => {
@@ -27,7 +27,7 @@ export const addCard = createAsyncThunk(
   }
 );
 
-// PUT cards/:id
+// PUT cards/:id - Оновлює існуючу картку за її ID (cardId) з новими даними (data).
 export const updateCard = createAsyncThunk(
   'cards/updateCard',
   async ({ cardId, data }, thunkAPI) => {
@@ -40,7 +40,7 @@ export const updateCard = createAsyncThunk(
   }
 );
 
-// DELETE cards/:id
+// DELETE cards/:id - Видаляє картку за її ID (cardId).
 export const deleteCard = createAsyncThunk(
   'cards/deleteCard',
   async (cardId, thunkAPI) => {
@@ -53,7 +53,7 @@ export const deleteCard = createAsyncThunk(
   }
 );
 
-// PATCH cards/:id
+// PATCH cards/:id - Застосовує часткові зміни до картки за її ID (cardId) з новими даними (data).
 export const replaceCard = createAsyncThunk(
   'cards/replaceCard',
   async ({ cardId, data }, thunkAPI) => {
