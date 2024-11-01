@@ -1,10 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi, setAuthHeader, clearAuthHeader } from "../../config/tastProApi";
 
-/*
- * POST @ /auth/register
- * body: { name, email, password }
- */
+// POST /auth/register: Відправляє запит для реєстрації нового користувача з параметрами name, email і password.
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
@@ -18,10 +15,7 @@ export const register = createAsyncThunk(
   }
 );
 
-/*
- * POST @ /users/login
- * body: { email, password }
- */
+// POST /auth/login: Відправляє запит для входу користувача з параметрами email і password.
 export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
@@ -35,10 +29,7 @@ export const logIn = createAsyncThunk(
   }
 );
 
-/*
- * POST @ /auth/logout
- * headers: Authorization: Bearer token
- */
+// POST /auth/logout: Відправляє запит для виходу користувача.
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await taskProApi.post('/auth/logout');
@@ -48,10 +39,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-/*
- * GET @ /users/current
- * headers: Authorization: Bearer token
- */
+// GET /users/current: Отримує дані поточного користувача.
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
@@ -72,10 +60,7 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-/*
- * PATCH @ /user/
- * headers: Authorization: Bearer token
- */
+// PATCH /user/: Відправляє запит для оновлення профілю користувача.
 export const updateUserProfile = createAsyncThunk(
   'auth/profile',
   async (credentials, thunkAPI) => {
@@ -96,10 +81,7 @@ export const updateUserProfile = createAsyncThunk(
   }
 );
 
-/*
- * PATCH @ /user/theme
- * headers: Authorization: Bearer token
- */
+// PATCH /user/theme: Відправляє запит для зміни теми користувача.
 export const updateUserTheme = createAsyncThunk(
   'auth/theme',
   async (theme, thunkAPI) => {
@@ -121,10 +103,7 @@ export const updateUserTheme = createAsyncThunk(
   }
 );
 
-/*
- * POST @ /feedback/sendFeedback
- * headers: Authorization: Bearer token
- */
+// POST /feedback/sendFeedback: Відправляє зворотний зв'язок від користувача.
 export const needHelp = createAsyncThunk(
   'auth/feedback',
   async (feedback, thunkAPI) => {
