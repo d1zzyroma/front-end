@@ -94,7 +94,7 @@ const MainDashBoard = ({ boardId }) => {
                     <EllipsisText
                       className={s.cardDescr}
                       text={card.cardDescr}
-                      length="115"
+                      length="110"
                     />
                     {/*  */}
                     <div className={s.cardDivider}></div>
@@ -134,6 +134,14 @@ const MainDashBoard = ({ boardId }) => {
               </button>
             </div>
           ))}
+          <button className={s.addColumnBtn}>
+            <span className={s.btnColumnWrapper}>
+              <span className={s.btnIconWrapper}>
+                <SvgIcon id="icon-plus" className={s.columnIcons} />
+              </span>
+              <span>Add another column</span>
+            </span>
+          </button>
         </span>
       </div>
     </>
