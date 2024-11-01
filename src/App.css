@@ -15,6 +15,12 @@
   --plus-sidebar-icon: #121212;
   --hover-sidebar-btn: #9dc888;
   --hover-sidebar-element: #bedbb0;
+  --bg-scroll: #e8e8e8;
+  --bg-screen: #f6f6f7;
+  --label-blue: #8fa1d0;
+  --label-pink: #e09cb5;
+  --label-green: #bedbb0;
+  --label-grey: rgba(22, 22, 22, 0.3);
 }
 
 /* Для темної теми */
@@ -35,6 +41,7 @@
   --hover-sidebar-btn: #9dc888;
   --sidebar-light: rgba(255, 255, 255, 0.5);
   --hover-sidebar-element: #bedbb0;
+  --bg-screen: #1f1f1f;
 }
 
 /* Для фіолетової теми */
@@ -55,4 +62,5 @@
   --hover-sidebar-btn: #979cea;
   --sidebar-light: rgba(255, 255, 255, 0.5);
   --hover-sidebar-element: #fff;
+  --bg-screen: #ecedfd;
 }
