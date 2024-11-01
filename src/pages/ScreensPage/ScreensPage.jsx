@@ -7,7 +7,7 @@ const ScreensPage = () => {
 
   return (
     <div className={s.cont}>
-      <h2>Board </h2>
+      <h2 className={s.title}>Board </h2>
       <p>Нижче створюйте вже колонки {boardId}</p>
       <p>Десь тут ще хедер борда{boardId}</p>
       <MainDashBoard boardId={boardId} />
