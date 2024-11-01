@@ -8,6 +8,12 @@
   --background-paper: #fcfcfc;
   --text-primary: #161616;
   --text-secondary: rgba(22, 22, 22, 0.8);
+  --bg-scroll: #e8e8e8;
+  --bg-screen: #f6f6f7;
+  --label-blue: #8fa1d0;
+  --label-pink: #e09cb5;
+  --label-green: #bedbb0;
+  --label-grey: rgba(22, 22, 22, 0.3);
 }
 
 /* Для темної теми */
@@ -21,6 +27,7 @@
   --background-paper: #161616;
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.8);
+  --bg-screen: #1f1f1f;
 }
 
 /* Для фіолетової теми */
@@ -34,4 +41,5 @@
   --background-paper: #fff;
   --text-primary: #161616;
   --text-secondary: rgba(22, 22, 22, 0.8);
+  --bg-screen: #ecedfd;
 }
