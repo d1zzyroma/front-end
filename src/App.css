@@ -8,6 +8,13 @@
   --background-paper: #fcfcfc;
   --text-primary: #161616;
   --text-secondary: rgba(22, 22, 22, 0.8);
+  --accent-sidebar: #f6f6f7;
+  --accent-sidebar-color: #161616;
+  --accent-sidebar-btn: #bedbb0;
+  --sidebar-light: rgba(22, 22, 22, 0.5);
+  --plus-sidebar-icon: #121212;
+  --hover-sidebar-btn: #9dc888;
+  --hover-sidebar-element: #bedbb0;
 }
 
 /* Для темної теми */
@@ -21,6 +28,13 @@
   --background-paper: #161616;
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.8);
+  --accent-sidebar: #1f1f1f;
+  --plus-sidebar-icon: #121212;
+  --accent-sidebar-color: #fff;
+  --accent-sidebar-btn: #bedbb0;
+  --hover-sidebar-btn: #9dc888;
+  --sidebar-light: rgba(255, 255, 255, 0.5);
+  --hover-sidebar-element: #bedbb0;
 }
 
 /* Для фіолетової теми */
@@ -34,4 +48,11 @@
   --background-paper: #fff;
   --text-primary: #161616;
   --text-secondary: rgba(22, 22, 22, 0.8);
+  --accent-sidebar: rgba(236, 237, 253, 0.4);
+  --plus-sidebar-icon: #fff;
+  --accent-sidebar-color: #fff;
+  --accent-sidebar-btn: #b8bcfd;
+  --hover-sidebar-btn: #979cea;
+  --sidebar-light: rgba(255, 255, 255, 0.5);
+  --hover-sidebar-element: #fff;
 }
