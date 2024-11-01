@@ -1,45 +1,54 @@
 .boardContainer {
+  /* padding-bottom: 24px; */
+}
+
+.scrollBottomContainer {
   display: flex;
-  overflow-x: auto;
-  height: 64vh;
+  overflow-x: scroll;
+  /* width: 100%; */
+  height: calc(100vh - 130px);
+  /* height: 74vh; */
   overflow-y: hidden;
   /*  */
   scroll-behavior: smooth;
+  margin-bottom: 20px;
 }
 
 .columnWrapper {
   flex: 0 0 100vw;
-  height: 64vh;
-  overflow-y: auto;
-  border-right: 1px solid #ccc;
-  box-sizing: border-box;
+  height: 100%;
+  /* border-right: 1px solid #ccc; */
+  /* box-sizing: border-box; */
+  /* overflow-y: scroll; */
 }
 
-.boardContainer::-webkit-scrollbar {
+.scrollBottomContainer::-webkit-scrollbar {
   height: 12px;
   width: 8px;
 }
-.columnWrapper::-webkit-scrollbar {
+.cardList::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.boardContainer::-webkit-scrollbar-thumb,
-.columnWrapper::-webkit-scrollbar-thumb {
-  /*  */
+.scrollBottomContainer::-webkit-scrollbar-thumb,
+.cardList::-webkit-scrollbar-thumb {
   background-color: #e8e8e8;
   border-radius: 12px;
 }
 
-.boardContainer::-webkit-scrollbar-track,
-.columnWrapper::-webkit-scrollbar-track {
-  background-color: var(--background-default);
-  border-radius: 12px;
+.scrollBottomContainer::-webkit-scrollbar-track {
   margin: 20px;
 }
 
-.boardContainer::-webkit-scrollbar-corner,
-.columnWrapper::-webkit-scrollbar-corner {
+.scrollBottomContainer::-webkit-scrollbar-track,
+.cardList::-webkit-scrollbar-track {
+  background-color: var(--background-default);
+  border-radius: 12px;
+}
+
+.scrollBottomContainer::-webkit-scrollbar-corner,
+.cardList::-webkit-scrollbar-corner {
   background-color: transparent;
 }
 
@@ -82,12 +91,18 @@
 .cardList {
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 46%);
+  overflow-y: scroll;
+  margin-left: 20px;
+  margin-right: 8px;
+  /* box-sizing: border-box; */
 }
 
 .card {
   background-color: var(--background-default);
-  margin-left: 20px;
-  margin-right: 20px;
+  /* /////////////////// */
+  /* margin-left: 4px; */
+  margin-right: 4px;
   border-radius: 8px;
   padding: 14px 20px;
   /*  */
@@ -187,10 +202,11 @@
 }
 
 .addCardBtn {
+  /* width: 350px; */
   border-radius: 8px;
   background: #bedbb0;
   margin: 14px 20px;
-  padding: 18px;
+  padding: 18px 98px;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 14px;
