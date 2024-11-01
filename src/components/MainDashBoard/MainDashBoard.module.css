@@ -292,7 +292,6 @@
   }
 
   .addColumnBtn {
-    /* margin: 14px 20px; */
     margin: 0px;
     margin-right: 32px;
     min-width: 355px;
@@ -300,4 +299,22 @@
 }
 
 @media screen and (min-width: 1439px) {
+  .scrollBottomContainer {
+    height: calc(100vh - 120px);
+  }
+
+  .columnWrapper {
+    flex-basis: auto;
+    width: 350px;
+  }
+
+  .cardList {
+    height: calc(100vh - 46%);
+  }
+
+  .addColumnBtn {
+    margin-left: 18px;
+    margin-right: 32px;
+    min-width: 355px;
+  }
 }

@@ -63,3 +63,17 @@
     gap: 8px;
   }
 }
+
+@media screen and (min-width: 1439px) {
+  .boardTitleBox {
+    padding-top: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-bottom: 10px;
+  }
+
+  .cont {
+    max-width: calc(100vw - 260px);
+    height: calc(100vh - 68px);
+  }
+}
