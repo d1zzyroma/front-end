@@ -15,6 +15,8 @@
   --label-green: #bedbb0;
   --label-grey: rgba(22, 22, 22, 0.3);
   --text-selected-day: #161616;
+  --add-btn: #ffffff;
+  --hover-btn: #9dc888;
 }
 
 /* Для темної теми */
@@ -30,6 +32,8 @@
   --text-secondary: rgba(255, 255, 255, 0.5);
   --bg-screen: #1f1f1f;
   --text-selected-day: #1f1f1f;
+  --add-btn: #ffffff;
+  --hover-btn: #9dc888;
 }
 
 /* Для фіолетової теми */
@@ -45,7 +49,10 @@
   --text-secondary: rgba(22, 22, 22, 0.8);
   --bg-screen: #ecedfd;
   --text-selected-day: #fcfcfc;
+  --add-btn: #161616;
+  --hover-btn: #7b7ede;
 }
+
 /* .datePicker {
   width: 100% !important;
   padding: 8px !important;
@@ -125,7 +132,7 @@
 
 .react-datepicker__week {
   display: flex !important;
-  gap: 10px !important;
+  gap: 0px !important;
   /* grid-template-columns: repeat(7, 1fr) !important; */
   /* column-gap: 10px !important; */
 }
@@ -162,6 +169,15 @@
 .react-datepicker__time-name .react-datepicker__day--selected {
   background-color: var(--primary-main) !important;
   color: white;
+  border-radius: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+.react-datepicker__time-name .react-datepicker__day--selected ::before {
+  z-index: -1 !important;
+  background: #ffffff !important;
+  width: 24px !important;
+  height: 24px !important;
 }
 
 .react-datepicker__day:hover {
@@ -173,6 +189,7 @@
   align-items: center !important;
   width: 24px !important;
   height: 24px !important;
+  transition: none !important;
 }
 
 .react-datepicker__day--selected,

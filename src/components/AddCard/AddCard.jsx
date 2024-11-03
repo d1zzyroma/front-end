@@ -3,6 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import SvgIcon from "../SvgIcon/SvgIcon.jsx";
 
 const AddCardForm = () => {
   const initialValues = {
@@ -26,7 +27,7 @@ const AddCardForm = () => {
     { color: "#8fa1d0", priority: "low" },
     { color: "#e09cb5", priority: "medium" },
     { color: "#bedbb0", priority: "high" },
-    { color: "rgba(22, 22, 22, 0.3)", priority: "without" },
+    { color: "#656565", priority: "without" },
   ];
 
   return (
@@ -91,8 +92,11 @@ const AddCardForm = () => {
                 />
               </div>
 
-              <button type="submit" className="add-button">
-                + Add
+              <button type="submit" className={s.btn}>
+                <div className={s.btnplus}>
+                  <SvgIcon id="icon-plus" className={s.btnicon} />
+                </div>{" "}
+                <p className={s.btntext}>Add</p>
               </button>
             </Form>
           )}
