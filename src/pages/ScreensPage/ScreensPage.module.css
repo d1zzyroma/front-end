@@ -1,5 +1,8 @@
 .cont {
-  background: #18b434;
+  /* background: #18b434; */
   width: 100%;
   font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
