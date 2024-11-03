@@ -13,9 +13,15 @@ const ThemeSwitcher = ({ theme, setTheme, closeDropdown }) => {
 
   return (
     <div>
-      <button onClick={() => handleThemeSelection("light")}>Light</button>
-      <button onClick={() => handleThemeSelection("dark")}>Dark</button>
-      <button onClick={() => handleThemeSelection("violet")}>Violet</button>
+      <button className={s.item} onClick={() => handleThemeSelection("light")}>
+        Light
+      </button>
+      <button className={s.item} onClick={() => handleThemeSelection("dark")}>
+        Dark
+      </button>
+      <button className={s.item} onClick={() => handleThemeSelection("violet")}>
+        Violet
+      </button>
     </div>
   );
 };
