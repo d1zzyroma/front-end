@@ -1,18 +1,71 @@
 .cont {
   max-width: 375px;
   height: 60px;
-  background: #fcfcfc;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-left: 20px;
   padding-right: 20px;
+  background-color: var(--bg-screen);
+}
+
+.pTheme {
+  color: var(--text-secondary);
+}
+
+.icon {
+  fill: none;
+  stroke: var(--text-primary);
+  background-color: var(--background-paper);
+  width: 16px;
+  height: 8px;
+}
+
+.dropdown {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100px;
+  height: 107px;
+  padding: 18px 44px 18px 18px;
+  top: 100%; /* Позиціонує меню прямо під кнопкою */
+  left: 0;
+  background-color: var(--background-paper);
+
+  border: 1px solid var(--primary-main);
+  border-radius: 8px;
+  box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.1);
+  z-index: 1000; /* Забезпечує, щоб меню було поверх інших елементів */
+}
+
+.dropdownItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 21px;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.28px;
+}
+
+.dropdownItem:hover {
+  color: var(--primary-main);
 }
 
 .mobileMenu {
   width: 24px;
   height: 24px;
+  stroke: var(--primary-main);
 }
+
 .divRight {
   display: flex;
   align-items: center;
@@ -20,25 +73,18 @@
   gap: 14px;
 }
 .divLabel {
-  width: 68px;
+  position: relative; /* Контейнер для абсолютного позиціонування випадаючого меню */
   display: flex;
-  align-items: center;
-}
-
-.label {
-  display: flex;
-  align-items: center;
-  gap: 4px;
 }
 
 .divUser {
   display: flex;
   align-items: center;
-  width: 79px;
+  gap: 8px;
 }
 
 .p {
-  color: #161616;
+  color: var(--text-primary);
   font-family: Poppins;
   font-size: 14px;
   font-style: normal;
@@ -50,10 +96,7 @@
 .divImg {
   width: 32px;
   height: 32px;
-  background-color: blue;
-}
-
-.select {
+  background-color: var(--label-blue);
 }
 
 @media screen and (min-width: 768px) {

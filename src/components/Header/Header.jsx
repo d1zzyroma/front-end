@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
+import ThemeSwitcher from "../Themes/ThemeSwitcher/ThemeSwitcher";
 import icons from "../../images/icons/icons.svg";
-// import ThemeSwitcher from "../Themes/ThemeSwitcher/ThemeSwitcher.jsx";
 import s from "./Header.module.css";
 
 const Header = () => {
   const [theme, setTheme] = useState("light");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const handleThemeChange = (event) => {
-    setTheme(event.target.value);
+  // const theme = "dark"
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -21,22 +28,21 @@ const Header = () => {
       </svg>
       <div className={s.divRight}>
         <div className={s.divLabel}>
-          <label htmlFor="theme-selector" className={s.label}>
-            {/* <p className={s.p}>Theme</p> */}
-            <div className={s.divSelect}>
-              <select
-                name="Theme"
-                id="theme-selector"
-                value={theme}
-                onChange={handleThemeChange}
-                className={s.select}
-              >
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="violet">Violet</option>
-              </select>
+          <p className={s.pTheme}>Theme</p>
+          <button onClick={toggleDropdown} className={s.iconButton}>
+            <svg className={s.icon}>
+              <use href={`${icons}#icon-down`} />
+            </svg>
+          </button>
+          {isOpen && (
+            <div className={s.dropdown}>
+              <ThemeSwitcher
+                theme={theme}
+                setTheme={setTheme}
+                closeDropdown={closeDropdown}
+              />
             </div>
-          </label>
+          )}
         </div>
         <div className={s.divUser}>
           <p className={s.p}>Login</p>
