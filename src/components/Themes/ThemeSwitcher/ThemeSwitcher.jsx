@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import s from "./ThemeSwither.module.css";
 
 const ThemeSwitcher = ({ theme, setTheme, closeDropdown }) => {
   useEffect(() => {
