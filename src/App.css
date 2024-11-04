@@ -1,6 +1,7 @@
 :root {
   --primary-light: #fcfcfc;
   --primary-main: #bedbb0;
+  --primary-main-transparent: rgba(190, 219, 176, 0.4);
   --primary-dark: #0b5c15;
   --primary-contrastText: rgba(22, 22, 22, 0.1);
   --secondary-main: rgba(22, 22, 22, 0.1);
@@ -29,12 +30,18 @@
   --modal-btn-text: #161616;
   --modal-plus-icon: #fff;
   --modal-icon-wrap: #161616;
+  --drop-down-text: #161616;
+  --btn: #bedbb0;
+  --btn-hover: #9dc888;
+  --btn-add-color: #161616;
+  --bg-modal: #fff;
 }
 
 /* Для темної теми */
 [data-theme="dark"] {
   --primary-light: #161616;
   --primary-main: #bedbb0;
+  --primary-main-transparent: rgba(190, 219, 176, 0.4);
   --primary-dark: #1b1c21;
   --primary-contrastText: rgba(255, 255, 255, 0.1);
   --secondary-main: rgba(255, 255, 255, 0.1);
@@ -58,12 +65,18 @@
   --modal-btn-text: #161616;
   --modal-plus-icon: #fff;
   --modal-icon-wrap: #161616;
+  --drop-down-text: rgba(255, 255, 255, 0.5);
+  --btn: #bedbb0;
+  --btn-hover: #9dc888;
+  --btn-add-color: #161616;
+  --bg-modal: #151515;
 }
 
 /* Для фіолетової теми */
 [data-theme="violet"] {
   --primary-light: #fff;
   --primary-main: #5255bc;
+  --primary-main-transparent: rgba(82, 85, 188, 0.4);
   --primary-dark: #b8bcfd;
   --primary-contrastText: rgba(255, 255, 255, 0.1);
   --secondary-main: rgba(22, 22, 22, 0.1);
@@ -87,4 +100,9 @@
   --modal-btn-text: #fff;
   --modal-plus-icon: #161616;
   --modal-icon-wrap: #fff;
+  --drop-down-text: #161616;
+  --btn: #5255bc;
+  --btn-hover: #7b7ede;
+  --btn-add-color: #fff;
+  --bg-modal: #fff;
 }
