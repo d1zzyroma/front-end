@@ -1,0 +1,19 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 21px;
+  gap: 4px;
+  cursor: pointer;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  color: var(--drop-down-text);
+  background-color: var(--background-paper);
+  &:hover {
+    color: var(--primary-main);
+  }
+}

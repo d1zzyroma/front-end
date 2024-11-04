@@ -1,0 +1,171 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-modal);
+  border-radius: 8px;
+  padding: 20px;
+  width: 350px;
+  max-width: 90%;
+  min-height: 300px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-secondary-color, #333);
+  cursor: pointer;
+}
+.iconClose {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-primary);
+  stroke: var(--text-primary);
+}
+
+.formStyle {
+  width: 100%;
+  text-align: center;
+}
+
+.titleName {
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.labelStyle {
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.inputName {
+  font-size: 14px;
+  padding: 12px 18px;
+  width: 100%;
+  height: 49px;
+  border: 1px solid var(--primary-main-transparent);
+  border-radius: 8px;
+  background: var(--bg-screen);
+  color: var(--text-primary);
+  transition: border 0.3s, color 0.3s;
+}
+
+.inputName:hover {
+  border-color: var(--primary-main);
+}
+
+.inputName:focus {
+  outline: none;
+  border-color: var(--primary-main);
+  color: var(--text-primary);
+}
+
+.inputNameImg {
+  display: block;
+  width: 100px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.imgBackground {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--img-background-color, #e0e0e0);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  fill: var(--img-icon-color, #aaa);
+}
+
+.imgUser {
+  width: 68px;
+  height: 68px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.plusIcon {
+  stroke: #121212;
+  border-radius: 4px;
+  width: 10px;
+  height: 10px;
+}
+
+.plusIconBackground {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--plus-icon-background, #f0f0f0);
+}
+
+.btnAdd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 6px;
+  width: 100%;
+  height: 49px;
+  background-color: var(--btn);
+  color: var(--btn-add-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnAdd:hover {
+  background-color: var(--btn-hover);
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.fieldIcon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #949090cc;
+  cursor: pointer;
+}
+
+.inputError {
+  font-size: 12px;
+  color: #ff4d4f;
+  text-align: left;
+  padding-left: 10px;
+  margin-top: 4px;
+}
