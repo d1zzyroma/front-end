@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { taskProApi, setAuthHeader, clearAuthHeader } from "../../config/tastProApi";
+import { taskProApi, setAuthHeader, clearAuthHeader } from '../../config/taskProApi';
 import { toast } from "react-toastify";
 
 // POST /auth/register: Відправляє запит для реєстрації нового користувача з параметрами name, email і password.
