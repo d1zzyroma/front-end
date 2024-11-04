@@ -3,6 +3,8 @@ import * as yup from "yup";
 import s from "./RegisterForm.module.css";
 import icons from "../../images/icons/icons.svg";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations.js";
 
 // Валідація
 const registerSchema = yup.object().shape({
@@ -39,7 +41,7 @@ const RegisterForm = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-
+  const dispatch = useDispatch();
   return (
     <div className={s.cont}>
       <Formik
@@ -47,6 +49,7 @@ const RegisterForm = () => {
         validationSchema={registerSchema}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values);
+          dispatch(register(values));
           setSubmitting(false);
         }}
       >

@@ -4,6 +4,9 @@ import s from "./LoginForm.module.css";
 import icons from "../../images/icons/icons.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn, register } from "../../redux/auth/operations.js";
+import { selectAuthState } from "../../redux/auth/selectors.js";
 //Валідація
 const loginSchema = yup.object().shape({
   email: yup
@@ -32,15 +35,18 @@ const LoginForm = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
+  const userstate = useSelector(selectAuthState);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleLogin = async (values, { setSubmitting }) => {
     try {
+      await dispatch(logIn(values));
       console.log("Відправка даних:", values);
+      await console.log(userstate);
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      navigate("/home");
+      // navigate("/home");
     } catch (error) {
       console.error("Помилка при логіні:", error);
     } finally {
