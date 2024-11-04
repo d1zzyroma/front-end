@@ -1,10 +1,105 @@
 .cont {
-  background: #967f7f;
+  max-width: 375px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: var(--background-paper);
 }
-.user-icon {
-  fill: rgb(180, 27, 27);
+
+.pTheme {
+  color: var(--text-secondary);
 }
+
 .icon {
   fill: none;
-  stroke: black;
+  stroke: var(--text-primary);
+  background-color: var(--background-paper);
+  width: 16px;
+  height: 8px;
+}
+
+.dropdown {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100px;
+  height: 107px;
+  padding: 18px 44px 18px 18px;
+  top: 100%; /* Позиціонує меню прямо під кнопкою */
+  left: 0;
+  background-color: var(--background-paper);
+
+  border: 1px solid var(--primary-main);
+  border-radius: 8px;
+  box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.1);
+  z-index: 1000; /* Забезпечує, щоб меню було поверх інших елементів */
+}
+
+.mobileMenu {
+  width: 24px;
+  height: 24px;
+  stroke: var(--primary-main);
+}
+
+.divRight {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 14px;
+}
+.divLabel {
+  position: relative; /* Контейнер для абсолютного позиціонування випадаючого меню */
+  display: flex;
+}
+
+.divUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p {
+  color: var(--text-primary);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
+}
+
+.divImg {
+  width: 32px;
+  height: 32px;
+  background-color: var(--label-blue);
+}
+
+@media screen and (min-width: 768px) {
+  .cont {
+    min-width: 768px;
+    min-height: 68px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .mobileMenu {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .cont {
+    min-width: 1180px;
+    padding-right: 24px;
+  }
+
+  .mobileMenu {
+    display: none;
+  }
 }
