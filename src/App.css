@@ -8,12 +8,18 @@
   --background-paper: #fcfcfc;
   --text-primary: #161616;
   --text-secondary: rgba(22, 22, 22, 0.8);
-  --bg-scroll: #e8e8e8;
+  --bg-scroll-track: #e8e8e8;
   --bg-screen: #f6f6f7;
   --label-blue: #8fa1d0;
   --label-pink: #e09cb5;
   --label-green: #bedbb0;
   --label-grey: rgba(22, 22, 22, 0.3);
+  /*  */
+  --button-text: #161616;
+  --bg-scroll: rgba(22, 22, 22, 0.1);
+  --bottom-scroll: #fff;
+  --bg-scroll-thumb: rgba(22, 22, 22, 0.1);
+  --stroke-btn: #fff;
 }
 
 /* Для темної теми */
@@ -28,6 +34,13 @@
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.8);
   --bg-screen: #1f1f1f;
+  /*  */
+  --button-text: #161616;
+  --bg-scroll: #121212;
+  --bg-scroll-track: rgba(255, 255, 255, 0.1);
+  --bottom-scroll: #121212;
+  --bg-scroll-thumb: rgba(255, 255, 255, 0.1);
+  --stroke-btn: #fff;
 }
 
 /* Для фіолетової теми */
@@ -42,4 +55,11 @@
   --text-primary: #161616;
   --text-secondary: rgba(22, 22, 22, 0.8);
   --bg-screen: #ecedfd;
+  /*  */
+  --button-text: #fff;
+  --bg-scroll: #b8bcfd;
+  --bg-scroll-track: #fff;
+  --bottom-scroll: #fff;
+  --bg-scroll-thumb: #b8bcfd;
+  --stroke-btn: #161616;
 }

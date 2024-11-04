@@ -1,5 +1,8 @@
 .boardContainer {
   /* padding-bottom: 24px; */
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .scrollBottomContainer {
@@ -25,9 +28,12 @@
   height: 8px;
 }
 
-.scrollBottomContainer::-webkit-scrollbar-thumb,
+.scrollBottomContainer::-webkit-scrollbar-thumb {
+  background-color: var(--bg-scroll-thumb);
+  border-radius: 12px;
+}
 .cardList::-webkit-scrollbar-thumb {
-  background-color: #e8e8e8;
+  background-color: var(--bg-scroll);
   border-radius: 12px;
 }
 
@@ -35,9 +41,12 @@
   margin: 20px;
 }
 
-.scrollBottomContainer::-webkit-scrollbar-track,
+.scrollBottomContainer::-webkit-scrollbar-track {
+  background-color: var(--bottom-scroll);
+  border-radius: 12px;
+}
 .cardList::-webkit-scrollbar-track {
-  background-color: var(--background-default);
+  background-color: var(--bg-scroll-track);
   border-radius: 12px;
 }
 
@@ -47,7 +56,7 @@
 }
 
 .columnNameBox {
-  background-color: var(--background-default);
+  background-color: var(--background-paper);
   margin-left: 20px;
   margin-right: 20px;
   border-radius: 8px;
@@ -59,7 +68,6 @@
 }
 
 .columnName {
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
@@ -85,7 +93,7 @@
 
 .columnIcons:hover,
 .columnIcons:active {
-  stroke: #bedbb0;
+  stroke: var(--label-green);
 }
 
 .cardList {
@@ -98,7 +106,7 @@
 }
 
 .card {
-  background-color: var(--background-default);
+  background-color: var(--background-paper);
   margin-right: 4px;
   border-radius: 8px;
   padding: 14px 20px;
@@ -112,13 +120,12 @@
   top: 0;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  background-color: #e09cb5;
+  background-color: var(--label-pink);
   width: 4px;
   height: 100%;
 }
 
 .cardTitle {
-  font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: -0.02em;
@@ -127,7 +134,6 @@
 }
 
 .cardDescr {
-  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 133%;
@@ -137,7 +143,7 @@
 
 .cardDivider {
   height: 1px;
-  background-color: rgba(22, 22, 22, 0.1);
+  background-color: var(--secondary-main);
   margin-bottom: 14px;
   margin-top: 14px;
 }
@@ -163,16 +169,14 @@
 
 .priorityTitle,
 .deadline {
-  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 8px;
   letter-spacing: -0.02em;
-  color: rgba(22, 22, 22, 0.5);
+  color: var(--text-secondary);
 }
 
 .priorityValue,
 .deadlineDate {
-  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 10px;
   letter-spacing: -0.02em;
@@ -188,7 +192,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #e09cb5;
+  background-color: var(--label-pink);
 }
 
 .cardIcons {
@@ -198,35 +202,34 @@
 
 .addCardBtn {
   border-radius: 8px;
-  background: #bedbb0;
+  background: var(--primary-main);
   margin: 14px 20px;
   padding: 18px 98px;
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
-  color: var(--text-secondary);
+  color: var(--button-text);
   width: -webkit-fill-available;
   transition: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .addCardBtn:hover,
 .addCardBtn:active {
-  background-color: #9dc888;
+  background-color: var(--label-green);
 }
 
 .btnIconWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--text-primary);
+  background-color: var(--button-text);
   width: 28px;
   height: 28px;
   border-radius: 4px;
 }
 
 .btnIconWrapper > .columnIcons {
-  stroke: var(--background-default);
+  stroke: var(--stroke-btn);
   stroke-opacity: 1;
   fill: none;
 }
@@ -240,10 +243,9 @@
 
 .addColumnBtn {
   border-radius: 8px;
-  background: var(--background-default);
+  background: var(--background-paper);
   margin: 14px 20px;
   padding: 14px 60px;
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
@@ -263,6 +265,12 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+}
+
+.btnIconWrapper > .columnIcons {
+  stroke: var(--stroke-btn);
+  stroke-opacity: 1;
+  fill: none;
 }
 
 @media screen and (min-width: 765px) {

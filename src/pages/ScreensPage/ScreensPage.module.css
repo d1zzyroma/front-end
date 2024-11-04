@@ -1,8 +1,11 @@
 .cont {
-  /* background: var(--primary-light); */
-  background: #f6f6f7;
-  width: 100%;
+  background: var(--bg-screen);
+  /* width: 100%; */
   height: 100vh;
+  font-family: "Poppins", sans-serif;
+  /*  */
+  width: 375px;
+  height: 812px;
 }
 
 .boardTitleBox {
@@ -16,7 +19,6 @@
 }
 
 .boardTitle {
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
@@ -29,7 +31,6 @@
 }
 
 .filter {
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
@@ -50,10 +51,15 @@
 
 .filterIcon:hover,
 .filterIcon:active {
-  stroke: #bedbb0;
+  stroke: var(--label-green);
 }
 
 @media screen and (min-width: 765px) {
+  .cont {
+    width: 768px;
+    height: 1024px;
+  }
+
   .boardTitleBox {
     padding-top: 26px;
     padding-left: 32px;
@@ -71,6 +77,11 @@
 }
 
 @media screen and (min-width: 1439px) {
+  .cont {
+    width: 1440px;
+    height: 770px;
+  }
+
   .boardTitleBox {
     padding-top: 10px;
     padding-left: 24px;
