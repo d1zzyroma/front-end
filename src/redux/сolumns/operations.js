@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { taskProApi } from '../../config/tastProApi';
+import { taskProApi } from '../../config/taskProApi';
 
 // GET columns - Відправляє запит до API для отримання списку колонок.
 export const getColumns = createAsyncThunk(
