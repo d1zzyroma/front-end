@@ -21,6 +21,14 @@
   --label-pink: #e09cb5;
   --label-green: #bedbb0;
   --label-grey: rgba(22, 22, 22, 0.3);
+  --modal-overlay: rgba(21, 21, 21, 0.3);
+  --modal-bg: #fcfcfc;
+  --modal-input-border: #bedbb0;
+  --modal-btn: #bedbb0;
+  --hover-modal-btn: #9dc888;
+  --modal-btn-text: #161616;
+  --modal-plus-icon: #fff;
+  --modal-icon-wrap: #161616;
 }
 
 /* Для темної теми */
@@ -42,6 +50,14 @@
   --sidebar-light: rgba(255, 255, 255, 0.5);
   --hover-sidebar-element: #bedbb0;
   --bg-screen: #1f1f1f;
+  --modal-overlay: rgba(21, 21, 21, 0.5);
+  --modal-bg: #151515;
+  --modal-input-border: #bedbb0;
+  --modal-btn: #bedbb0;
+  --hover-modal-btn: #9dc888;
+  --modal-btn-text: #161616;
+  --modal-plus-icon: #fff;
+  --modal-icon-wrap: #161616;
 }
 
 /* Для фіолетової теми */
@@ -63,4 +79,12 @@
   --sidebar-light: rgba(255, 255, 255, 0.5);
   --hover-sidebar-element: #fff;
   --bg-screen: #ecedfd;
+  --modal-overlay: rgba(21, 21, 21, 0.3);
+  --modal-bg: #fcfcfc;
+  --modal-input-border: #b8bcfd;
+  --modal-btn: #5255bc;
+  --hover-modal-btn: #7b7ede;
+  --modal-btn-text: #fff;
+  --modal-plus-icon: #161616;
+  --modal-icon-wrap: #fff;
 }

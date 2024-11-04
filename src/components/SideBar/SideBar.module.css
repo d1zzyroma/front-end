@@ -1,27 +1,36 @@
 .cont {
   background-color: var(--background-default);
   font-family: "Poppins";
-  padding: 24px;
-  height: 100vh;
+  padding: 14px;
+}
+@media (min-width: 768px) {
+  .cont {
+    padding: 24px;
+  }
 }
 .sidebarTitle {
   font-weight: 400;
   font-size: 12px;
   letter-spacing: -0.02em;
   color: var(--sidebar-light);
+  margin-bottom: 8px;
 }
 
 /* --- Create Board Styles --- */
 .createBoard {
   display: flex;
   align-items: center;
-  gap: 96px;
+  gap: 77px;
   padding: 14px 0px;
   border-top: 1px solid rgba(22, 22, 22, 0.1);
   border-bottom: 1px solid rgba(22, 22, 22, 0.1);
   margin-bottom: 40px;
 }
-
+@media screen and (min-width: 1440px) {
+  .createBoard {
+    gap: 96px;
+  }
+}
 .createBoardTitle {
   color: var(--accent-sidebar-color);
   font-weight: 500;
@@ -52,22 +61,32 @@
   gap: 4px;
 }
 .cont .boardsList {
-  margin-left: -24px;
-  margin-right: -24px;
+  margin-left: -14px;
+  margin-right: -14px;
+}
+@media (min-width: 768px) {
+  .cont .boardsList {
+    margin-left: -24px;
+    margin-right: -24px;
+  }
 }
 .boardItem {
   display: flex;
-  padding: 20px 24px;
+  padding: 20px 14px;
   position: relative;
   color: var(--sidebar-light);
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (min-width: 768px) {
+  .boardItem {
+    padding: 20px 24px;
+  }
 }
 .boardItem:last-child {
   margin-bottom: 40px;
 }
 .boardItem:hover,
-.boardItem:focus,
-.boardItem:active {
+.boardItem:focus {
   background-color: var(--accent-sidebar);
 }
 
@@ -77,15 +96,14 @@
   top: 0;
   right: 0;
   height: 100%;
-  width: 0; /* Початкова ширина */
+  width: 0;
   background-color: var(--hover-sidebar-element);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   transition: width 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.boardItem:hover::after,
-.boardItem:focus::after {
+.boardItem:hover::after {
   width: 4px;
 }
 .btnGroup {
@@ -95,26 +113,34 @@
   top: 50%;
   transform: translateY(-50%);
 }
-.boardItem:hover .btnGroup,
-.boardItem:focus .btnGroup {
+.boardItem:hover .btnGroup {
   display: flex;
   gap: 8px;
 }
 .linkContent {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+@media (min-width: 768px) {
+  .linkContent {
+    gap: 8px;
+  }
+}
 .boardItem:hover .linkContent {
   color: var(--accent-sidebar-color);
 }
 .link {
   display: flex;
-  gap: 58px;
+  gap: 43px;
+}
+@media (min-width: 768px) {
+  .link {
+    gap: 58px;
+  }
 }
 .projectIcon {
   width: 18px;
@@ -132,7 +158,6 @@
   fill: none;
   stroke: var(--sidebar-light);
 }
-
 .iconTrash {
   width: 16px;
   height: 16px;
@@ -143,11 +168,16 @@
 /* --- Need Help Styles --- */
 .needHelpContainer {
   margin-top: auto;
-  padding: 20px;
+  padding: 14px;
   border-radius: 8px;
-  width: 212px;
   background-color: var(--accent-sidebar);
   margin-bottom: 24px;
+}
+@media (min-width: 768px) {
+  .needHelpContainer {
+    padding: 20px;
+    width: 212px;
+  }
 }
 .accent {
   color: var(--primary-main);
@@ -157,11 +187,19 @@
   margin-bottom: 14px;
 }
 .needHelpText {
-  font-size: 14px;
-  line-height: 143%;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 133%;
   letter-spacing: -0.02em;
   margin-bottom: 18px;
   color: var(--accent-sidebar-color);
+}
+
+@media (min-width: 768px) {
+  .needHelpText {
+    font-size: 14px;
+    line-height: 143%;
+  }
 }
 .needHelpBtn {
   display: flex;
@@ -193,7 +231,7 @@
   width: 32px;
   height: 32px;
   fill: none;
-  stroke: var(--accent-sidebar-btn);
+  stroke: var(--hover-sidebar-element);
   transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .logoutBtn:hover .logoutIcon {

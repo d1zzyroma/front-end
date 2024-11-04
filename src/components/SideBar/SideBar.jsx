@@ -2,13 +2,28 @@ import { NavLink } from "react-router-dom";
 import s from "./SideBar.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import cactusImg from "../../images/Sidebar/cactus.png";
+import { useDispatch } from "react-redux";
+import { deleteBoard } from "../../redux/boards/operations";
+import { useState } from "react";
+import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
 
 const SideBar = () => {
+  const dispatch = useDispatch();
   const boards = [
     { id: 1, name: "Board 1" },
     { id: 2, name: "Board 2" },
     { id: 3, name: "Board 3" },
   ];
+
+  const handleDelete = (id) => {
+    dispatch(deleteBoard(id));
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <>
       <div className={s.cont}>
@@ -31,7 +46,7 @@ const SideBar = () => {
                   <button type="button">
                     <SvgIcon id="icon-pencil" className={s.iconPencil} />
                   </button>
-                  <button>
+                  <button type="button" onClick={() => handleDelete(board.id)}>
                     <SvgIcon id="icon-trash" className={s.iconTrash} />
                   </button>
                 </div>
@@ -46,10 +61,15 @@ const SideBar = () => {
             check out our support resources or reach out to our customer support
             team.
           </p>
-          <button type="button" className={s.needHelpBtn}>
+          <button type="button" className={s.needHelpBtn} onClick={openModal}>
             <SvgIcon id="icon-help-circle" className={s.needHelpIcon} />
             Need Help?
           </button>
+          {isModalOpen && (
+            <div>
+              <NeedHelpForm closeModal={closeModal} />
+            </div>
+          )}
         </div>
         <button type="button" className={s.logoutBtn}>
           <SvgIcon id="icon-login" className={s.logoutIcon} />
