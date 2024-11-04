@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { taskProApi, setAuthHeader } from "../../config/tastProApi";
+import { taskProApi, setAuthHeader } from '../../config/taskProApi';
 
 // Отримати всі борди
 export const getBoards = createAsyncThunk(

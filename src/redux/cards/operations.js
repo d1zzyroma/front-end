@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { taskProApi } from '../../config/tastProApi';
+import { taskProApi } from '../../config/taskProApi';
 
 // GET cards -  Отримує список карток для певної дошки (board).
 export const getCards = createAsyncThunk(
