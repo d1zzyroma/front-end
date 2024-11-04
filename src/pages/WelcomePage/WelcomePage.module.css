@@ -1,10 +1,35 @@
 .cont {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
   margin-bottom: 48px;
   width: 100%; /* Дефолтна ширина */
   max-width: 335px;
+}
+
+.logoNameCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+.icon {
+  fill: white;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+}
+.svg {
+  width: 40px;
+  height: 40px;
+  background-color: #000;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .title {
@@ -15,6 +40,14 @@
   text-align: center;
   width: 100%; /* Дефолтна ширина */
   max-width: 300px;
+}
+.logoText {
+  font-family: Poppins;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 42px;
+  letter-spacing: -0.04em;
+  text-align: left;
 }
 
 .nav {
@@ -57,17 +90,17 @@
 }
 
 /* Стає фіксованою після 375px */
-@media (min-width: 375px) and (max-width: 767px) {
+/* @media (min-width: 375px) and (max-width: 767px) {
   .cont {
     width: 335px;
   }
   .button {
     width: 335px;
   }
-}
+} */
 
 /* Адаптивна верстка для планшетів від 768px */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .cont {
     width: 473px;
   }
@@ -77,4 +110,4 @@
   .title {
     width: 473px;
   }
-}
+} */
