@@ -21,6 +21,8 @@ const boardSchema = Yup.object().shape({
   title: Yup.string().required('Title is required'),
 });
 
+
+
 export default function AddEditBoard({ onClose, boardId }) {
   const theme = useTheme();
   const dispatch = useDispatch();
