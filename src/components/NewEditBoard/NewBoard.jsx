@@ -1,140 +1,322 @@
-// import { useState } from "react";
-// import css from './AddEditBoard.module.css';
-// import { useDispatch } from "react-redux";
-// import { Formik, Form, Field } from "formik";
-// import { useSelector, } from 'react-redux';
-// import { useState } from "react";
-import { useState } from "react"
-import { useSelector, useDispatch } from 'react-redux';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import css from './AddEditBoard.module.css';
-import useTheme from '../ThemeContext/ThemeContext.jsx';
-import { selectBoards } from '../../redux/boards/slice.js'; 
-import { addBoard, updateBoardById } from '../../redux/boards/slice.js'; 
-import IconPicker from '../IconPicker/IconPicker'; 
-import BackgroundPicker from '../BackgroundPicker/BackgroundPicker'; 
-import AddIconButton from '../AddIconButton/AddIconButton'; 
-import iconDefs from '../../images/icons/icons.svg"'; 
+import SvgIcon from "../SvgIcon/SvgIcon";
+import styles from "./NewBoard.module.css";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
-const boardSchema = Yup.object().shape({
-  title: Yup.string().required('Title is required'),
-});
+import noBack from "../../images/images-bg/images-bg-default.png";
+import { addBoard } from "../../redux/boards/operations.js";
 
-export default function AddEditBoard({ onClose, boardId }) {
-  const theme = useTheme();
+const backgrounds = [
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/vlk8bztf90uy6itveqjl.png",
+    alt: "cappodocia",
+    key: "cappodocia",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/v0wt4bwax3bhdlag1ziv.png",
+    alt: "baloon",
+    key: "baloon",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220071/backgrounds/mini/c08fbwcqicwfqwksxsyx.png",
+    alt: "clouds",
+    key: "clouds",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220071/backgrounds/mini/sey0nharzdv7uzxpt98w.png",
+    alt: "fullMoon",
+    key: "full-moon",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220069/backgrounds/mini/lfrtnx9rqh3koliovr7h.png",
+    alt: "halfMoon",
+    key: "half-moon",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/oyfwjk41qpxsud8g8ri9.png",
+    alt: "magnolia",
+    key: "magnolia",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/yjuxoyg5cjxzpk30oeoe.png",
+    alt: "mountains",
+    key: "mountains",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/yjyionahp9lthpybw5sg.png",
+    alt: "nightTrailer",
+    key: "night-trailer",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220071/backgrounds/mini/sce6oy35czbj7yb9osoe.png",
+    alt: "palmLeaves",
+    key: "palm-leaves",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/whne8ssdvejvamukn7sc.png",
+    alt: "rockyBeach",
+    key: "rocky-beach",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/womdt7hq0ngnofzbuhgu.png",
+    alt: "sakura",
+    key: "sakura",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/tqbovopj2qyuln6ing9o.png",
+    alt: "sea",
+    key: "sea",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/csxhywowypy9arxzig17.png",
+    alt: "starrySky",
+    key: "starry-sky",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/vaxhftlahpyrpje3itvb.png",
+    alt: "violetCircle",
+    key: "violet-circle",
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/pgjqswykxm1qukwfyic0.png",
+    alt: "yacht",
+    key: "yacht",
+  },
+];
+
+ export const NewBoard = ({ openModal }) => {
+  const [icons, setIcons] = useState("icon-Project");
+  const [background, setBackground] = useState("no-background");
+  const [title, setTitle] = useState(null);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [icon, setIcon] = useState('icon-board-icon-1');
-  const [background, setBackground] = useState('');
-  const isEditing = useSelector(state => state.modal.isModalDisplayed);
-  // const board = useSelector(selectCurrentBoard);
-  const boards = useSelector(selectBoards);
 
-  const board = boards.find(item => item._id === boardId);
-
-  const handleSelectedIconChange = selectedIcon => {
-    setIcon(selectedIcon);
+  const getTitle = (event) => {
+    setTitle(event.target.value);
   };
 
-  const handleSelectedBackgroundChange = selectedBackground => {
-    if (selectedBackground === 'default') {
-      setBackground('');
-    } else {
-      setBackground(selectedBackground);
-    }
+  const closeModal = () => {
+    openModal();
   };
 
-  const handleSubmit = async (values, { resetForm }) => {
-    try {
-      if (!isEditing) {
-        await dispatch(
-          addBoard({
-            title: values.title,
-            background: background,
-            icon: icon,
-          })
-        );
-      } else {
-        await dispatch(
-          updateBoardById({
-            title: values.title,
-            background: background,
-            icon: icon,
-            id: boardId,
-          })
-        );
-      }
-      resetForm();
-      onClose();
-    } catch (err) {
-      console.log(err);
-    }
+  const getIcon = (event) => {
+    setIcons(event.currentTarget.dataset.source);
+  };
+
+  const getBack = (event) => {
+    setBackground(event.currentTarget.dataset.source);
+  };
+
+  const newBoardObject = {
+    title: title,
+    icon: icons,
+    background: background,
+  };
+
+  const newBoardFunc = () => {
+    dispatch(addBoard(newBoardObject));
+    closeModal();
+    navigate(`${title}`);
   };
 
   return (
-    <>
-      <button className={css.closeBtn} onClick={onClose}>
-        <svg
-          style={{ stroke: theme.popUp.closeIconColor }}
-          width="18"
-          height="18"
+    <div className={styles.divCard}>
+      <h2 className={styles.textNew}>New board</h2>
+      <input
+        className={styles.titleInput}
+        type="text"
+        placeholder="Title"
+        onChange={getTitle}
+      />
+      <h3 className={styles.textIcons}>Icons</h3>
+      <ul className={styles.listDarkIcons}>
+        <li>
+          {/* <button
+//               data-source="project"
+//               className={styles.buttonIcons}
+//               onClick={getIcon}
+//             > */}
+          <input
+            type="radio"
+            data-source="icon-Project"
+            name="buttons"
+            className={styles.inputRad}
+            onClick={getIcon}
+          />
+          <SvgIcon
+            id={"icon-Project"}
+            className={
+              icons === "icon-Project" ? styles.darkIcons : styles.serIcons
+            }
+          ></SvgIcon>
+        </li>
+        <li>
+          <input
+            type="radio"
+            data-source="icon-star"
+            name="buttons"
+            className={styles.inputRad}
+            onClick={getIcon}
+          />
+          <SvgIcon
+            id={"icon-star"}
+            className={
+              icons === "icon-star" ? styles.darkIcons : styles.serIcons
+            }
+          ></SvgIcon>
+        </li>
+        <li>
+          <input
+            type="radio"
+            data-source="icon-loading"
+            name="buttons"
+            className={styles.inputRad}
+            onClick={getIcon}
+          />
+          <SvgIcon
+            id={"icon-loading"}
+            className={
+              icons === "icon-loading" ? styles.darkIcons : styles.serIcons
+            }
+          ></SvgIcon>
+        </li>
+        <li>
+          <input
+            type="radio"
+            data-source="icon-puzzle"
+            name="buttons"
+            className={styles.inputRad}
+            onClick={getIcon}
+          />
+          <SvgIcon
+            id={"icon-puzzle"}
+            className={
+              icons === "icon-puzzle" ? styles.darkIcons : styles.serIcons
+            }
+          ></SvgIcon>
+        </li>
+        <li>
+          <input
+            type="radio"
+            data-source="icon-cube"
+            name="buttons"
+            className={styles.inputRad}
+            onClick={getIcon}
+          />
+          <SvgIcon
+            id={"icon-cube"}
+            className={
+              icons === "icon-cube" ? styles.darkIcons : styles.serIcons
+            }
+          ></SvgIcon>
+        </li>
+        <li>
+          <input
+            type="radio"
+            data-source="icon-lightning"
+            name="buttons"
+            className={styles.inputRad}
+            onClick={getIcon}
+          />
+          <SvgIcon
+            id={"icon-lightning"}
+            className={
+              icons === "icon-lightning" ? styles.darkIcons : styles.serIcons
+            }
+          ></SvgIcon>
+        </li>
+        <li>
+          <input
+            type="radio"
+            data-source="icon-colors"
+            name="buttons"
+            className={styles.inputRad}
+            onClick={getIcon}
+          />
+          <SvgIcon
+            id={"icon-colors"}
+            className={
+              icons === "icon-colors" ? styles.darkIcons : styles.serIcons
+            }
+          ></SvgIcon>
+        </li>
+        <li>
+          <input
+            type="radio"
+            data-source="icon-hexagon"
+            name="buttons"
+            className={styles.inputRad}
+            onClick={getIcon}
+          />
+          <SvgIcon
+            id={"icon-hexagon"}
+            className={
+              icons === "icon-hexagon" ? styles.darkIcons : styles.serIcons
+            }
+          ></SvgIcon>
+        </li>
+      </ul>
+      <h3 className={styles.textBackground}>Background</h3>
+      <ul className={styles.listColorIcons}>
+        <li
+          className={
+            background === "no-background"
+              ? styles.listItemActive
+              : styles.listItem
+          }
         >
-          <use xlinkHref={`${iconDefs}#icon-close`} />
-        </svg>
-      </button>
-      <h3 style={{ color: theme.popUp.titleColor }} className={css.titleBoard}>
-        {!isEditing ? 'New board' : 'Edit board'}
-      </h3>
-      <Formik
-        initialValues={{
-          title: isEditing ? board.title : '',
-          icon: isEditing ? board.icon : icon,
-          background: isEditing ? board.background : background,
-        }}
-        onSubmit={handleSubmit}
-        validationSchema={boardSchema}
-      >
-        <Form>
-          <label className={css.label}>
-            <ErrorMessage
-              className={css.errorMessage}
-              name="title"
-              component="p"
-            />
-            <Field
-              style={{
-                color: theme.popUp.inputTextColor,
-                borderColor: theme.popUp.inputBorderColor,
-                '::placeholder': { color: theme.popUp.inputPlaceholderColor },
-              }}
-              className={css.input}
-              type="text"
-              name="title"
-              placeholder="Title"
-            />
-          </label>
-          <IconPicker
-            onSelectedIconChange={handleSelectedIconChange}
-            defaultIcon={isEditing ? board.icon : icon}
+          <input
+            type="radio"
+            name="backs"
+            data-source="no-background"
+            className={styles.inputBack}
+            onClick={getBack}
           />
-          <BackgroundPicker
-            onSelectedBackgroundChange={handleSelectedBackgroundChange}
-            defaultBackground={isEditing ? board.background : background}
-          />
-          <AddIconButton
-            buttonType="submit"
-            className={css.btn}
-            theme={'light'}
+          <img src={noBack} alt="no-back" className={styles.img_back} />
+        </li>
+        {backgrounds.map((bg) => (
+          <li
+            key={bg.key}
+            className={
+              background === bg.key ? styles.listItemActive : styles.listItem
+            }
           >
-            <span
-              style={{ color: theme.popUp.buttonTextColor }}
-              className={css.btnSumbitAction}
-            >
-              {!isEditing ? 'Create' : 'Edit'}
-            </span>
-          </AddIconButton>
-        </Form>
-      </Formik>
-    </>
+            <input
+              type="radio"
+              name="backs"
+              className={styles.inputBack}
+              data-source={bg.key}
+              onClick={getBack}
+            />
+            <img src={bg.source} alt={bg.alt} className={styles.img_back} />
+          </li>
+        ))}
+      </ul>
+      <button className={styles.mainButton} onClick={newBoardFunc}>
+        <div className={styles.plusBtnZaglushka}>
+          <SvgIcon id={"plus"} className={styles.plusIcon} />
+        </div>
+        Create
+      </button>
+    </div>
   );
-}
+};
+
+export default NewBoard;
