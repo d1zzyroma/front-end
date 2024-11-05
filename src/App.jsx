@@ -37,7 +37,7 @@ function App() {
 
   if (isRefreshing || loading) {
     return (
-      <div>
+      <div className="loader">
         <BallTriangle
           height={100}
           width={100}
