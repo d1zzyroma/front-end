@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import s from "./WelcomePage.module.css";
 import icons from "../../images/icons/icons.svg";
+import logomain from "../../images/logo-welcome.png";
 
 const WelcomePage = () => {
   const [activeButton, setActiveButton] = useState("register");
@@ -10,6 +11,9 @@ const WelcomePage = () => {
     <>
       <div className={s.bgCon}>
         <div className={s.cont}>
+          <div className={s.logomain}>
+            <img src={logomain} alt="logo" width="162px" height="162px" />
+          </div>
           <div className={s.logoCont}>
             <div className={s.logoNameCont}>
               <div className={s.svg}>
