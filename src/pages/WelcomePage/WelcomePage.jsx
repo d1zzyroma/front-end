@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import s from "./WelcomePage.module.css";
 import icons from "../../images/icons/icons.svg";
+
 const WelcomePage = () => {
   const [activeButton, setActiveButton] = useState("register");
 
