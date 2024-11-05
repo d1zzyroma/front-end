@@ -1,11 +1,3 @@
-body {
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
 .cont {
   width: 90%;
   max-width: 375px;
