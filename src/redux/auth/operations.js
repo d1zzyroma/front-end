@@ -12,7 +12,7 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await taskProApi.post("/auth/register", credentials);
-      setAuthHeader(res.data.accessToken);
+      setAuthHeader(res.data.data.accessToken);
       toast.success(
         "Congratulations, your account has been successfully created! 🚀",
         {
@@ -92,9 +92,9 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   }
 });
 
-// GET /users/current: Отримує дані поточного користувача.
-export const refreshUser = createAsyncThunk(
-  "auth/refresh",
+// GET /user/current: Отримує дані поточного користувача.
+export const userCurrent = createAsyncThunk(
+  "user/current",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -105,7 +105,7 @@ export const refreshUser = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await taskProApi.get("/auth/current");
+      const res = await taskProApi.get("/user/current");
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -113,9 +113,9 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-// PATCH /user/: Відправляє запит для оновлення профілю користувача.
+// PATCH /user/profile: Відправляє запит для оновлення профілю користувача.
 export const updateUserProfile = createAsyncThunk(
-  "auth/profile",
+  "user/profile",
   async (credentials, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -126,7 +126,7 @@ export const updateUserProfile = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await taskProApi.patch("/user", credentials);
+      const res = await taskProApi.patch("user/profile", credentials);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -136,7 +136,7 @@ export const updateUserProfile = createAsyncThunk(
 
 // PATCH /user/theme: Відправляє запит для зміни теми користувача.
 export const updateUserTheme = createAsyncThunk(
-  "auth/theme",
+  "user/theme",
   async (theme, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -156,9 +156,9 @@ export const updateUserTheme = createAsyncThunk(
   }
 );
 
-// POST /feedback/sendFeedback: Відправляє зворотний зв'язок від користувача.
+// POST /support/send-message: Відправляє зворотний зв'язок від користувача.
 export const needHelp = createAsyncThunk(
-  "auth/feedback",
+  "support/send-message",
   async (feedback, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -169,7 +169,7 @@ export const needHelp = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await taskProApi.post("/feedback/sendFeedback", feedback);
+      const res = await taskProApi.post("/support/send-message", feedback);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

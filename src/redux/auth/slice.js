@@ -3,7 +3,7 @@ import {
   register,
   logIn,
   logOut,
-  refreshUser,
+  userCurrent,
   updateUserProfile,
   updateUserTheme,
   needHelp,
@@ -35,8 +35,7 @@ const authSlice = createSlice({
       })
       .addCase(logIn.fulfilled, (state, action) => {
         const { name, email, avatar, theme, accessToken } = action.payload.data;
-        state.user = { name, email, avatar, theme };
-        console.log(action);
+        state.user = { name, email, avatar, theme };        
 
         state.token = accessToken;
         state.isLoggedIn = true;
@@ -48,10 +47,10 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.pending, (state) => {
+      .addCase(userCurrent.pending, (state) => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.fulfilled, (state, action) => {
+      .addCase(userCurrent.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
@@ -71,7 +70,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, (state) => {
+      .addCase(userCurrent.rejected, (state) => {
         state.isRefreshing = false;
       });
   },
