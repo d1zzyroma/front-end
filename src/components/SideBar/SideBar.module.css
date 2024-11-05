@@ -2,11 +2,55 @@
   background-color: var(--background-default);
   font-family: "Poppins";
   padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  overflow-y: auto;
+}
+.cont::-webkit-scrollbar {
+  background-color: var(--bg-scroll-track);
+  width: 4px;
+  height: 12px;
+  border-radius: 12px;
+}
+.cont::-webkit-scrollbar-thumb {
+  background-color: var(--bg-scroll-thumb);
+  border-radius: 12px;
 }
 @media (min-width: 768px) {
   .cont {
     padding: 24px;
   }
+}
+
+.logoContainer {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 60px;
+  align-items: center;
+}
+
+.logoIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  background-color: var(--logo-icon-wrapper);
+}
+.logoIcon {
+  width: 16px;
+  height: 16px;
+  fill: var(--logo-icon);
+}
+
+.logoTitle {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  color: var(--logo-title);
 }
 .sidebarTitle {
   font-weight: 400;
@@ -38,6 +82,9 @@
   letter-spacing: -0.02em;
 }
 .addBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 6px;
   padding: 8px 10px;
   background-color: var(--accent-sidebar-btn);

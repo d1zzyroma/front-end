@@ -27,7 +27,6 @@
   --label-green: #bedbb0;
   --label-grey: rgba(22, 22, 22, 0.3);
 
-
   --button-text: #161616;
   --bg-scroll: rgba(22, 22, 22, 0.1);
   --bottom-scroll: #fff;
@@ -48,6 +47,10 @@
   --btn-hover: #9dc888;
   --btn-add-color: #161616;
   --bg-modal: #fff;
+
+  --logo-icon-wrapper: #1f1f1f;
+  --logo-icon: #fff;
+  --logo-title: #161616;
 }
 
 /* Для темної теми */
@@ -93,6 +96,10 @@
   --btn-hover: #9dc888;
   --btn-add-color: #161616;
   --bg-modal: #151515;
+
+  --logo-icon-wrapper: #1f1f1f;
+  --logo-icon: #fff;
+  --logo-title: #fff;
 }
 
 /* Для фіолетової теми */
@@ -116,7 +123,6 @@
   --hover-sidebar-element: #fff;
   --bg-screen: #ecedfd;
 
-  
   --button-text: #fff;
   --bg-scroll: #b8bcfd;
   --bg-scroll-track: #fff;
@@ -138,4 +144,8 @@
   --btn-hover: #7b7ede;
   --btn-add-color: #fff;
   --bg-modal: #fff;
+
+  --logo-icon-wrapper: #ecedfd;
+  --logo-icon: #5255bc;
+  --logo-title: #fff;
 }
