@@ -3,10 +3,12 @@
   font-family: "Poppins";
   padding: 14px;
   display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
   overflow-y: auto;
+  min-width: 225px;
 }
 .cont::-webkit-scrollbar {
   background-color: var(--bg-scroll-track);
@@ -20,10 +22,15 @@
 }
 @media (min-width: 768px) {
   .cont {
+    /* max-width: 260px; */
     padding: 24px;
   }
 }
-
+@media screen and (min-width: 1440px) {
+  .cont {
+    display: flex;
+  }
+}
 .logoContainer {
   display: flex;
   gap: 8px;
