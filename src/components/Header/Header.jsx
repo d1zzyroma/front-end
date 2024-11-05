@@ -3,7 +3,7 @@ import ThemeSwitcher from "../Themes/ThemeSwitcher/ThemeSwitcher";
 import EditProfile from "../EditProfile/EditProfile.jsx";
 import icons from "../../images/icons/icons.svg";
 import s from "./Header.module.css";
-
+import userAva from "../../images/user.png";
 const Header = () => {
   const [theme, setTheme] = useState("light");
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +35,7 @@ const Header = () => {
     <header>
       <div className={s.cont}>
         <svg className={s.mobileMenu}>
-          <use href={`${icons}#icon-bell`} />
+          <use href={`${icons}#icon-mobile-menu`} />
         </svg>
         <div className={s.divRight}>
           <div className={s.divLabel}>
@@ -56,14 +56,14 @@ const Header = () => {
             )}
           </div>
           <div className={s.divUser}>
-            <p className={s.p}>Login</p>
+            <p className={s.p}>UserName</p>
             <div className={s.divImg}>
               <button
                 className={s.btnEditProf}
                 type="button"
                 onClick={openEditProfile}
               >
-                X
+                <img src={userAva} alt="UserAvatar" />
               </button>
             </div>
           </div>

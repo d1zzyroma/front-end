@@ -23,7 +23,11 @@
 
   max-width: 335px;
 }
-
+.logomain {
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 24px;
+}
 .logoNameCont {
   display: flex;
   justify-content: center;
