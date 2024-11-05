@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { deleteBoard } from "../../redux/boards/operations";
 import { useState } from "react";
 import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
+import { logOut } from "../../redux/auth/operations";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,10 @@ const SideBar = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteBoard(id));
+  };
+
+  const handleLogOut = () => {
+    dispatch(logOut());
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,7 +76,7 @@ const SideBar = () => {
             </div>
           )}
         </div>
-        <button type="button" className={s.logoutBtn}>
+        <button type="button" className={s.logoutBtn} onClick={handleLogOut}>
           <SvgIcon id="icon-login" className={s.logoutIcon} />
           Log out
         </button>
