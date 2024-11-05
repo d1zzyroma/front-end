@@ -14,9 +14,27 @@ import HomePage from "./pages/HomePage/HomePage.jsx";
 import { ThemeProvider } from "./components/Themes/ThemeContext/ThemeContext.jsx";
 import InfoForTeam from "./info/InfoForTeam/InfoForTeam.jsx";
 import { RestrictedRoute } from "./components/Routes/RestrictedRoute.jsx";
+import { PrivateRoute } from "./components/Routes/PrivateRoute.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn, selectUser } from "./redux/auth/selectors.js";
+import { userCurrent } from "./redux/auth/operations.js";
+import { useEffect } from "react";
 // // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 
 function App() {
+  // const user = useSelector(selectUser);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const dispatch = useDispatch();
+  // useEffect(
+  //   (isLoggedIn) => {
+  //     if (isLoggedIn) {
+  //       // dispatch(userCurrent());
+  //       console.log("ZBS");
+  //     }
+  //   },
+  //   [isLoggedIn]
+  // );
+
   return (
     <ThemeProvider>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -46,7 +64,12 @@ function App() {
           </Route>
 
           {/* Private route ScreensPage */}
-          <Route path="/home" element={<HomePage />}>
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute redirectTo="/welcome" component={<HomePage />} />
+            }
+          >
             <Route path=":boardId" element={<ScreensPage />} />
           </Route>
         </Routes>
