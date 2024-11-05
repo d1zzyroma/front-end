@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { deleteBoard } from "../../redux/boards/operations";
 import { useState } from "react";
 import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
-import { logOut } from "../../redux/auth/operations";
+import { logOut } from "../../redux/auth/operations.js";
 
 const SideBar = () => {
   const dispatch = useDispatch();
