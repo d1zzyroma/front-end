@@ -43,7 +43,7 @@
 .mobileMenu {
   width: 24px;
   height: 24px;
-  stroke: var(--primary-main);
+  stroke: var(--text-primary);
 }
 
 .divRight {
