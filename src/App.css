@@ -54,6 +54,7 @@
   --logo-icon-wrapper: #1f1f1f;
   --logo-icon: #fff;
   --logo-title: #161616;
+  --bg-icon: #656565;
 }
 #root {
   display: flex;
@@ -111,6 +112,7 @@
   --logo-icon-wrapper: #1f1f1f;
   --logo-icon: #fff;
   --logo-title: #fff;
+  --bg-icon: #656565;
 }
 
 /* Для фіолетової теми */
@@ -360,6 +362,7 @@
   --logo-icon-wrapper: #ecedfd;
   --logo-icon: #5255bc;
   --logo-title: #fff;
+  --bg-icon: #656565;
 }
 .loader {
   height: 100vh;
