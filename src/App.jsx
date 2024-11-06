@@ -23,6 +23,12 @@ import { BallTriangle } from "react-loader-spinner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// import HomePage from "./pages/HomePage/HomePage.jsx";
+// import { ThemeProvider } from "./components/Themes/ThemeContext/ThemeContext.jsx";
+// import InfoForTeam from "./info/InfoForTeam/InfoForTeam.jsx";
+// import { RestrictedRoute } from "./components/Routes/RestrictedRoute.jsx";
+// // // // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+// import { NewBoard } from "../src/components/NewEditBoard/NewBoard"
 function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);

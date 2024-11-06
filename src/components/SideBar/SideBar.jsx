@@ -7,6 +7,7 @@ import { deleteBoard } from "../../redux/boards/operations";
 import { useState } from "react";
 import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
 import { logOut } from "../../redux/auth/operations.js";
+import NewBoard from "../NewEditBoard/NewBoard.jsx";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ const SideBar = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
+  const [isAddBoardOpen, setIsAddBoardOpen] = useState(false);
+  const openAddBoard = () => setIsAddBoardOpen(true);
+  const closeAddBoard = () => setIsAddBoardOpen(false);
   return (
     <>
       <div className={s.cont}>
@@ -42,7 +45,7 @@ const SideBar = () => {
           <h2 className={s.sidebarTitle}>My boards</h2>
           <div className={s.createBoard}>
             <p className={s.createBoardTitle}>Create new board</p>
-            <button type="submit" className={s.addBtn}>
+            <button type="submit" className={s.addBtn} onClick={openAddBoard}>
               <SvgIcon id="icon-plus" className={s.addBtnIcon} />
             </button>
           </div>
@@ -93,6 +96,11 @@ const SideBar = () => {
             Log out
           </button>
         </div>
+        {isAddBoardOpen && (
+          <div>
+            <NewBoard closeModal={closeAddBoard} />
+          </div>
+        )}
       </div>
     </>
   );
