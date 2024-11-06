@@ -1,0 +1,1 @@
+export const selectSideBarVisibility = (state) => state.visibilitySideBar.visibility;
