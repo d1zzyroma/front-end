@@ -41,6 +41,11 @@
   height: 18px;
   fill: var(--text-primary);
   stroke: var(--text-primary);
+  transition: fill 0.3s, stroke 0.3s;
+  &:hover {
+    stroke: var(--primary-main);
+    fill: var(--primary-main);
+  }
 }
 
 .formStyle {

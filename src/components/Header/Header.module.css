@@ -7,10 +7,17 @@
   padding-left: 20px;
   padding-right: 20px;
   background-color: var(--background-paper);
+  font-family: "Poppins", sans-serif;
 }
 
 .pTheme {
   color: var(--text-secondary);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.28px;
 }
 
 .icon {
@@ -27,7 +34,6 @@
   gap: 8px;
   width: 32px;
   height: 32px;
-  background-color: blue;
   fill: var(--img-icon-color, #aaa);
 }
 
@@ -75,7 +81,7 @@
 
 .p {
   color: var(--text-primary);
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
