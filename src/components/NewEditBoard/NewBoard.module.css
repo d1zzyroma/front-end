@@ -23,6 +23,14 @@
   color: var(--text-primary);
   font-family: "Poppins", sans-serif;
 }
+.iconclose {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  fill: var(--text-primary);
+}
 .textNew {
   font-size: 18px;
 
@@ -99,7 +107,7 @@
   height: 18px;
   margin: 4px;
   fill: none;
-  stroke: var(--sidebar-light);
+  stroke: var(--bg-icon);
 }
 
 .darkIcons {

@@ -153,6 +153,9 @@ export const NewBoard = ({ closeModal }) => {
           value={title}
           onChange={handleTitleChange}
         />
+        <button onClick={closeModal}>
+          <SvgIcon id="icon-close" className={styles.iconclose} />
+        </button>
         <h3 className={styles.textIcons}>Icons</h3>
         <ul className={styles.listDarkIcons}>
           {icons.map((icon) => (
