@@ -10,13 +10,13 @@ import { toast } from "react-toastify";
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
+    let token = null;
     try {     
       const res = await taskProApi.post("/auth/register", credentials);      
       
       if (res.data.status === 201) {
-        setAuthHeader(res.data.data.accessToken);        
-        try { 
-          console.log(credentials);
+              
+        try {          
           const resLogin = await taskProApi.post("/auth/login", { email: credentials.email, password: credentials.password });          
           setAuthHeader(resLogin.data.data.accessToken);
            toast.success(
@@ -31,8 +31,9 @@ export const register = createAsyncThunk(
           progress: undefined,
           theme: "light",
         }
-      );
-return resLogin.data;
+          );          
+          token = resLogin.data.data.accessToken;          
+
         } catch (loginError) {          
           toast.error("Login failed: " + (loginError.response?.data?.message || loginError.message), {
             position: "top-right",
@@ -46,7 +47,7 @@ return resLogin.data;
           return thunkAPI.rejectWithValue(loginError.message);
         }
       }     
-      return res.data;
+      return { ...res.data, accessToken: token };
     } catch (error) {
      
       const errorMessage = error.response?.data?.message || error.message;
