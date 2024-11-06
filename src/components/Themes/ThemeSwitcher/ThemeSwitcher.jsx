@@ -1,24 +1,33 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import s from "./ThemeSwitсher.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserTheme } from "../../../redux/auth/operations.js";
+import { selectUserTheme } from "../../../redux/auth/selectors.js";
 
-const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState("light"); // Початкова тема
+const ThemeSwitcher = ({ closeDropdown }) => {
+  const theme = useSelector(selectUserTheme);
 
-  // Застосовуємо зміну теми через атрибут data-theme в HTML
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  // Функція для перемикання тем
-  const handleThemeChange = (newTheme) => {
-    setTheme(newTheme);
+  }, []);
+  const dispatch = useDispatch();
+  const handleThemeSelection = (newTheme) => {
+    dispatch(updateUserTheme(newTheme));
+    document.documentElement.setAttribute("data-theme", newTheme);
+    closeDropdown(); // Закриваємо меню після вибору теми
   };
 
   return (
     <div>
-      <h2>Виберіть тему:</h2>
-      <button onClick={() => handleThemeChange("light")}>Світла</button>
-      <button onClick={() => handleThemeChange("dark")}>Темна</button>
-      <button onClick={() => handleThemeChange("violet")}>Фіолетова</button>
+      <button className={s.item} onClick={() => handleThemeSelection("light")}>
+        Light
+      </button>
+      <button className={s.item} onClick={() => handleThemeSelection("dark")}>
+        Dark
+      </button>
+      <button className={s.item} onClick={() => handleThemeSelection("violet")}>
+        Violet
+      </button>
     </div>
   );
 };
