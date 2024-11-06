@@ -1,11 +1,36 @@
+.bgCon {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    rgba(196, 196, 196, 0) 25%,
+    #bedbb0 92.19%
+  );
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font: 400 18px / 1.55556 "Poppins", sans-serif;
+}
+
 .cont {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   margin-bottom: 48px;
-  width: 100%; /* Дефолтна ширина */
-  max-width: 335px;
+  max-width: 100%;
+  padding: 0 16px;
+}
+
+.logomain {
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 24px;
+  width: 124px;
+  height: 124px;
 }
 
 .logoNameCont {
@@ -15,13 +40,17 @@
   gap: 15px;
   margin-bottom: 24px;
 }
+
 .icon {
   fill: white;
   display: block;
   opacity: 1;
   visibility: visible;
   z-index: 999;
+  width: 15px;
+  height: 20px;
 }
+
 .svg {
   width: 40px;
   height: 40px;
@@ -33,21 +62,23 @@
 }
 
 .title {
-  font: 400 18px / 1.55556 "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
   text-align: center;
-  width: 100%; /* Дефолтна ширина */
+  width: 100%;
   max-width: 300px;
 }
+
 .logoText {
-  font-family: Poppins;
   font-size: 28px;
   font-weight: 600;
   line-height: 42px;
   letter-spacing: -0.04em;
   text-align: left;
+}
+.logoNameCont {
+  min-width: 166px;
 }
 
 .nav {
@@ -55,10 +86,11 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 .button {
-  width: 100%; /* Гумова ширина */
+  width: 90%;
   max-width: 335px;
   padding: 10px 0;
   font-size: 16px;
@@ -70,6 +102,7 @@
   text-decoration: none;
   cursor: pointer;
   text-transform: uppercase;
+  transition: background-color 0.5s ease;
 }
 
 .active {
@@ -77,37 +110,72 @@
   color: #fff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* Гумова верстка для екранів до 375px */
-@media (max-width: 375px) {
+@media (min-width: 375px) {
   .cont {
-    padding: 0 10px;
+    min-width: 335px;
   }
-
-  .title {
-    font-size: 14px;
+  .button {
+    width: 100%;
   }
 }
 
-/* Стає фіксованою після 375px */
-/* @media (min-width: 375px) and (max-width: 767px) {
+/* Tablet */
+@media (min-width: 768px) {
+  .logomain {
+    width: 162px;
+    height: 162px;
+  }
+  .logoText {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 60px;
+    letter-spacing: -0.04em;
+    text-align: left;
+  }
   .cont {
-    width: 335px;
+    min-width: 473px;
   }
   .button {
-    width: 335px;
+    min-width: 344px;
   }
-} */
-
-/* Адаптивна верстка для планшетів від 768px */
-/* @media (min-width: 768px) {
-  .cont {
-    width: 473px;
-  }
-  .button {
-    width: 344px;
+  .logoNameCont {
+    min-width: 222px;
   }
   .title {
+    min-width: 435px;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+  .svg {
+    min-width: 48px;
+    min-height: 48px;
+  }
+  .icon {
+    min-width: 18px;
+    min-height: 24px;
+  }
+}
+
+/* PK */
+@media (min-width: 1440px) {
+  .logomain {
+    width: 162px;
+    height: 162px;
+  }
+  .logoText {
     width: 473px;
   }
-} */
+  .cont {
+    max-width: 473px;
+  }
+  .button {
+    width: 364px;
+  }
+  .logoNameCont {
+    width: 222px;
+  }
+}

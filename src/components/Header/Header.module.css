@@ -21,6 +21,16 @@
   height: 8px;
 }
 
+.profileIcon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 32px;
+  height: 32px;
+  background-color: blue;
+  fill: var(--img-icon-color, #aaa);
+}
+
 .dropdown {
   display: inline-flex;
   flex-direction: column;
@@ -43,7 +53,7 @@
 .mobileMenu {
   width: 24px;
   height: 24px;
-  stroke: var(--primary-main);
+  stroke: var(--text-primary);
 }
 
 .divRight {
@@ -76,7 +86,7 @@
 .divImg {
   width: 32px;
   height: 32px;
-  background-color: var(--label-blue);
+  /* background-color: var(--label-blue); */
 }
 
 @media screen and (min-width: 768px) {
@@ -95,7 +105,7 @@
 
 @media screen and (min-width: 1440px) {
   .cont {
-    min-width: 1180px;
+    max-width: 1440px;
     padding-right: 24px;
   }
 

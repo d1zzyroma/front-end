@@ -1,17 +1,3 @@
-body {
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    rgba(196, 196, 196, 0) 25%,
-    #bedbb0 92.19%
-  );
-  font: 400 18px / 1.55556 "Poppins", sans-serif;
-}
-
 .cont {
   width: 90%;
   max-width: 375px;
@@ -26,7 +12,7 @@ body {
 }
 
 .fieldWrapper {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -42,10 +28,10 @@ body {
   outline: none;
   box-sizing: border-box;
 }
-input:hover {
+.input:hover {
   background-color: rgba(15, 15, 15, 0.4);
 }
-input:focus {
+.input:focus {
   background-color: rgba(15, 15, 15, 0.4);
   border: 1px solid rgba(190, 219, 176, 0.9);
 }

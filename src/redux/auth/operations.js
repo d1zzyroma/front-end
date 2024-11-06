@@ -6,45 +6,66 @@ import {
 } from "../../config/taskProApi";
 import { toast } from "react-toastify";
 
-// POST /auth/register: Відправляє запит для реєстрації нового користувача з параметрами name, email і password.
+// POST /auth/register: і /auth/login Відправляє запит для реєстрації нового користувача з параметрами name, email і password і запит на вхід користувача.
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
-    try {
-      const res = await taskProApi.post("/auth/register", credentials);
-      setAuthHeader(res.data.accessToken);
-      toast.success(
-        "Congratulations, your account has been successfully created! 🚀",
-        {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
+    let token = null;
+    try {     
+      const resRegister = await taskProApi.post("/auth/register", credentials);      
+      
+      if (resRegister.data.status === 201) {
+              
+        try {          
+          const resLogin = await taskProApi.post("/auth/login", { email: credentials.email, password: credentials.password });          
+          setAuthHeader(resLogin.data.data.accessToken);
+
+          setTimeout(() => {             
+    toast.success(
+    `${resLogin.data.data.user.name}, welcome to TaskPro! 🚀`,
+    {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
+}, 1000);
+          token = resLogin.data.data.accessToken;          
+
+        } catch (errorLogin) {          
+         
+          return thunkAPI.rejectWithValue(errorLogin.message);
         }
-      );
-      return res.data;
-    } catch (error) {
-      toast.warning(
-        "Email already in use. Try logging in or reset your password.",
-        {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-        }
-      );
-      return thunkAPI.rejectWithValue(error.message);
+      }     
+      return { ...resRegister.data, accessToken: token };
+    } catch (errorRegister) {     
+      
+      setTimeout(() => {
+  toast.warning(
+    "Email already in use. Try logging in or reset your password.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
+}, 1000);
+
+      return thunkAPI.rejectWithValue(errorRegister.message);
     }
   }
 );
+
 
 // POST /auth/login: Відправляє запит для входу користувача з параметрами email і password.
 export const logIn = createAsyncThunk(
@@ -53,30 +74,42 @@ export const logIn = createAsyncThunk(
     try {
       const res = await taskProApi.post("/auth/login", credentials);
       setAuthHeader(res.data.data.accessToken);
-      toast.success("Welcome to TaskPro! 🚀", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      });
-      console.log();
+
+      setTimeout(() => {
+  toast.success(
+    `${res.data.data.user.name}, welcome to TaskPro! 🚀`,
+    {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
+}, 1000);
 
       return res.data;
     } catch (error) {
-      toast.error("Incorrect email or password. Please try again.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      });
+
+      setTimeout(() => {
+  toast.error(
+    "Incorrect email or password. Please try again.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
+}, 1000);
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -92,9 +125,9 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   }
 });
 
-// GET /users/current: Отримує дані поточного користувача.
-export const refreshUser = createAsyncThunk(
-  "auth/refresh",
+// GET /user/current: Отримує дані поточного користувача.
+export const userCurrent = createAsyncThunk(
+  "user/current",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -105,17 +138,19 @@ export const refreshUser = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await taskProApi.get("/auth/current");
-      return res.data;
+      const res = await taskProApi.get("/user/current");
+      console.log(res.data);
+
+      return res.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// PATCH /user/: Відправляє запит для оновлення профілю користувача.
+// PATCH /user/profile: Відправляє запит для оновлення профілю користувача.
 export const updateUserProfile = createAsyncThunk(
-  "auth/profile",
+  "user/profile",
   async (credentials, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -126,9 +161,38 @@ export const updateUserProfile = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await taskProApi.patch("/user", credentials);
+      const res = await taskProApi.patch("user/profile", credentials);
+
+      toast.success(
+    "User data updated.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+        }
+    
+  );     
       return res.data;
     } catch (error) {
+
+      toast.error(
+    "Error, please try again later.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );     
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -136,7 +200,7 @@ export const updateUserProfile = createAsyncThunk(
 
 // PATCH /user/theme: Відправляє запит для зміни теми користувача.
 export const updateUserTheme = createAsyncThunk(
-  "auth/theme",
+  "user/theme",
   async (theme, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -148,7 +212,8 @@ export const updateUserTheme = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const payload = { theme };
-      const res = await taskProApi.patch("/user/theme", payload);
+      const res = await taskProApi.patch("/user/theme", payload);      
+
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -156,9 +221,9 @@ export const updateUserTheme = createAsyncThunk(
   }
 );
 
-// POST /feedback/sendFeedback: Відправляє зворотний зв'язок від користувача.
+// POST /support/send-message: Відправляє зворотний зв'язок від користувача.
 export const needHelp = createAsyncThunk(
-  "auth/feedback",
+  "support/send-message",
   async (feedback, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -169,9 +234,37 @@ export const needHelp = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await taskProApi.post("/feedback/sendFeedback", feedback);
-      return res.data;
+      const res = await taskProApi.post("/support/send-message", feedback);
+      
+  toast.success(
+    "Thank you, the support service will contact you.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );     
+    return res.data;
     } catch (error) {
+     
+  toast.error(
+    "Sorry, error, please try again later.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
       return thunkAPI.rejectWithValue(error.message);
     }
   }
