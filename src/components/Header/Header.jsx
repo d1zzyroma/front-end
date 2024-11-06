@@ -4,10 +4,13 @@ import EditProfile from "../EditProfile/EditProfile.jsx";
 import icons from "../../images/icons/icons.svg";
 import s from "./Header.module.css";
 import userAva from "../../images/user.png";
+import { useSelector } from "react-redux";
+import { selectUserName } from "../../redux/auth/selectors.js";
 const Header = () => {
   const [theme, setTheme] = useState("light");
   const [isOpen, setIsOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const user = useSelector(selectUserName);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -56,7 +59,7 @@ const Header = () => {
             )}
           </div>
           <div className={s.divUser}>
-            <p className={s.p}>UserName</p>
+            <p className={s.p}>{user}</p>
             <div className={s.divImg}>
               <button
                 className={s.btnEditProf}
