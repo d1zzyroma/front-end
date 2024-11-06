@@ -14,7 +14,7 @@ export const getBoards = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      const response = await taskProApi.get('/board');
+      const response = await taskProApi.get('/boards');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
