@@ -5,9 +5,10 @@ import icons from "../../images/icons/icons.svg";
 import s from "./Header.module.css";
 import userAva from "../../images/user.png";
 import { useSelector } from "react-redux";
-import { selectUserName } from "../../redux/auth/selectors.js";
+import { selectUserName, selectUserTheme } from "../../redux/auth/selectors.js";
 const Header = () => {
-  const [theme, setTheme] = useState("light");
+  // const [theme, setTheme] = useState("light");
+  const theme = useSelector(selectUserTheme);
   const [isOpen, setIsOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const user = useSelector(selectUserName);
@@ -51,8 +52,8 @@ const Header = () => {
             {isOpen && (
               <div className={s.dropdown}>
                 <ThemeSwitcher
-                  theme={theme}
-                  setTheme={setTheme}
+                  // theme={theme}
+                  // setTheme={setTheme}
                   closeDropdown={closeDropdown}
                 />
               </div>
