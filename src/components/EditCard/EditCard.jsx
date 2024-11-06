@@ -1,11 +1,11 @@
-import s from "./AddCard.module.css";
+import s from "./EditCard.module.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SvgIcon from "../SvgIcon/SvgIcon.jsx";
 
-const AddCardForm = ({ closeModal }) => {
+const EditCardForm = ({ closeModal }) => {
   const initialValues = {
     title: "",
     description: "",
@@ -39,7 +39,7 @@ const AddCardForm = ({ closeModal }) => {
     >
       <div className={s.modal}>
         <div className={s.modalcontent}>
-          <h2 className={s.title}>Add Card</h2>
+          <h2 className={s.title}>Edit Card</h2>
           <button className={s.closebtn} onClick={closeModal}>
             <SvgIcon id="icon-close" className={s.iconclose} />
           </button>
@@ -104,7 +104,7 @@ const AddCardForm = ({ closeModal }) => {
                   <div className={s.btnplus}>
                     <SvgIcon id="icon-plus" className={s.btnicon} />
                   </div>{" "}
-                  <p className={s.btntext}>Add</p>
+                  <p className={s.btntext}>Edit</p>
                 </button>
               </Form>
             )}
@@ -115,4 +115,4 @@ const AddCardForm = ({ closeModal }) => {
   );
 };
 
-export default AddCardForm;
+export default EditCardForm;

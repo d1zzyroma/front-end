@@ -3,6 +3,7 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./MainDashBoard.module.css";
 import EllipsisText from "react-ellipsis-text";
 import AddCardForm from "../AddCard/AddCard.jsx";
+import EditCardForm from "../EditCard/EditCard.jsx";
 
 const MainDashBoard = ({ boardId }) => {
   const columns = [
@@ -73,6 +74,9 @@ const MainDashBoard = ({ boardId }) => {
     },
   ];
   const [openModalIndex, setOpenModalIndex] = useState(null);
+  const [openModalEditIndex, setOpenModalEditIndex] = useState(null);
+  const openModalEdit = (index) => setOpenModalEditIndex(index);
+  const closeModalEdit = () => setOpenModalEditIndex(null);
 
   const openModal = (index) => setOpenModalIndex(index);
   const closeModal = () => setOpenModalIndex(null);
@@ -122,7 +126,9 @@ const MainDashBoard = ({ boardId }) => {
                           id="icon-arrow-circle-broken-right"
                           className={s.columnIcons}
                         />
-                        <SvgIcon id="icon-pencil" className={s.columnIcons} />
+                        <button onClick={() => openModalEdit(index)}>
+                          <SvgIcon id="icon-pencil" className={s.columnIcons} />
+                        </button>
                         <SvgIcon id="icon-trash" className={s.columnIcons} />
                       </div>
                     </div>
@@ -140,6 +146,11 @@ const MainDashBoard = ({ boardId }) => {
               {openModalIndex === index && (
                 <div>
                   <AddCardForm closeModal={closeModal} />
+                </div>
+              )}
+              {openModalEditIndex === index && (
+                <div>
+                  <EditCardForm closeModal={closeModalEdit} />
                 </div>
               )}
             </div>
