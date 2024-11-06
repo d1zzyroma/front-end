@@ -13,6 +13,8 @@
   letter-spacing: -0.28px;
   color: var(--drop-down-text);
   background-color: var(--background-paper);
+  font-family: "Poppins", sans-serif;
+  transition: color 0.3s;
   &:hover {
     color: var(--primary-main);
   }

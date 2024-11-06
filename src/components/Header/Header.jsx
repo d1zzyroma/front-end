@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
 import ThemeSwitcher from "../Themes/ThemeSwitcher/ThemeSwitcher";
 import EditProfile from "../EditProfile/EditProfile.jsx";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   selectUserName,
-  selectUserAvatar,
+  // selectUserAvatar,
   selectUserTheme,
 } from "../../redux/auth/selectors.js";
 import icons from "../../images/icons/icons.svg";
 import s from "./Header.module.css";
-
+import { toggleSideBar } from "../../redux/sideBar/slice.js";
 import userAva from "../../images/user.png";
 // import { useSelector } from "react-redux";
 // import { selectUserName, selectUserTheme } from "../../redux/auth/selectors.js";
 const Header = () => {
   // const [theme, setTheme] = useState("light");
+  const dispatch = useDispatch();
   const theme = useSelector(selectUserTheme);
   const [isOpen, setIsOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
   const userName = useSelector(selectUserName);
-  const userAvatar = useSelector(selectUserAvatar);
+  // const userAvatar = useSelector(selectUserAvatar);
   console.log("User Name:", userName);
-  console.log("User Avatar:", userAvatar);
+  // console.log("User Avatar:", userAvatar);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -49,7 +50,11 @@ const Header = () => {
   return (
     <header>
       <div className={s.cont}>
-        <button className={s.btnMobMenu} type="button">
+        <button
+          className={s.btnMobMenu}
+          type="button"
+          onClick={() => dispatch(toggleSideBar())}
+        >
           <svg className={s.mobileMenu}>
             <use href={`${icons}#icon-mobile-menu`} />
           </svg>
@@ -73,7 +78,7 @@ const Header = () => {
             )}
           </div>
           <div className={s.divUser}>
-            {/* <p className={s.p}>{userName}</p> */}
+            <p className={s.p}>{userName}</p>
 
             <div className={s.divImg}>
               <button
@@ -81,18 +86,9 @@ const Header = () => {
                 type="button"
                 onClick={openEditProfile}
               >
-                {userName}
-                {userAvatar ? (
-                  <img
-                    src={userAvatar}
-                    alt="avatar"
-                    className={s.profile_avatar}
-                  />
-                ) : (
-                  <svg className={s.profileIcon}>
-                    <use href={`${icons}#icon-user-ico`}></use>
-                  </svg>
-                )}
+                {/* {userName} */}
+
+                <img src={userAva} alt="avatar" className={s.profile_avatar} />
               </button>
             </div>
           </div>
