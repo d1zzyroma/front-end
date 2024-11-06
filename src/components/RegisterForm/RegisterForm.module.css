@@ -12,7 +12,7 @@
 }
 
 .fieldWrapper {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -28,10 +28,10 @@
   outline: none;
   box-sizing: border-box;
 }
-input:hover {
+.input:hover {
   background-color: rgba(15, 15, 15, 0.4);
 }
-input:focus {
+.input:focus {
   background-color: rgba(15, 15, 15, 0.4);
   border: 1px solid rgba(190, 219, 176, 0.9);
 }
