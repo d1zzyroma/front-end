@@ -6,65 +6,62 @@ import {
 } from "../../config/taskProApi";
 import { toast } from "react-toastify";
 
-// POST /auth/register: Відправляє запит для реєстрації нового користувача з параметрами name, email і password.
+// POST /auth/register: і /auth/login Відправляє запит для реєстрації нового користувача з параметрами name, email і password і запит на вхід користувача.
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     let token = null;
     try {     
-      const res = await taskProApi.post("/auth/register", credentials);      
+      const resRegister = await taskProApi.post("/auth/register", credentials);      
       
-      if (res.data.status === 201) {
+      if (resRegister.data.status === 201) {
               
         try {          
           const resLogin = await taskProApi.post("/auth/login", { email: credentials.email, password: credentials.password });          
           setAuthHeader(resLogin.data.data.accessToken);
-           toast.success(
-        "Welcome to TaskPro! 🚀",
-        {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-        }
-          );          
+
+          setTimeout(() => {             
+    toast.success(
+    `${resLogin.data.data.user.name}, welcome to TaskPro! 🚀`,
+    {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
+}, 1000);
           token = resLogin.data.data.accessToken;          
 
-        } catch (loginError) {          
-          toast.error("Login failed: " + (loginError.response?.data?.message || loginError.message), {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            theme: "light",
-          });
-          return thunkAPI.rejectWithValue(loginError.message);
+        } catch (errorLogin) {          
+         
+          return thunkAPI.rejectWithValue(errorLogin.message);
         }
       }     
-      return { ...res.data, accessToken: token };
-    } catch (error) {
-     
-      const errorMessage = error.response?.data?.message || error.message;
-      toast.warning(
-        "Email already in use. Try logging in or reset your password. " + errorMessage,
-        {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-        }
-      );
-      return thunkAPI.rejectWithValue(errorMessage);
+      return { ...resRegister.data, accessToken: token };
+    } catch (errorRegister) {     
+      
+      setTimeout(() => {
+  toast.warning(
+    "Email already in use. Try logging in or reset your password.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
+}, 1000);
+
+      return thunkAPI.rejectWithValue(errorRegister.message);
     }
   }
 );
@@ -77,30 +74,42 @@ export const logIn = createAsyncThunk(
     try {
       const res = await taskProApi.post("/auth/login", credentials);
       setAuthHeader(res.data.data.accessToken);
-      toast.success("Welcome to TaskPro! 🚀", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      });
-      console.log();
+
+      setTimeout(() => {
+  toast.success(
+    `${res.data.data.user.name}, welcome to TaskPro! 🚀`,
+    {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
+}, 1000);
 
       return res.data;
     } catch (error) {
-      toast.error("Incorrect email or password. Please try again.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-      });
+
+      setTimeout(() => {
+  toast.error(
+    "Incorrect email or password. Please try again.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
+}, 1000);
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -153,8 +162,37 @@ export const updateUserProfile = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await taskProApi.patch("user/profile", credentials);
+
+      toast.success(
+    "User data updated.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+        }
+    
+  );     
       return res.data;
     } catch (error) {
+
+      toast.error(
+    "Error, please try again later.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );     
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -174,7 +212,8 @@ export const updateUserTheme = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const payload = { theme };
-      const res = await taskProApi.patch("/user/theme", payload);
+      const res = await taskProApi.patch("/user/theme", payload);      
+
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -196,8 +235,36 @@ export const needHelp = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await taskProApi.post("/support/send-message", feedback);
-      return res.data;
+      
+  toast.success(
+    "Thank you, the support service will contact you.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );     
+    return res.data;
     } catch (error) {
+     
+  toast.error(
+    "Sorry, error, please try again later.",
+    {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    }
+  );
       return thunkAPI.rejectWithValue(error.message);
     }
   }
