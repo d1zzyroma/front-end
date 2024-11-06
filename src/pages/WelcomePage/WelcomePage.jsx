@@ -6,18 +6,17 @@ import logomain from "../../images/logo-welcome.png";
 
 const WelcomePage = () => {
   const [activeButton, setActiveButton] = useState("register");
-
   return (
     <>
       <div className={s.bgCon}>
         <div className={s.cont}>
-          <div className={s.logomain}>
-            <img src={logomain} alt="logo" width="162px" height="162px" />
-          </div>
           <div className={s.logoCont}>
+            <div className={s.logomain}>
+              <img src={logomain} alt="logo" />
+            </div>
             <div className={s.logoNameCont}>
               <div className={s.svg}>
-                <svg className={s.icon} width="15px" height="20px">
+                <svg className={s.icon}>
                   <use href={`${icons}#icon-welcome`}></use>
                 </svg>
               </div>

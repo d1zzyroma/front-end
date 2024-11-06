@@ -33,10 +33,10 @@
   position: relative;
   padding-right: 40px;
 }
-input:hover {
+.input:hover {
   background-color: rgba(15, 15, 15, 0.4);
 }
-input:focus {
+.input:focus {
   background-color: rgba(15, 15, 15, 0.4);
   border: 1px solid rgba(190, 219, 176, 0.9);
 }
