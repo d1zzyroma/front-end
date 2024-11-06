@@ -52,7 +52,10 @@
   --logo-icon: #fff;
   --logo-title: #161616;
 }
-
+#root {
+  display: flex;
+  justify-content: center;
+}
 /* Для темної теми */
 [data-theme="dark"] {
   --primary-light: #161616;
