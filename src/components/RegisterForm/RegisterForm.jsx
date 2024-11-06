@@ -164,7 +164,7 @@ const RegisterForm = () => {
       await dispatch(register(values));
 
       // Виконати логін з тією ж інформацією
-      await dispatch(logIn({ email: values.email, password: values.password }));
+      // await dispatch(logIn({ email: values.email, password: values.password }));
 
       // Отримати актуальні дані користувача після логіну
       await dispatch(userCurrent());

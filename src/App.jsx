@@ -20,6 +20,8 @@ import {
 import { userCurrent } from "./redux/auth/operations.js";
 import { useEffect, useState } from "react";
 import { BallTriangle } from "react-loader-spinner";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +54,7 @@ function App() {
 
   return (
     <ThemeProvider>
+       <ToastContainer />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Routes>
           <Route

@@ -9,14 +9,20 @@ import {
 import icons from "../../images/icons/icons.svg";
 import s from "./Header.module.css";
 
+import userAva from "../../images/user.png";
+import { useSelector } from "react-redux";
+import { selectUserName, selectUserTheme } from "../../redux/auth/selectors.js";
 const Header = () => {
-  const [theme, setTheme] = useState("light");
+  // const [theme, setTheme] = useState("light");
+  const theme = useSelector(selectUserTheme);
   const [isOpen, setIsOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+
   const userName = useSelector(selectUserName);
   const userAvatar = useSelector(selectUserAvatar);
   console.log("User Name:", userName);
   console.log("User Avatar:", userAvatar);
+
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -59,15 +65,17 @@ const Header = () => {
             {isOpen && (
               <div className={s.dropdown}>
                 <ThemeSwitcher
-                  theme={theme}
-                  setTheme={setTheme}
+                  // theme={theme}
+                  // setTheme={setTheme}
                   closeDropdown={closeDropdown}
                 />
               </div>
             )}
           </div>
           <div className={s.divUser}>
+
             {/* <p className={s.p}>{userName}</p> */}
+
             <div className={s.divImg}>
               <button
                 className={s.btnEditProf}

@@ -14,7 +14,7 @@ const initialState = {
     name: null,
     email: null,
     avatar: null,
-    theme: "light",
+    theme: null,
   },
   token: null,
   isLoggedIn: false,
@@ -29,6 +29,7 @@ const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         const { name, email, token } = action.payload;
         state.user = { name, email, avatar: null, theme: "light" };
+        state.isLoggedIn = true;
         state.token = token;
 
         state.isRefreshing = false;
@@ -42,7 +43,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(logOut.fulfilled, (state) => {
-        state.user = { name: null, email: null, avatar: null, theme: "light" };
+        state.user = initialState.user;
         state.token = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
@@ -62,7 +63,9 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(updateUserTheme.fulfilled, (state, action) => {
-        state.user.theme = action.payload.theme;
+        state.user.theme = action.payload.date.theme;
+        console.log(state.user.theme);
+
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
