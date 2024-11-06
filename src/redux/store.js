@@ -5,6 +5,7 @@ import { authReducer } from './auth/slice';
 import { columnsReducer } from './сolumns/slice.js';
 import { cardsReducer } from './cards/slice.js';
 import { boardsReducer } from './boards/slice.js';
+import sideBarReducer from './sideBar/slice.js';
 
 const authPersistConfig = {
   key: 'auth',
@@ -18,6 +19,7 @@ export const store = configureStore({
     columns: columnsReducer,
     cards: cardsReducer,
     boards: boardsReducer,
+    visibilitySideBar: sideBarReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
