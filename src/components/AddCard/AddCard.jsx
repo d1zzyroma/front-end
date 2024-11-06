@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SvgIcon from "../SvgIcon/SvgIcon.jsx";
 
-const AddCardForm = () => {
+const AddCardForm = ({ closeModal }) => {
   const initialValues = {
     title: "",
     description: "",
@@ -31,76 +31,85 @@ const AddCardForm = () => {
   ];
 
   return (
-    <div className={s.modal}>
-      <div className={s.modalcontent}>
-        <h2 className={s.title}>Add Card</h2>
-        <button className={s.closebtn}>&times;</button>
+    <div className={s.modalOverlay}>
+      <div className={s.modal}>
+        <div className={s.modalcontent}>
+          <h2 className={s.title}>Add Card</h2>
+          <button
+            className={s.closebtn}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) closeModal();
+            }}
+          >
+            &times;
+          </button>
 
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ setFieldValue, values }) => (
-            <Form className={s.form}>
-              <div className={s.input}>
-                <Field name="title" placeholder="Title" className={s.field} />
-              </div>
-
-              <div className={s.input}>
-                <Field
-                  as="textarea"
-                  name="description"
-                  placeholder="Description"
-                  className={s.fielddescr}
-                />
-              </div>
-
-              <div className={s.input}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ setFieldValue, values }) => (
+              <Form className={s.form}>
                 <div className={s.input}>
-                  <label>Label color</label>
-                  <div className={s.labelColors}>
-                    {labelOptions.map(({ color, priority }) => (
-                      <button
-                        key={color}
-                        type="button"
-                        className={`${s.colorButton} ${
-                          values.labelColor === color ? s.selectedColor : ""
-                        }`}
-                        style={{ color: color, backgroundColor: color }}
-                        onClick={() => {
-                          setFieldValue("labelColor", color);
-                          setFieldValue("priority", priority);
-                        }}
-                      />
-                    ))}
+                  <Field name="title" placeholder="Title" className={s.field} />
+                </div>
+
+                <div className={s.input}>
+                  <Field
+                    as="textarea"
+                    name="description"
+                    placeholder="Description"
+                    className={s.fielddescr}
+                  />
+                </div>
+
+                <div className={s.input}>
+                  <div className={s.input}>
+                    <label>Label color</label>
+                    <div className={s.labelColors}>
+                      {labelOptions.map(({ color, priority }) => (
+                        <button
+                          key={color}
+                          type="button"
+                          className={`${s.colorButton} ${
+                            values.labelColor === color ? s.selectedColor : ""
+                          }`}
+                          style={{ color: color, backgroundColor: color }}
+                          onClick={() => {
+                            setFieldValue("labelColor", color);
+                            setFieldValue("priority", priority);
+                          }}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className={s.input}>
-                <label htmlFor="deadline">Deadline</label>
-                <DatePicker
-                  selected={values.deadline}
-                  onChange={(date) => setFieldValue("deadline", date)}
-                  placeholderText="Select Date"
-                  dateFormat="EEEE, MMMM dd"
-                  minDate={startDate}
-                  showPopperArrow={false}
-                  onFocus={(e) => e.target.blur()}
-                  onKeyDown={(e) => e.preventDefault()}
-                />
-              </div>
+                <div className={s.input}>
+                  <label htmlFor="deadline">Deadline</label>
+                  <DatePicker
+                    selected={values.deadline}
+                    onChange={(date) => setFieldValue("deadline", date)}
+                    placeholderText="Select Date"
+                    dateFormat="EEEE, MMMM dd"
+                    minDate={startDate}
+                    showPopperArrow={false}
+                    onFocus={(e) => e.target.blur()}
+                    onKeyDown={(e) => e.preventDefault()}
+                  />
+                </div>
 
-              <button type="submit" className={s.btn}>
-                <div className={s.btnplus}>
-                  <SvgIcon id="icon-plus" className={s.btnicon} />
-                </div>{" "}
-                <p className={s.btntext}>Add</p>
-              </button>
-            </Form>
-          )}
-        </Formik>
+                <button type="submit" className={s.btn}>
+                  <div className={s.btnplus}>
+                    <SvgIcon id="icon-plus" className={s.btnicon} />
+                  </div>{" "}
+                  <p className={s.btntext}>Add</p>
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </div>
     </div>
   );

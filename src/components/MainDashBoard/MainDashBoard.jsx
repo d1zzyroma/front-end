@@ -1,6 +1,8 @@
+import { useState } from "react";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./MainDashBoard.module.css";
 import EllipsisText from "react-ellipsis-text";
+import AddCardForm from "../AddCard/AddCard.jsx";
 
 const MainDashBoard = ({ boardId }) => {
   const columns = [
@@ -70,7 +72,10 @@ const MainDashBoard = ({ boardId }) => {
       ],
     },
   ];
+  const [openModalIndex, setOpenModalIndex] = useState(null);
 
+  const openModal = (index) => setOpenModalIndex(index);
+  const closeModal = () => setOpenModalIndex(null);
   return (
     <>
       <div className={s.boardContainer}>
@@ -124,7 +129,7 @@ const MainDashBoard = ({ boardId }) => {
                   </div>
                 ))}
               </div>
-              <button className={s.addCardBtn}>
+              <button className={s.addCardBtn} onClick={() => openModal(index)}>
                 <span className={s.btnWrapper}>
                   <span className={s.btnIconWrapper}>
                     <SvgIcon id="icon-plus" className={s.columnIcons} />
@@ -132,6 +137,11 @@ const MainDashBoard = ({ boardId }) => {
                   <span>Add another card</span>
                 </span>
               </button>
+              {openModalIndex === index && (
+                <div>
+                  <AddCardForm closeModal={closeModal} />
+                </div>
+              )}
             </div>
           ))}
           <button className={s.addColumnBtn}>
