@@ -14,7 +14,7 @@ const initialState = {
     name: null,
     email: null,
     avatar: null,
-    theme: "light",
+    theme: null,
   },
   token: null,
   isLoggedIn: false,
@@ -63,7 +63,9 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(updateUserTheme.fulfilled, (state, action) => {
-        state.user.theme = action.payload.theme;
+        state.user.theme = action.payload.date.theme;
+        console.log(state.user.theme);
+
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
