@@ -10,11 +10,17 @@ import { toast } from "react-toastify";
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
-    try {
-      const res = await taskProApi.post("/auth/register", credentials);
-      setAuthHeader(res.data.data.accessToken);
-      toast.success(
-        "Congratulations, your account has been successfully created! 🚀",
+    try {     
+      const res = await taskProApi.post("/auth/register", credentials);      
+      
+      if (res.data.status === 201) {
+        setAuthHeader(res.data.data.accessToken);        
+        try { 
+          console.log(credentials);
+          const resLogin = await taskProApi.post("/auth/login", { email: credentials.email, password: credentials.password });          
+          setAuthHeader(resLogin.data.data.accessToken);
+           toast.success(
+        "Welcome to TaskPro! 🚀",
         {
           position: "top-right",
           autoClose: 3000,
@@ -26,10 +32,26 @@ export const register = createAsyncThunk(
           theme: "light",
         }
       );
+return resLogin.data;
+        } catch (loginError) {          
+          toast.error("Login failed: " + (loginError.response?.data?.message || loginError.message), {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "light",
+          });
+          return thunkAPI.rejectWithValue(loginError.message);
+        }
+      }     
       return res.data;
     } catch (error) {
+     
+      const errorMessage = error.response?.data?.message || error.message;
       toast.warning(
-        "Email already in use. Try logging in or reset your password.",
+        "Email already in use. Try logging in or reset your password. " + errorMessage,
         {
           position: "top-right",
           autoClose: 5000,
@@ -41,10 +63,11 @@ export const register = createAsyncThunk(
           theme: "light",
         }
       );
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
+
 
 // POST /auth/login: Відправляє запит для входу користувача з параметрами email і password.
 export const logIn = createAsyncThunk(
