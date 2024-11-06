@@ -67,13 +67,14 @@ const Header = () => {
             )}
           </div>
           <div className={s.divUser}>
-            <p className={s.p}>{userName}</p>
+            {/* <p className={s.p}>{userName}</p> */}
             <div className={s.divImg}>
               <button
                 className={s.btnEditProf}
                 type="button"
                 onClick={openEditProfile}
               >
+                {userName}
                 {userAvatar ? (
                   <img
                     src={userAvatar}
@@ -81,7 +82,7 @@ const Header = () => {
                     className={s.profile_avatar}
                   />
                 ) : (
-                  <svg className={s.profile_icon}>
+                  <svg className={s.profileIcon}>
                     <use href={`${icons}#icon-user-ico`}></use>
                   </svg>
                 )}
