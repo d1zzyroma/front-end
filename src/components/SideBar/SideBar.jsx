@@ -66,7 +66,7 @@ const SideBar = () => {
           <ul className={s.boardsList}>
             {boards.map((board) => (
               <li
-                key={board.id}
+                key={board._id}
                 className={s.boardItem}
                 onClick={() => getBoardInfo(board._id)}
               >
