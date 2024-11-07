@@ -2,34 +2,25 @@ import { useEffect, useState } from "react";
 import ThemeSwitcher from "../Themes/ThemeSwitcher/ThemeSwitcher";
 import EditProfile from "../EditProfile/EditProfile.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectUserName,
-  // selectUserAvatar,
-  selectUserTheme,
-} from "../../redux/auth/selectors.js";
+import { selectUserName, selectUserTheme } from "../../redux/auth/selectors.js";
 import icons from "../../images/icons/icons.svg";
 import s from "./Header.module.css";
 import { toggleSideBar } from "../../redux/sideBar/slice.js";
 import userAva from "../../images/user.png";
-// import { useSelector } from "react-redux";
-// import { selectUserName, selectUserTheme } from "../../redux/auth/selectors.js";
+
 const Header = () => {
-  // const [theme, setTheme] = useState("light");
   const dispatch = useDispatch();
   const theme = useSelector(selectUserTheme);
   const [isOpen, setIsOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
   const userName = useSelector(selectUserName);
-  // const userAvatar = useSelector(selectUserAvatar);
+
   console.log("User Name:", userName);
-  // console.log("User Avatar:", userAvatar);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
-
-  // const theme = "dark"
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
