@@ -2,14 +2,22 @@ import { NavLink } from "react-router-dom";
 import s from "./SideBar.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import cactusImg from "../../images/Sidebar/cactus.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteBoard } from "../../redux/boards/operations";
 import { useState } from "react";
 import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
 import { logOut } from "../../redux/auth/operations.js";
 import NewBoard from "../NewEditBoard/NewBoard.jsx";
+import { selectSideBarVisibility } from "../../redux/sideBar/selectors.js";
+import { toggleSideBar } from "../../redux/sideBar/slice.js";
 
 const SideBar = () => {
+  const isSideBarVisible = useSelector(selectSideBarVisibility);
+
+  const handleClose = () => {
+    dispatch(toggleSideBar());
+  };
+
   const dispatch = useDispatch();
   const boards = [
     { id: 1, name: "Board 1" },
@@ -34,7 +42,10 @@ const SideBar = () => {
   const closeAddBoard = () => setIsAddBoardOpen(false);
   return (
     <>
-      <div className={s.cont}>
+      {isSideBarVisible && (
+        <div className={s.overlay} onClick={handleClose}></div>
+      )}
+      <div className={`${s.cont} ${isSideBarVisible ? s.visible : s.hidden}`}>
         <div>
           <NavLink to="/home" className={s.logoContainer}>
             <span className={s.logoIconWrapper}>
