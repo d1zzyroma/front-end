@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const sideBarSlice = createSlice({
   name: "visibilitySideBar",
-  initialState: { visibility: true },
+  initialState: { visibility: false },
   reducers: {
     openSideBar: (state) => {
       state.visibility = true;
