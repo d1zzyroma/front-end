@@ -1,11 +1,42 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import s from "./EditProfile.module.css";
 import icons from "../../images/icons/icons.svg";
+import * as yup from "yup";
 
 const EditProfile = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const registerSchema = yup.object().shape({
+    name: yup
+      .string()
+      .matches(
+        /^[a-zA-Z0-9!@#$%^&*()_+=[\]{}:;"',.<>?/`~|\\-]*( [a-zA-Z0-9!@#$%^&*()_+=[\]{}:;"',.<>?/`~|\\-]+)*$/,
+        "Name can include Latin letters, numbers, and symbols"
+      )
+      .min(2, "Name must be at least 2 characters")
+      .max(32, "Name cannot exceed 32 characters")
+      .required("Please, type valid name"),
+    email: yup
+      .string()
+      .matches(/^[^\s]+$/, "Email cannot contain spaces")
+      .matches(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        "Invalid email format"
+      )
+      .required("Please, type valid email"),
+    password: yup
+      .string()
+      .matches(/^[^\s]+$/, "Password cannot contain spaces")
+      .matches(
+        /^[a-zA-Z0-9!@#$%^&*()_+=[\]{}:;"',.<>?/`~|\\-]*$/,
+        "Password can include Latin letters, numbers, and symbols without spaces"
+      )
+      .min(8, "Password must be at least 8 characters")
+      .max(64, "Password cannot exceed 64 characters")
+      .required("Please, type valid password"),
+  });
 
   const initialValues = {
     avatar: "",
@@ -33,7 +64,11 @@ const EditProfile = ({ onClose }) => {
           </svg>
         </button>
 
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={registerSchema}
+          onSubmit={onSubmit}
+        >
           {() => (
             <Form className={s.formStyle}>
               <label className={s.labelStyle}>
@@ -56,6 +91,11 @@ const EditProfile = ({ onClose }) => {
                   name="name"
                   placeholder="Name"
                 />
+                <ErrorMessage
+                  name="name"
+                  component="label"
+                  className={s.error}
+                />
               </label>
               <label className={s.labelStyle}>
                 <Field
@@ -63,6 +103,11 @@ const EditProfile = ({ onClose }) => {
                   type="email"
                   name="email"
                   placeholder="Email"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="label"
+                  className={s.error}
                 />
               </label>
               <label className={`${s.labelStyle} ${s.passwordLabel}`}>
@@ -81,11 +126,16 @@ const EditProfile = ({ onClose }) => {
                   <svg className={s.iconEye}>
                     <use
                       href={`${icons}#${
-                        showPassword ? "icon-eyes-closed" : "icon-eyes"
+                        showPassword ? "icon-eyes" : "icon-eyes-closed"
                       }`}
                     />
                   </svg>
                 </button>
+                <ErrorMessage
+                  name="password"
+                  component="label"
+                  className={s.error}
+                />
               </label>
               <button type="submit" className={s.btnAdd}>
                 Send

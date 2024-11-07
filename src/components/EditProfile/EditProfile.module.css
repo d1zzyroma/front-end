@@ -37,13 +37,15 @@
   color: var(--text-secondary-color, #333);
   cursor: pointer;
 }
+
 .iconClose {
   width: 18px;
   height: 18px;
   fill: var(--text-primary);
   stroke: var(--text-primary);
   transition: fill 0.3s, stroke 0.3s;
-  &:hover {
+  &:hover,
+  &:focus {
     stroke: var(--primary-main);
     fill: var(--primary-main);
   }
@@ -175,8 +177,10 @@
   transition: background-color 0.3s;
 }
 
-.btnAdd:hover {
+.btnAdd:hover,
+.btnAdd:focus {
   background-color: var(--btn-hover);
+  border-color: none;
 }
 
 .passwordToggle {
@@ -201,4 +205,14 @@
   text-align: left;
   padding-left: 10px;
   margin-top: 4px;
+}
+
+.error {
+  color: red;
+  font-size: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 2px;
+  width: 100%;
 }
