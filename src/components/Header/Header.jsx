@@ -62,7 +62,7 @@ const Header = () => {
         <div className={s.divRight}>
           <div className={s.divLabel}>
             <p className={s.pTheme}>Theme</p>
-            <button onClick={toggleDropdown} className={s.iconButton}>
+            <button onClick={toggleDropdown} className={s.btnTheme}>
               <svg className={s.icon}>
                 <use href={`${icons}#icon-down`} />
               </svg>
