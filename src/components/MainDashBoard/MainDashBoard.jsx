@@ -331,7 +331,7 @@ const MainDashBoard = ({ boardId }) => {
                               <EllipsisText
                                 className={s.cardDescr}
                                 text={card.cardDescr}
-                                length="110"
+                                length={110}
                               />
                               <div className={s.cardDivider}></div>
                               <div className={s.cardEditsInfo}>
