@@ -126,6 +126,20 @@
   object-fit: cover;
 }
 
+.iconEye {
+  width: 18px;
+  height: 18px;
+  fill: #757575;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+}
+
 .plusIcon {
   stroke: #121212;
   border-radius: 4px;

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Formik, Form, Field } from "formik";
 import s from "./EditProfile.module.css";
-
 import icons from "../../images/icons/icons.svg";
 
 const EditProfile = ({ onClose }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const initialValues = {
     avatar: "",
     name: "",
@@ -14,9 +15,12 @@ const EditProfile = ({ onClose }) => {
   };
 
   const onSubmit = (values) => {
-    // Логіка для обробки форми (наприклад, збереження змін)
     console.log("Submitted profile data:", values);
     onClose();
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
   return (
@@ -61,13 +65,27 @@ const EditProfile = ({ onClose }) => {
                   placeholder="Email"
                 />
               </label>
-              <label className={s.labelStyle}>
+              <label className={`${s.labelStyle} ${s.passwordLabel}`}>
                 <Field
                   className={s.inputName}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Password"
                 />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className={s.passwordToggle}
+                  aria-label="Toggle password visibility"
+                >
+                  <svg className={s.iconEye}>
+                    <use
+                      href={`${icons}#${
+                        showPassword ? "icon-eyes-closed" : "icon-eyes"
+                      }`}
+                    />
+                  </svg>
+                </button>
               </label>
               <button type="submit" className={s.btnAdd}>
                 Send

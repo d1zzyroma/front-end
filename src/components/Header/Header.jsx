@@ -63,7 +63,7 @@ const Header = () => {
           <div className={s.divLabel}>
             <p className={s.pTheme}>Theme</p>
             <button onClick={toggleDropdown} className={s.btnTheme}>
-              <svg className={s.icon}>
+              <svg className={`${s.icon} ${isOpen ? s.rotated : ""}`}>
                 <use href={`${icons}#icon-down`} />
               </svg>
             </button>

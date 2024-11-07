@@ -33,6 +33,11 @@
   background-color: var(--background-paper);
   width: 16px;
   height: 8px;
+  transition: transform 0.3s ease;
+}
+
+.icon.rotated {
+  transform: rotate(-180deg);
 }
 
 .profileIcon {
