@@ -1,14 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   getBoards,
   getBoardById,
   addBoard,
   updateBoard,
   deleteBoard,
-} from './operations';
+} from "./operations";
+import { userCurrent } from "../auth/operations.js";
 
 const boardsSlice = createSlice({
-  name: 'boards',
+  name: "boards",
   initialState: {
     boards: [],
     loading: false,
@@ -28,21 +29,26 @@ const boardsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+      .addCase(userCurrent.fulfilled, (state, action) => {
+        state.boards = action.payload.boards;
+      })
       .addCase(getBoardById.fulfilled, (state, action) => {
-        state.boards = state.boards.map(board => 
-          board.id === action.payload.id ? action.payload : board
+        state.boards = state.boards.map((board) =>
+          board.id === action.payload.data.board._id ? action.payload : board
         );
       })
       .addCase(addBoard.fulfilled, (state, action) => {
-        state.boards.push(action.payload);
+        state.boards.push(action.payload.data);
       })
       .addCase(updateBoard.fulfilled, (state, action) => {
-        state.boards = state.boards.map(board =>
+        state.boards = state.boards.map((board) =>
           board.id === action.payload.id ? action.payload : board
         );
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {
-        state.boards = state.boards.filter(board => board.id !== action.meta.arg);
+        state.boards = state.boards.filter(
+          (board) => board.id !== action.meta.arg
+        );
       });
   },
 });
