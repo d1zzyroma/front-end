@@ -16,8 +16,6 @@ const Header = () => {
 
   const userName = useSelector(selectUserName);
 
-  console.log("User Name:", userName);
-
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
