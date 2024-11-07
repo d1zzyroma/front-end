@@ -1,12 +1,12 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { taskProApi } from '../../config/taskProApi';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { taskProApi } from "../../config/taskProApi";
 
 // GET columns - Відправляє запит до API для отримання списку колонок.
 export const getColumns = createAsyncThunk(
-  'columns/getColumns',
+  "columns/getColumns",
   async (_, thunkAPI) => {
     try {
-      const response = await taskProApi.get('/columns');
+      const response = await taskProApi.get("/columns");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -16,10 +16,13 @@ export const getColumns = createAsyncThunk(
 
 // POST columns - Відправляє запит для створення нової колонки з даними, що передаються в параметрах.
 export const addColumn = createAsyncThunk(
-  'columns/addColumn',
-  async (data, thunkAPI) => {
+  "columns/addColumn",
+  async ({ id, title }, thunkAPI) => {
     try {
-      const response = await taskProApi.post('/columns', data);
+      console.log(title);
+      const response = await taskProApi.post(`/columns/${id}`, {
+        title,
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -29,7 +32,7 @@ export const addColumn = createAsyncThunk(
 
 // PUT columns/:id - Відправляє запит для оновлення колонки за її ID, передаючи нові дані.
 export const updateColumn = createAsyncThunk(
-  'columns/updateColumn',
+  "columns/updateColumn",
   async ({ id, data }, thunkAPI) => {
     try {
       const response = await taskProApi.put(`/columns/${id}`, data);
@@ -42,7 +45,7 @@ export const updateColumn = createAsyncThunk(
 
 // DELETE columns/:id - Відправляє запит для видалення колонки за її ID.
 export const deleteColumn = createAsyncThunk(
-  'columns/deleteColumn',
+  "columns/deleteColumn",
   async (id, thunkAPI) => {
     try {
       await taskProApi.delete(`/columns/${id}`);
