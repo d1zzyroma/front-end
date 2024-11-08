@@ -5,7 +5,7 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./EditColumnForm.module.css";
 import { updateColumn } from "../../redux/сolumns/operations";
 
-const EditColumnForm = ({ title, columnId, closeModal }) => {
+const EditColumnForm = ({ title, columnId, closeEditColumn }) => {
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
@@ -18,11 +18,12 @@ const EditColumnForm = ({ title, columnId, closeModal }) => {
 
   const handleSubmit = (values, { resetForm }) => {
     const { title } = values;
+    console.log(title + "title", columnId + "column id");
 
     dispatch(updateColumn({ columnId, title }));
 
     resetForm();
-    closeModal();
+    closeEditColumn();
   };
 
   return (
@@ -30,13 +31,13 @@ const EditColumnForm = ({ title, columnId, closeModal }) => {
       <div
         className={s.modalOverlay}
         onClick={(e) => {
-          if (e.target === e.currentTarget) closeModal();
+          if (e.target === e.currentTarget) closeEditColumn();
         }}
       >
         <div className={s.modalContent}>
           <div className={s.modalTitleContainer}>
             <h2 className={s.modalTitle}>Edit column</h2>
-            <button className={s.closeModalBtn} onClick={closeModal}>
+            <button className={s.closeModalBtn} onClick={closeEditColumn}>
               <SvgIcon id="icon-x-close" className={s.closeBtnIcon} />
             </button>
           </div>

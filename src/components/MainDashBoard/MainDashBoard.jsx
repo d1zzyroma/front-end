@@ -9,9 +9,13 @@ import AddColumnForm from "../AddColumnForm/AddColumnForm.jsx";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { allColumnsByBoard } from "../../redux/сolumns/selectors.js";
+import EditColumnForm from "../EditColumnForm/EditColumnForm.jsx";
+import { useDispatch } from "react-redux";
+import { deleteColumn } from "../../redux/сolumns/operations.js";
 
 const MainDashBoard = () => {
   const { boardId } = useParams();
+  const dispatch = useDispatch();
   // 1. Параметри для пріоритетів карток
   const labelOptions = [
     { color: "#8fa1d0", priority: "Low" },
@@ -20,54 +24,6 @@ const MainDashBoard = () => {
     { color: "#656565", priority: "Without priority" },
   ];
 
-  // 2. Стан для колонок з початковими даними
-  // const [columns, setColumns] = useState([
-  //   {
-  //     columnTitle: "Column title 1",
-  //     id: "1",
-  //     bordId: "1",
-  //     cards: [
-  //       {
-  //         cardTitle: "Card 1",
-  //         columnId: "1",
-  //         cardDescr: "Description 1",
-  //         priority: "Medium",
-  //       },
-  //       {
-  //         cardTitle: "Card 2",
-  //         columnId: "1",
-  //         cardDescr: "Description 2",
-  //         priority: "High",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     columnTitle: "Column title 2",
-  //     id: "2",
-  //     bordId: "1",
-  //     cards: [
-  //       {
-  //         cardTitle: "Card 3",
-  //         columnId: "2",
-  //         cardDescr: "Description 3",
-  //         priority: "High",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     columnTitle: "Column title 3",
-  //     id: "3",
-  //     bordId: "1",
-  //     cards: [
-  //       {
-  //         cardTitle: "Card 4",
-  //         columnId: "3",
-  //         cardDescr: "Description 4",
-  //         priority: "Without",
-  //       },
-  //     ],
-  //   },
-  // ]);
   const columns = useSelector(allColumnsByBoard);
 
   // 3. Стан для контролю відкриття/закриття модальних вікон
@@ -82,6 +38,20 @@ const MainDashBoard = () => {
   const closeModalAddColumn = () => setOpenModalAddColumn(null);
   const openModal = (index) => setOpenModalIndex(index);
   const closeModal = () => setOpenModalIndex(null);
+  const [editColumnId, setEditColumnId] = useState(null);
+
+  const openEditColumn = (id) => {
+    setEditColumnId(id);
+  };
+
+  const closeEditColumn = () => {
+    setEditColumnId(null);
+  };
+
+  const handleDeleteColumn = (id) => {
+    // Запускаем действие удаления через dispatch
+    dispatch(deleteColumn(id));
+  };
   // const board = useSelector(selectBoards);
   // const boardIds = board._id;
 
@@ -140,10 +110,27 @@ const MainDashBoard = () => {
                     <div className={s.columnNameBox}>
                       <h2 className={s.columnName}>{column.title}</h2>
                       <div className={s.iconsBox}>
-                        <SvgIcon id="icon-pencil" className={s.columnIcons} />
-                        <SvgIcon id="icon-trash" className={s.columnIcons} />
+                        <button
+                          type="button"
+                          onClick={() => openEditColumn(column._id)}
+                        >
+                          <SvgIcon id="icon-pencil" className={s.columnIcons} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteColumn(column._id)}
+                        >
+                          <SvgIcon id="icon-trash" className={s.columnIcons} />
+                        </button>
                       </div>
                     </div>
+                    {editColumnId === column._id && (
+                      <EditColumnForm
+                        title={column.title}
+                        closeEditColumn={closeEditColumn}
+                        columnId={column._id}
+                      />
+                    )}
 
                     {/* Список карточек в колонке */}
                     <div className={s.cardList}>

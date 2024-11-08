@@ -47,9 +47,14 @@ const columnsSlice = createSlice({
 
       // Оновлення колонки
       .addCase(updateColumn.fulfilled, (state, action) => {
-        state.columns = state.columns.map((column) =>
-          column._id === action.payload._id ? action.payload : column
+        const updatedColumn = action.payload.data;
+        const column = state.columns.find(
+          (col) => col._id === updatedColumn._id
         );
+
+        if (column) {
+          column.title = updatedColumn.title;
+        }
       })
 
       // Видалення колонки

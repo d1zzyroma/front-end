@@ -41,9 +41,11 @@ export const addColumn = createAsyncThunk(
 // PUT columns/:id - Відправляє запит для оновлення колонки за її ID, передаючи нові дані.
 export const updateColumn = createAsyncThunk(
   "columns/updateColumn",
-  async ({ id, data }, thunkAPI) => {
+  async ({ columnId, title }, thunkAPI) => {
+    const dataSend = { title: title };
+
     try {
-      const response = await taskProApi.put(`/columns/${id}`, data);
+      const response = await taskProApi.patch(`/columns/${columnId}`, dataSend);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
