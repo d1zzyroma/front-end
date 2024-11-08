@@ -86,8 +86,9 @@
 .logoContainer {
   display: flex;
   gap: 8px;
-  padding-bottom: 60px;
+  margin-bottom: 60px;
   align-items: center;
+  width: 105px;
 }
 
 .logoIconWrapper {
@@ -165,21 +166,7 @@
   flex-direction: column;
   list-style: none;
   gap: 4px;
-  max-height: 185px;
-  overflow-y: auto;
   margin-bottom: 40px;
-}
-.boardsList::-webkit-scrollbar {
-  width: 6px;
-}
-
-.boardsList::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.boardsList::-webkit-scrollbar-thumb {
-  background-color: var(--bg-scroll-thumb);
-  border-radius: 3px;
 }
 .cont .boardsList {
   margin-left: -14px;

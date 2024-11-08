@@ -65,6 +65,7 @@
   font-weight: 400;
   font-size: 14px;
   letter-spacing: -0.02em;
+  color: var(--text-primary);
   border: 1px solid var(--modal-input-border);
   background: var(--modal-bg);
   border-radius: 8px;
