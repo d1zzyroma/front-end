@@ -62,7 +62,7 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
         <h3 className={styles.textIcons}>Icons</h3>
         <ul className={styles.listDarkIcons}>
           {icons.map((icon) => (
-            <li key={icon.id}>
+            <li key={icon.id} className={styles.iconContainer}>
               <input
                 type="radio"
                 data-source={icon.name}

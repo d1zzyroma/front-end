@@ -58,7 +58,7 @@ const EditColumnForm = ({ title, columnId, closeEditColumn }) => {
                 <span className={s.editIconWrap}>
                   <SvgIcon id="icon-plus" className={s.editBtnIcon} />
                 </span>
-                Add
+                Edit
               </button>
             </Form>
           </Formik>

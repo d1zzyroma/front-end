@@ -58,6 +58,8 @@
 
   --underline: rgba(22, 22, 22, 0.1);
   --text-light: rgba(22, 22, 22, 0.5);
+
+  --icon-hover: #bedbb0;
 }
 #root {
   display: flex;
@@ -119,6 +121,8 @@
 
   --underline: rgba(255, 255, 255, 0.1);
   --text-light: rgba(255, 255, 255, 0.5);
+
+  --icon-hover: #bedbb0;
 }
 
 /* Для фіолетової теми */
@@ -165,6 +169,8 @@
 
   --underline: rgba(22, 22, 22, 0.1);
   --text-light: rgba(22, 22, 22, 0.5);
+
+  --icon-hover: #5255bc;
 }
 
 .datePicker {
