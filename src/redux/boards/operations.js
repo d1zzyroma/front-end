@@ -1,27 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { taskProApi, setAuthHeader } from "../../config/taskProApi";
 
-// Отримати борд за ID
-export const getBoardById = createAsyncThunk(
-  "boards/getBoardById",
-  async (boardId, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue("Token not found");
-    }
-
-    try {
-      setAuthHeader(token);
-      const response = await taskProApi.get(`/boards/${boardId}`);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 // Додати борд
 export const addBoard = createAsyncThunk(
   "boards/addBoard",
@@ -35,6 +14,8 @@ export const addBoard = createAsyncThunk(
 
     try {
       setAuthHeader(token);
+      console.log(data);
+
       const response = await taskProApi.post("/boards", data);
       return response.data;
     } catch (error) {
@@ -46,7 +27,7 @@ export const addBoard = createAsyncThunk(
 // Оновити борд
 export const updateBoard = createAsyncThunk(
   "boards/updateBoard",
-  async ({ boardId, data }, thunkAPI) => {
+  async ({ boardId, editedBoardObject }, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.token;
 
@@ -56,7 +37,11 @@ export const updateBoard = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      const response = await taskProApi.put(`/board/${boardId}`, data);
+
+      const response = await taskProApi.patch(
+        `/boards/${boardId}`,
+        editedBoardObject
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -77,7 +62,9 @@ export const deleteBoard = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      await taskProApi.delete(`/board/${boardId}`);
+      // console.log(boardId);
+
+      await taskProApi.delete(`/boards/${boardId}`);
       return boardId; // повертаємо ID для видалення
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

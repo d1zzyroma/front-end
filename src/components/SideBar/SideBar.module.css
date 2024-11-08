@@ -275,12 +275,21 @@
   height: 16px;
   fill: none;
   stroke: var(--sidebar-light);
+  transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.iconPencil:hover {
+  stroke: var(--icon-hover);
 }
 .iconTrash {
   width: 16px;
   height: 16px;
   fill: none;
   stroke: var(--sidebar-light);
+  transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.iconTrash:hover {
+  stroke: var(--icon-hover);
 }
 
 /* --- Need Help Styles --- */
@@ -328,14 +337,22 @@
   font-size: 12px;
   letter-spacing: -0.02em;
   color: var(--accent-sidebar-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .needHelpIcon {
   width: 20px;
   height: 20px;
   fill: none;
   stroke: var(--accent-sidebar-color);
+  transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+.needHelpBtn:hover {
+  color: var(--primary-main);
+}
+.needHelpBtn:hover .needHelpIcon {
+  color: var(--primary-main);
+  stroke: var(--primary-main);
+}
 /* --- Logout Btn Styles --- */
 .logoutBtn {
   display: flex;

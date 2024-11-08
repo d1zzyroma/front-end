@@ -33,7 +33,6 @@
 }
 .textNew {
   font-size: 18px;
-
   text-align: left;
   letter-spacing: -0.02em;
   margin-bottom: 24px;
@@ -43,22 +42,17 @@
   height: 49px;
   padding: 18px;
   font-size: 14px;
-
-  background-color: rgb(246, 246, 247);
+  background: var(--modal-bg);
   border-radius: 8px;
   margin-bottom: 24px;
   opacity: 0.4;
-  transition: border var(--primary-transition);
-}
-
-.titleInput:hover {
-  opacity: 1;
-  border: 1px solid var(--btn-and-hover-color);
+  color: var(--text-primary);
+  border: 1px solid var(--modal-input-border);
 }
 
 .titleInput:focus {
   opacity: 1;
-  outline: 1px solid var(--input-border-color);
+  outline: 1px solid var(--modal-input-border);
 }
 
 .textIcons {
@@ -88,8 +82,6 @@
   width: 28px;
   height: 28px;
   box-sizing: border-box;
-  background-color: aqua;
-  border: 1px solid #000;
   border-radius: 6px;
   margin: 2px;
 }
@@ -101,7 +93,12 @@
   border-radius: 6px;
   margin: 2px;
 }
-
+.iconContainer svg {
+  transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.iconContainer:hover svg {
+  stroke: var(--text-primary);
+}
 .serIcons {
   width: 18px;
   height: 18px;
@@ -119,7 +116,6 @@
 }
 .textBackground {
   color: var(--text-primary-color);
-
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -134,17 +130,21 @@
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background: var(--btn);
-  color: var(--btn-add-color);
-  font-family: Poppins;
+  color: var(--modal-btn-text);
+  background-color: var(--modal-btn);
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.28px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mainButton:hover,
+.mainButton:focus {
+  background-color: var(--hover-modal-btn);
 }
 .plusBtnZaglushka {
-  background-color: var(--btn-add-color);
+  background-color: var(--modal-icon-wrap);
   border-radius: 4px;
   width: 28px;
   height: 28px;
@@ -169,18 +169,6 @@
 .img_back {
   border-radius: 5px;
 }
-.inputBtnIcons {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  margin: 4px;
-  z-index: -1;
-}
-
-.inputBtnIcons:checked .darkIcons {
-  color: red;
-}
-
 .buttonIcons {
   z-index: 999;
 }
@@ -196,9 +184,6 @@
   height: 100%;
   z-index: 999;
   opacity: 0;
-}
-.inputRad:checked {
-  stroke: var(--text-primary);
 }
 .inputBack {
   position: absolute;

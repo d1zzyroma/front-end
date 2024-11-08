@@ -3,8 +3,8 @@ import s from "./SideBar.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import cactusImg from "../../images/Sidebar/cactus.png";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBoard, getBoardById } from "../../redux/boards/operations";
-import { useState } from "react";
+import { deleteBoard } from "../../redux/boards/operations";
+import { useEffect, useState } from "react";
 import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
 import { logOut } from "../../redux/auth/operations.js";
 import NewBoard from "../NewEditBoard/NewBoard.jsx";
@@ -12,6 +12,8 @@ import { selectSideBarVisibility } from "../../redux/sideBar/selectors.js";
 import { toggleSideBar } from "../../redux/sideBar/slice.js";
 import { selectBoards } from "../../redux/boards/selectors.js";
 import { selectUser } from "../../redux/auth/selectors.js";
+import { getBoardById } from "../../redux/сolumns/operations.js";
+import EditBoard from "../EditBoard/EditBoard.jsx";
 
 const SideBar = () => {
   const isSideBarVisible = useSelector(selectSideBarVisibility);
@@ -22,7 +24,13 @@ const SideBar = () => {
   const reduxBoards = useSelector(selectBoards);
   const boards = reduxBoards.slice().reverse();
   const userId = useSelector(selectUser);
+  useEffect(() => {
+    if (boards.length > 0) {
+      const firstBoardId = boards[0]._id;
 
+      dispatch(getBoardById(firstBoardId));
+    }
+  }, []);
   const dispatch = useDispatch();
   const getBoardInfo = (id) => {
     dispatch(getBoardById(id));
@@ -41,8 +49,19 @@ const SideBar = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const [isAddBoardOpen, setIsAddBoardOpen] = useState(false);
+
+  const [editBoardId, setEditBoardId] = useState(null);
   const openAddBoard = () => setIsAddBoardOpen(true);
+
   const closeAddBoard = () => setIsAddBoardOpen(false);
+
+  const openEditBoard = (id) => {
+    setEditBoardId(id);
+  };
+
+  const closeEditBoard = () => {
+    setEditBoardId(null);
+  };
   return (
     <>
       {isSideBarVisible && (
@@ -65,13 +84,12 @@ const SideBar = () => {
           </div>
           <ul className={s.boardsList}>
             {boards.map((board) => (
-              <li
-                key={board._id}
-                className={s.boardItem}
-                onClick={() => getBoardInfo(board._id)}
-              >
+              <li key={board._id} className={s.boardItem}>
                 <NavLink to={`/home/${board._id}`} className={s.link}>
-                  <div className={s.linkContent}>
+                  <div
+                    className={s.linkContent}
+                    onClick={() => getBoardInfo(board._id)}
+                  >
                     <SvgIcon
                       id={`icon-${board.icon}`}
                       className={s.projectIcon}
@@ -79,17 +97,28 @@ const SideBar = () => {
                     {board.title}
                   </div>
                   <div className={s.btnGroup}>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => openEditBoard(board._id)}
+                    >
                       <SvgIcon id="icon-pencil" className={s.iconPencil} />
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleDelete(board.id)}
+                      onClick={() => handleDelete(board._id)}
                     >
                       <SvgIcon id="icon-trash" className={s.iconTrash} />
                     </button>
                   </div>
                 </NavLink>
+                {editBoardId === board._id && (
+                  <div>
+                    <EditBoard
+                      closeEditBoard={closeEditBoard}
+                      boardId={board._id}
+                    />
+                  </div>
+                )}
               </li>
             ))}
           </ul>

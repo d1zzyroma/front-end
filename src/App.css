@@ -55,6 +55,11 @@
   --logo-icon: #fff;
   --logo-title: #161616;
   --bg-icon: #656565;
+
+  --underline: rgba(22, 22, 22, 0.1);
+  --text-light: rgba(22, 22, 22, 0.5);
+
+  --icon-hover: #bedbb0;
 }
 #root {
   display: flex;
@@ -113,6 +118,11 @@
   --logo-icon: #fff;
   --logo-title: #fff;
   --bg-icon: #656565;
+
+  --underline: rgba(255, 255, 255, 0.1);
+  --text-light: rgba(255, 255, 255, 0.5);
+
+  --icon-hover: #bedbb0;
 }
 
 /* Для фіолетової теми */
@@ -156,6 +166,11 @@
   --logo-icon-wrapper: #ecedfd;
   --logo-icon: #5255bc;
   --logo-title: #fff;
+
+  --underline: rgba(22, 22, 22, 0.1);
+  --text-light: rgba(22, 22, 22, 0.5);
+
+  --icon-hover: #5255bc;
 }
 
 .datePicker {

@@ -84,7 +84,11 @@ const LoginForm = () => {
                 style={{ cursor: "pointer" }}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                <use href={`${icons}#icon-eyes`}></use>
+                <use
+                  href={`${icons}#${
+                    showPassword ? "icon-eyes" : "icon-eyes-closed"
+                  }`}
+                ></use>
               </svg>
               <ErrorMessage
                 name="password"

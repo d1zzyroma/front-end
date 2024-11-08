@@ -12,6 +12,7 @@
 }
 
 .modalContent {
+  font-family: "Poppins", sans-serif;
   background: var(--modal-bg);
   padding: 24px;
   border: 1px solid rgba(190, 219, 176, 0.5);
@@ -88,6 +89,9 @@
   color: var(--modal-btn-text);
   background-color: var(--modal-btn);
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.editBtn:hover {
+  background-color: var(--hover-modal-btn);
 }
 .editIconWrap {
   width: 28px;

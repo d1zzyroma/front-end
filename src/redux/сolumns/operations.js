@@ -1,12 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { taskProApi } from "../../config/taskProApi";
+import { setAuthHeader, taskProApi } from "../../config/taskProApi";
 
-// GET columns - Відправляє запит до API для отримання списку колонок.
-export const getColumns = createAsyncThunk(
-  "columns/getColumns",
-  async (_, thunkAPI) => {
+// GET Отримати колонки борда за ID
+export const getBoardById = createAsyncThunk(
+  "boards/getBoardById",
+  async (boardId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
+
+    if (!token) {
+      return thunkAPI.rejectWithValue("Token not found");
+    }
+
     try {
-      const response = await taskProApi.get("/columns");
+      setAuthHeader(token);
+      const response = await taskProApi.get(`/boards/${boardId}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -19,10 +27,10 @@ export const addColumn = createAsyncThunk(
   "columns/addColumn",
   async ({ id, title }, thunkAPI) => {
     try {
-      console.log(title);
       const response = await taskProApi.post(`/columns/${id}`, {
         title,
       });
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -33,9 +41,11 @@ export const addColumn = createAsyncThunk(
 // PUT columns/:id - Відправляє запит для оновлення колонки за її ID, передаючи нові дані.
 export const updateColumn = createAsyncThunk(
   "columns/updateColumn",
-  async ({ id, data }, thunkAPI) => {
+  async ({ columnId, title }, thunkAPI) => {
+    const dataSend = { title: title };
+
     try {
-      const response = await taskProApi.put(`/columns/${id}`, data);
+      const response = await taskProApi.patch(`/columns/${columnId}`, dataSend);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

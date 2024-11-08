@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import s from "./EditProfile.module.css";
 import icons from "../../images/icons/icons.svg";
 import * as yup from "yup";
+import { useDispatch } from "react-redux";
+import { updateUserProfile } from "../../redux/auth/operations.js";
 
 const EditProfile = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [avatarFile, setAvatarFile] = useState(null);
 
   const registerSchema = yup.object().shape({
     name: yup
@@ -39,14 +42,14 @@ const EditProfile = ({ onClose }) => {
   });
 
   const initialValues = {
-    avatar: "",
     name: "",
     email: "",
     password: "",
   };
-
+  const dispatch = useDispatch();
   const onSubmit = (values) => {
-    console.log("Submitted profile data:", values);
+    const credentials = { ...values, avatarUrl: avatarFile };
+    dispatch(updateUserProfile(credentials));
     onClose();
   };
 
@@ -72,7 +75,14 @@ const EditProfile = ({ onClose }) => {
           {() => (
             <Form className={s.formStyle}>
               <label className={s.labelStyle}>
-                <input className={s.inputNameImg} type="file" name="avatar" />
+                <input
+                  className={s.inputNameImg}
+                  type="file"
+                  name="avatar"
+                  onChange={(event) => {
+                    setAvatarFile(event.currentTarget.files[0]);
+                  }}
+                />
                 <div className={s.imgBackground}>
                   <svg width="68" height="68" className={s.img}>
                     <use xlinkHref={`${icons}#icon-user-ico`} />
