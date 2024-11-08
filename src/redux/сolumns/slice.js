@@ -35,12 +35,14 @@ const columnsSlice = createSlice({
       })
 
       // Додавання нової колонки
-      .addCase(addColumn.pending, (state) => {
-        state.loading = true;
-      })
+
       .addCase(addColumn.fulfilled, (state, action) => {
-        state.columns.push(action.payload);
-        state.loading = false; // Додаємо нову колонку
+        const newColumn = {
+          ...action.payload.data, // данные колонки с сервера
+          cards: [], // добавляем пустой массив `cards` только в Redux
+        };
+        state.columns.push(newColumn);
+        // Додаємо нову колонку
       })
 
       // Оновлення колонки
@@ -60,10 +62,10 @@ const columnsSlice = createSlice({
       // Додавання картки
       .addCase(addCard.fulfilled, (state, action) => {
         const column = state.columns.find(
-          (col) => col._id === action.payload.columnId
+          (col) => col._id === action.payload.data.columnId
         );
         if (column) {
-          column.cards.push(action.payload); // Додаємо картку в колонку
+          column.cards.push(action.payload.data); // Додаємо картку в колонку
         }
       })
 

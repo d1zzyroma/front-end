@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SvgIcon from "../SvgIcon/SvgIcon.jsx";
+import { useDispatch } from "react-redux";
+import { addCard } from "../../redux/cards/operations.js";
 
 const AddCardForm = ({ closeModal, columnId }) => {
   const initialValues = {
@@ -12,6 +14,7 @@ const AddCardForm = ({ closeModal, columnId }) => {
     labelColor: "",
     deadline: null,
   };
+
   const startDate = Date.now();
   const validationSchema = Yup.object({
     title: Yup.string().required("Required"),
@@ -20,15 +23,20 @@ const AddCardForm = ({ closeModal, columnId }) => {
     deadline: Yup.date().required("Required"),
   });
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (values) => {
-    console.log("Form Data:", values);
-    console.log(columnId);
+    const { title, description, deadline, priority } = values;
+    const data = { title, description, deadline, priority };
+    dispatch(addCard({ columnId, data })); // Передаем columnId и data в виде объекта
+    closeModal();
   };
+
   const labelOptions = [
-    { color: "#8fa1d0", priority: "low" },
-    { color: "#e09cb5", priority: "medium" },
-    { color: "#bedbb0", priority: "high" },
-    { color: "#656565", priority: "without" },
+    { color: "#8fa1d0", priority: "Low" },
+    { color: "#e09cb5", priority: "Medium" },
+    { color: "#bedbb0", priority: "High" },
+    { color: "#656565", priority: "Without priority" },
   ];
 
   return (
@@ -48,7 +56,7 @@ const AddCardForm = ({ closeModal, columnId }) => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit} // columnId доступен через замыкание
           >
             {({ setFieldValue, values }) => (
               <Form className={s.form}>

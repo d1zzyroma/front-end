@@ -23,7 +23,7 @@ const ScreensPage = () => {
 
       {/* <p>Нижче створюйте вже колонки {boardId}</p>
       <p>Десь тут ще хедер борда{boardId}</p> */}
-      {loadCollumn ? (
+      {!loadCollumn ? (
         <MainDashBoard boardId={boardId} />
       ) : (
         <BallTriangle
