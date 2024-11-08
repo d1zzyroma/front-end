@@ -12,10 +12,12 @@ import {
   deleteCard,
   replaceCard,
 } from "../cards/operations.js";
+import { addBoard, deleteBoard } from "../boards/operations.js";
 
 const columnsSlice = createSlice({
   name: "columns",
   initialState: {
+    selectedBoard: {},
     columns: [],
     loading: false,
     error: null,
@@ -26,14 +28,20 @@ const columnsSlice = createSlice({
       // Обробка отримання даних про дошку з колонками та картками
       .addCase(getBoardById.fulfilled, (state, action) => {
         const { columnsAll } = action.payload.data;
-
+        const { board } = action.payload.data;
+        state.selectedBoard = board;
         // Оновлюємо стан колонок, отриманих з відповіді сервера
         state.columns = columnsAll.map((column) => ({
           ...column, // зберігаємо всі дані колонки
           cards: column.cards || [], // додаємо картки в колонку, якщо вони є
         }));
       })
-
+      .addCase(deleteBoard.fulfilled, (state) => {
+        state.selectedBoard = {};
+      })
+      .addCase(addBoard.fulfilled, (state, action) => {
+        state.selectedBoard = action.payload.data;
+      })
       // Додавання нової колонки
 
       .addCase(addColumn.fulfilled, (state, action) => {

@@ -4,7 +4,7 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import cactusImg from "../../images/Sidebar/cactus.png";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteBoard } from "../../redux/boards/operations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
 import { logOut } from "../../redux/auth/operations.js";
 import NewBoard from "../NewEditBoard/NewBoard.jsx";
@@ -24,7 +24,13 @@ const SideBar = () => {
   const reduxBoards = useSelector(selectBoards);
   const boards = reduxBoards.slice().reverse();
   const userId = useSelector(selectUser);
+  useEffect(() => {
+    if (boards.length > 0) {
+      const firstBoardId = boards[0]._id;
 
+      dispatch(getBoardById(firstBoardId));
+    }
+  }, []);
   const dispatch = useDispatch();
   const getBoardInfo = (id) => {
     dispatch(getBoardById(id));

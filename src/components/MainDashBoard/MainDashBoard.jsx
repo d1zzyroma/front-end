@@ -38,8 +38,7 @@ const MainDashBoard = () => {
   const closeModalEdit = () => setOpenModalEditId(null);
 
   // 4. Функції для керування модальними вікнами
-  // const openModalEdit = (index) => setOpenModalEditIndex(index);
-  // const closeModalEdit = () => setOpenModalEditIndex(null);
+
   const openModalAddColumn = () => setOpenModalAddColumn(true);
   const closeModalAddColumn = () => setOpenModalAddColumn(null);
   const openModal = (index) => setOpenModalIndex(index);
@@ -244,7 +243,7 @@ const MainDashBoard = () => {
                           );
                         })
                       ) : (
-                        <p>Нет карточек в этой колонке</p> // Если нет карточек, показываем сообщение
+                        <p></p> // Если нет карточек, показываем сообщение
                       )}
                       {provided.placeholder}
                     </div>
@@ -274,7 +273,7 @@ const MainDashBoard = () => {
               </Droppable>
             ))
           ) : (
-            <p>Колонки не загружены или пусты</p> // Если нет колонок, показываем сообщение
+            <p></p> // Если нет колонок, показываем сообщение
           )}
 
           {/* Кнопка для додавання нової колонки */}

@@ -7,11 +7,11 @@ import noBack from "../../images/images-bg/images-bg-default.png";
 import { updateBoard } from "../../redux/boards/operations.js";
 import icons from "../../images/icons/icons.js";
 import backgrounds from "../../images/background/background.js";
-// import backgrounds from "../../images/icons/background.js";
+import { getBoardById } from "../../redux/сolumns/operations.js";
 
 export const EditBoard = ({ closeEditBoard, boardId }) => {
   const [iconsSelected, setIconsSelected] = useState("icon-Project");
-  const [backgroundSelected, setBackgroundSelected] = useState({});
+  const [backgroundSelected, setBackgroundSelected] = useState("1"); // Змінюємо на ID як в NewBoard
   const [title, setTitle] = useState("");
 
   const dispatch = useDispatch();
@@ -20,31 +20,41 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
   const handleIconChange = (event) =>
     setIconsSelected(event.currentTarget.dataset.source);
 
-  const handleBackgroundChange = (event) =>
-    setBackgroundSelected(event.currentTarget.dataset.source);
+  // Обробник вибору фону, аналогічний NewBoard
+  const handleBackgroundChange = (event) => {
+    const selectedBackgroundId = event.currentTarget.dataset.source;
+    console.log("Selected background ID:", selectedBackgroundId); // Для перевірки
 
-  const newBoardObject = {
+    // Знаходимо фон за ID
+    const selectedBackground = backgrounds.find(
+      (bg) => bg.id === parseInt(selectedBackgroundId)
+    );
+    console.log("Selected background:", selectedBackground);
+
+    // Зберігаємо лише ID вибраного фону
+    setBackgroundSelected(
+      selectedBackground ? String(selectedBackground.id) : "1"
+    );
+  };
+
+  const editedBoardObject = {
     title,
     icon: iconsSelected,
     background: backgroundSelected,
   };
 
-  const createNewBoard = () => {
-    // console.log(newBoardObject);
-    console.log(boardId);
-
-    dispatch(updateBoard({ boardId, newBoardObject }));
+  const createUpdatedBoard = () => {
+    console.log("Board object to dispatch:", editedBoardObject);
+    dispatch(updateBoard({ boardId, editedBoardObject }));
+    dispatch(getBoardById(boardId));
     closeEditBoard();
-    // navigate(`/${title}`);
   };
 
   return (
     <div
       className={styles.modalOverlay}
       onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          closeEditBoard();
-        }
+        if (e.target === e.currentTarget) closeEditBoard();
       }}
     >
       <div className={styles.divCard}>
@@ -70,7 +80,7 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
                 className={styles.inputRad}
                 checked={iconsSelected === icon.name}
                 onChange={handleIconChange}
-              ></input>
+              />
               <SvgIcon
                 id={icon.id}
                 className={
@@ -103,9 +113,9 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
           </li>
           {backgrounds.map((bg) => (
             <li
-              key={bg.key}
+              key={bg.id}
               className={
-                backgroundSelected === bg.key
+                backgroundSelected === String(bg.id)
                   ? styles.listItemActive
                   : styles.listItem
               }
@@ -113,16 +123,16 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
               <input
                 type="radio"
                 name="backgrounds"
-                data-source={bg}
+                data-source={bg.id} // Передаємо ID
                 className={styles.inputBack}
-                checked={backgroundSelected === bg}
+                checked={backgroundSelected === String(bg.id)} // Перевірка по ID
                 onChange={handleBackgroundChange}
               />
               <img src={bg.min} alt={bg.alt} className={styles.img_back} />
             </li>
           ))}
         </ul>
-        <button className={styles.mainButton} onClick={createNewBoard}>
+        <button className={styles.mainButton} onClick={createUpdatedBoard}>
           <div className={styles.plusBtnZaglushka}>
             <SvgIcon id="icon-plus" className={styles.plusIcon} />
           </div>

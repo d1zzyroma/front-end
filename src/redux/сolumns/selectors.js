@@ -1,6 +1,8 @@
 // Отримання всіх колонок
 export const allColumnsByBoard = (state) => state.columns.columns;
 
+export const selectedBoardInfo = (state) => state.columns.selectedBoard;
+
 export const loadingColumns = (state) => state.columns.loading;
 // Отримання певної колонки за її _id
 export const selectColumnById = (state, columnId) => {

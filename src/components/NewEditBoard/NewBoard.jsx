@@ -7,11 +7,10 @@ import noBack from "../../images/images-bg/images-bg-default.png";
 import { addBoard } from "../../redux/boards/operations.js";
 import icons from "../../images/icons/icons.js";
 import backgrounds from "../../images/background/background.js";
-// import backgrounds from "../../images/icons/background.js";
 
 export const NewBoard = ({ closeModal }) => {
   const [iconsSelected, setIconsSelected] = useState("icon-Project");
-  const [backgroundSelected, setBackgroundSelected] = useState({});
+  const [backgroundSelected, setBackgroundSelected] = useState("1"); // Изменили на null
   const [title, setTitle] = useState("");
 
   const dispatch = useDispatch();
@@ -19,23 +18,33 @@ export const NewBoard = ({ closeModal }) => {
   const handleTitleChange = (event) => setTitle(event.target.value);
   const handleIconChange = (event) =>
     setIconsSelected(event.currentTarget.dataset.source);
-  console.log();
 
-  const handleBackgroundChange = (event) =>
-    setBackgroundSelected(event.currentTarget.dataset.source);
+  // Обработчик выбора фона
+  const handleBackgroundChange = (event) => {
+    const selectedBackgroundId = event.currentTarget.dataset.source;
+    console.log("Selected background ID:", selectedBackgroundId); // Для проверки
+
+    // Ищем сам объект фона по ID
+    const selectedBackground = backgrounds.find(
+      (bg) => bg.id === parseInt(selectedBackgroundId)
+    );
+    console.log("Selected background:", selectedBackground);
+
+    // Сохраняем только ID выбранного фона
+    setBackgroundSelected(selectedBackground ? selectedBackground.id : null);
+  };
 
   const newBoardObject = {
     title,
     icon: iconsSelected,
-    background: backgroundSelected,
+    // Преобразуем ID фона в строку
+    background: backgroundSelected ? String(backgroundSelected) : null,
   };
 
   const createNewBoard = () => {
-    console.log(backgroundSelected);
-
     dispatch(addBoard(newBoardObject));
+
     closeModal();
-    // navigate(`/${title}`);
   };
 
   return (
@@ -68,7 +77,7 @@ export const NewBoard = ({ closeModal }) => {
                 className={styles.inputRad}
                 checked={iconsSelected === icon.name}
                 onChange={handleIconChange}
-              ></input>
+              />
               <SvgIcon
                 id={icon.id}
                 className={
@@ -84,7 +93,7 @@ export const NewBoard = ({ closeModal }) => {
         <ul className={styles.listColorIcons}>
           <li
             className={
-              backgroundSelected === "no-background"
+              backgroundSelected === null
                 ? styles.listItemActive
                 : styles.listItem
             }
@@ -94,16 +103,16 @@ export const NewBoard = ({ closeModal }) => {
               name="backgrounds"
               data-source="no-background"
               className={styles.inputBack}
-              checked={backgroundSelected === "no-background"}
+              checked={backgroundSelected === null}
               onChange={handleBackgroundChange}
             />
             <img src={noBack} alt="no-background" className={styles.img_back} />
           </li>
           {backgrounds.map((bg) => (
             <li
-              key={bg.key}
+              key={bg.id}
               className={
-                backgroundSelected === bg.key
+                backgroundSelected === bg.id
                   ? styles.listItemActive
                   : styles.listItem
               }
@@ -111,9 +120,9 @@ export const NewBoard = ({ closeModal }) => {
               <input
                 type="radio"
                 name="backgrounds"
-                data-source={bg}
+                data-source={bg.id} // Передаем только ID
                 className={styles.inputBack}
-                checked={backgroundSelected === bg}
+                checked={backgroundSelected === bg.id} // Проверяем по ID
                 onChange={handleBackgroundChange}
               />
               <img src={bg.min} alt={bg.alt} className={styles.img_back} />
