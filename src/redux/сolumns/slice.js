@@ -1,97 +1,106 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import {
-  getColumns,
   addColumn,
   updateColumn,
   deleteColumn,
-} from "./operations.js";
-import { getBoardById } from "../boards/operations.js";
-
-const initialState = {
-  columns: [],
-  status: "idle",
-  loadColumns: false,
-  error: null,
-};
+  getBoardById,
+} from "../сolumns/operations.js";
+import {
+  addCard,
+  updateCard,
+  deleteCard,
+  replaceCard,
+} from "../cards/operations.js";
 
 const columnsSlice = createSlice({
   name: "columns",
-  initialState,
+  initialState: {
+    columns: [],
+    loading: false,
+    error: null,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // GET all columns
+      // Обробка отримання даних про дошку з колонками та картками
       .addCase(getBoardById.fulfilled, (state, action) => {
-        state.columns = action.payload.data;
-        state.loadColumns = true;
-      })
-      .addCase(getColumns.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
-      })
-      .addCase(getColumns.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.columns = action.payload;
-      })
-      .addCase(getColumns.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
+        const { columnsAll } = action.payload.data;
+
+        // Оновлюємо стан колонок, отриманих з відповіді сервера
+        state.columns = columnsAll.map((column) => ({
+          ...column, // зберігаємо всі дані колонки
+          cards: column.cards || [], // додаємо картки в колонку, якщо вони є
+        }));
       })
 
-      // POST column
+      // Додавання нової колонки
       .addCase(addColumn.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
-        state.loadColumns = true;
+        state.loading = true;
       })
       .addCase(addColumn.fulfilled, (state, action) => {
-        state.status = "succeeded";
-
-        // console.log(JSON.stringify(state.columns, null, 2));
-        // state.columns.columnsAll = [
-        //   ...state.columns.columnsAll,
-        //   action.payload.data,
-        // ];
-        state.columns.columnsAll.push(action.payload.data);
-      })
-      .addCase(addColumn.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
+        state.columns.push(action.payload);
+        state.loading = false; // Додаємо нову колонку
       })
 
-      // PUT column
-      .addCase(updateColumn.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
-      })
+      // Оновлення колонки
       .addCase(updateColumn.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        const index = state.columns.findIndex(
-          (column) => column.id === action.payload.id
+        state.columns = state.columns.map((column) =>
+          column._id === action.payload._id ? action.payload : column
         );
-        if (index !== -1) {
-          state.columns[index] = action.payload;
+      })
+
+      // Видалення колонки
+      .addCase(deleteColumn.fulfilled, (state, action) => {
+        state.columns = state.columns.filter(
+          (column) => column._id !== action.payload
+        );
+      })
+
+      // Додавання картки
+      .addCase(addCard.fulfilled, (state, action) => {
+        const column = state.columns.find(
+          (col) => col._id === action.payload.columnId
+        );
+        if (column) {
+          column.cards.push(action.payload); // Додаємо картку в колонку
         }
       })
-      .addCase(updateColumn.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
+
+      // Оновлення картки
+      .addCase(updateCard.fulfilled, (state, action) => {
+        const column = state.columns.find(
+          (col) => col._id === action.payload.columnId
+        );
+        if (column) {
+          column.cards = column.cards.map((card) =>
+            card._id === action.payload._id ? action.payload : card
+          );
+        }
       })
 
-      // DELETE column
-      .addCase(deleteColumn.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
-      })
-      .addCase(deleteColumn.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.columns = state.columns.filter(
-          (column) => column.id !== action.payload
+      // Видалення картки
+      .addCase(deleteCard.fulfilled, (state, action) => {
+        const column = state.columns.find(
+          (col) => col._id === action.payload.columnId
         );
+        if (column) {
+          column.cards = column.cards.filter(
+            (card) => card._id !== action.payload._id
+          );
+        }
       })
-      .addCase(deleteColumn.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
+
+      // Переміщення картки
+      .addCase(replaceCard.fulfilled, (state, action) => {
+        const column = state.columns.find(
+          (col) => col._id === action.payload.columnId
+        );
+        if (column) {
+          column.cards = column.cards.map((card) =>
+            card._id === action.payload._id ? action.payload : card
+          );
+        }
       });
   },
 });

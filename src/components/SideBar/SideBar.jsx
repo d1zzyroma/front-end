@@ -3,7 +3,7 @@ import s from "./SideBar.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import cactusImg from "../../images/Sidebar/cactus.png";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBoard, getBoardById } from "../../redux/boards/operations";
+import { deleteBoard} from "../../redux/boards/operations";
 import { useState } from "react";
 import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
 import { logOut } from "../../redux/auth/operations.js";
@@ -12,6 +12,7 @@ import { selectSideBarVisibility } from "../../redux/sideBar/selectors.js";
 import { toggleSideBar } from "../../redux/sideBar/slice.js";
 import { selectBoards } from "../../redux/boards/selectors.js";
 import { selectUser } from "../../redux/auth/selectors.js";
+import { getBoardById } from "../../redux/сolumns/operations.js";
 
 const SideBar = () => {
   const isSideBarVisible = useSelector(selectSideBarVisibility);
