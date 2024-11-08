@@ -4,13 +4,15 @@ import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SvgIcon from "../SvgIcon/SvgIcon.jsx";
+import { useDispatch } from "react-redux";
+import { updateCard } from "../../redux/cards/operations.js";
 
-const EditCardForm = ({ closeModal }) => {
+const EditCardForm = ({ cardInfo, closeModal, cardId }) => {
   const initialValues = {
-    title: "",
-    description: "",
-    labelColor: "",
-    deadline: null,
+    title: cardInfo.title,
+    description: cardInfo.description,
+    labelColor: cardInfo.labelColor,
+    deadline: cardInfo.deadline,
   };
   const startDate = Date.now();
   const validationSchema = Yup.object({
@@ -19,15 +21,18 @@ const EditCardForm = ({ closeModal }) => {
     labelColor: Yup.string().required("Required"),
     deadline: Yup.date().required("Required"),
   });
-
+  const dispatch = useDispatch();
   const handleSubmit = (values) => {
-    console.log("Form Data:", values);
+    const { title, description, deadline, priority } = values;
+    const data = { title, description, deadline, priority };
+    dispatch(updateCard({ cardId, data }));
+    closeModal();
   };
   const labelOptions = [
-    { color: "#8fa1d0", priority: "low" },
-    { color: "#e09cb5", priority: "medium" },
-    { color: "#bedbb0", priority: "high" },
-    { color: "#656565", priority: "without" },
+    { color: "#8fa1d0", priority: "Low" },
+    { color: "#e09cb5", priority: "Medium" },
+    { color: "#bedbb0", priority: "High" },
+    { color: "#656565", priority: "Without priority" },
   ];
 
   return (
