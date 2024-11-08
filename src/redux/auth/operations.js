@@ -139,6 +139,53 @@ export const userCurrent = createAsyncThunk(
 );
 
 // PATCH /user/profile: Відправляє запит для оновлення профілю користувача.
+// export const updateUserProfile = createAsyncThunk(
+//   "user/profile",
+//   async (credentials, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const persistedToken = state.auth.token;
+
+//     if (!persistedToken) {
+//       return thunkAPI.rejectWithValue("Unable to fetch user");
+//     }
+
+//     try {
+//       setAuthHeader(persistedToken);
+//       console.log(credentials);
+
+//       // const res = await taskProApi.patch("user/profile", credentials);
+//       const res = await taskProApi.patch("user/profile", credentials, {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//         },
+//       });
+
+//       toast.success("User data updated.", {
+//         position: "top-right",
+//         autoClose: 5000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: false,
+//         draggable: false,
+//         progress: undefined,
+//         theme: "light",
+//       });
+//       return res.data;
+//     } catch (error) {
+//       toast.error("Error, please try again later.", {
+//         position: "top-right",
+//         autoClose: 5000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: false,
+//         draggable: false,
+//         progress: undefined,
+//         theme: "light",
+//       });
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const updateUserProfile = createAsyncThunk(
   "user/profile",
   async (credentials, thunkAPI) => {
@@ -151,7 +198,22 @@ export const updateUserProfile = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      const res = await taskProApi.patch("user/profile", credentials);
+
+      // Створення FormData для файлу та інших полів
+      const formData = new FormData();
+      if (credentials.avatarUrl) {
+        formData.append("avatar", credentials.avatarUrl); // додавання файлу
+      }
+      formData.append("name", credentials.name);
+      formData.append("email", credentials.email);
+      formData.append("password", credentials.password);
+
+      // Відправка даних з заголовком для форм
+      const res = await taskProApi.patch("user/profile", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       toast.success("User data updated.", {
         position: "top-right",
