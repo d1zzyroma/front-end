@@ -33,7 +33,7 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
 
     // Зберігаємо лише ID вибраного фону
     setBackgroundSelected(
-      selectedBackground ? String(selectedBackground.id) : "1"
+      selectedBackground ? String(selectedBackground.id) : "0"
     );
   };
 
@@ -43,10 +43,10 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
     background: backgroundSelected,
   };
 
-  const createUpdatedBoard = () => {
+  const createUpdatedBoard = async () => {
     console.log("Board object to dispatch:", editedBoardObject);
     dispatch(updateBoard({ boardId, editedBoardObject }));
-    dispatch(getBoardById(boardId));
+    await dispatch(getBoardById(boardId));
     closeEditBoard();
   };
 

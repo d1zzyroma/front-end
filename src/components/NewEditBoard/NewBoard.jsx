@@ -10,7 +10,7 @@ import backgrounds from "../../images/background/background.js";
 
 export const NewBoard = ({ closeModal }) => {
   const [iconsSelected, setIconsSelected] = useState("icon-Project");
-  const [backgroundSelected, setBackgroundSelected] = useState("1"); // Изменили на null
+  const [backgroundSelected, setBackgroundSelected] = useState("0"); // Изменили на null
   const [title, setTitle] = useState("");
 
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export const NewBoard = ({ closeModal }) => {
     console.log("Selected background:", selectedBackground);
 
     // Сохраняем только ID выбранного фона
-    setBackgroundSelected(selectedBackground ? selectedBackground.id : null);
+    setBackgroundSelected(selectedBackground ? selectedBackground.id : "0");
   };
 
   const newBoardObject = {
@@ -101,7 +101,7 @@ export const NewBoard = ({ closeModal }) => {
             <input
               type="radio"
               name="backgrounds"
-              data-source="no-background"
+              data-source="0"
               className={styles.inputBack}
               checked={backgroundSelected === null}
               onChange={handleBackgroundChange}

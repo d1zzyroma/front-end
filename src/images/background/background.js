@@ -1,4 +1,13 @@
 const backgrounds = [
+  // {
+  //   id: 0,
+  //   min: "/src/images/images-bg/images-bg-default.png",
+  //   desktop: "/src/images/images-bg/images-bg-default.png",
+
+  //   tablet: "/src/images/images-bg/images-bg-default.png",
+
+  //   mobile: "/src/images/images-bg/images-bg-default.png",
+  // },
   {
     id: 1,
     min: "https://res.cloudinary.com/dbxyhtguo/image/upload/v1693220070/backgrounds/mini/vlk8bztf90uy6itveqjl.png",
