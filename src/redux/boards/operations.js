@@ -25,7 +25,7 @@ export const addBoard = createAsyncThunk(
 // Оновити борд
 export const updateBoard = createAsyncThunk(
   "boards/updateBoard",
-  async ({ boardId, data }, thunkAPI) => {
+  async ({ boardId, newBoardObject }, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.token;
 
@@ -33,9 +33,16 @@ export const updateBoard = createAsyncThunk(
       return thunkAPI.rejectWithValue("Token not found");
     }
 
+    console.log(newBoardObject);
+    console.log(boardId);
+
     try {
       setAuthHeader(token);
-      const response = await taskProApi.put(`/board/${boardId}`, data);
+
+      const response = await taskProApi.patch(
+        `/boards/${boardId}`,
+        newBoardObject
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

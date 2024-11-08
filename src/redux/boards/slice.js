@@ -27,8 +27,14 @@ const boardsSlice = createSlice({
         state.boards.push(action.payload.data);
       })
       .addCase(updateBoard.fulfilled, (state, action) => {
-        state.boards = state.boards.map((board) =>
-          board.id === action.payload.id ? action.payload : board
+        const updatedBoardData = action.payload.data; // Данні оновленої дошки з сервера
+
+        // Перебираємо масив boards і замінюємо тільки ту дошку, у якої співпадає id
+        state.boards = state.boards.map(
+          (board) =>
+            board._id === updatedBoardData._id
+              ? updatedBoardData // Замінюємо об'єкт повністю на той, що прийшов з сервера
+              : board // Інші дошки залишаються без змін
         );
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {

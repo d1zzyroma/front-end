@@ -13,6 +13,7 @@ import { toggleSideBar } from "../../redux/sideBar/slice.js";
 import { selectBoards } from "../../redux/boards/selectors.js";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { getBoardById } from "../../redux/сolumns/operations.js";
+import EditBoard from "../EditBoard/EditBoard.jsx";
 
 const SideBar = () => {
   const isSideBarVisible = useSelector(selectSideBarVisibility);
@@ -42,11 +43,19 @@ const SideBar = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const [isAddBoardOpen, setIsAddBoardOpen] = useState(false);
-  const [isEditBoardOpen, setIsEditBoardOpen] = useState(false);
+
+  const [editBoardId, setEditBoardId] = useState(null);
   const openAddBoard = () => setIsAddBoardOpen(true);
-  const openEditBoard = () => setIsEditBoardOpen(true);
+
   const closeAddBoard = () => setIsAddBoardOpen(false);
-  const closeEditBoard = () => setIsAddBoardOpen(false);
+
+  const openEditBoard = (id) => {
+    setEditBoardId(id);
+  };
+
+  const closeEditBoard = () => {
+    setEditBoardId(null);
+  };
   return (
     <>
       {isSideBarVisible && (
@@ -82,7 +91,10 @@ const SideBar = () => {
                     {board.title}
                   </div>
                   <div className={s.btnGroup}>
-                    <button type="button" onClick={openEditBoard}>
+                    <button
+                      type="button"
+                      onClick={() => openEditBoard(board._id)}
+                    >
                       <SvgIcon id="icon-pencil" className={s.iconPencil} />
                     </button>
                     <button
@@ -93,6 +105,14 @@ const SideBar = () => {
                     </button>
                   </div>
                 </NavLink>
+                {editBoardId === board._id && (
+                  <div>
+                    <EditBoard
+                      closeEditBoard={closeEditBoard}
+                      boardId={board._id}
+                    />
+                  </div>
+                )}
               </li>
             ))}
           </ul>
@@ -123,11 +143,6 @@ const SideBar = () => {
         {isAddBoardOpen && (
           <div>
             <NewBoard closeModal={closeAddBoard} userId={userId._id} />
-          </div>
-        )}
-        {isEditBoardOpen && (
-          <div>
-            <NewBoard closeModal={closeEditBoard} userId={userId._id} />
           </div>
         )}
       </div>
