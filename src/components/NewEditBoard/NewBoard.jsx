@@ -6,11 +6,12 @@ import { useDispatch } from "react-redux";
 import noBack from "../../images/images-bg/images-bg-default.png";
 import { addBoard } from "../../redux/boards/operations.js";
 import icons from "../../images/icons/icons.js";
-import backgrounds from "../../images/icons/background.js";
+import backgrounds from "../../images/background/background.js";
+// import backgrounds from "../../images/icons/background.js";
 
 export const NewBoard = ({ closeModal }) => {
   const [iconsSelected, setIconsSelected] = useState("icon-Project");
-  const [backgroundSelected, setBackgroundSelected] = useState("no-background");
+  const [backgroundSelected, setBackgroundSelected] = useState({});
   const [title, setTitle] = useState("");
 
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export const NewBoard = ({ closeModal }) => {
   };
 
   const createNewBoard = () => {
-    console.log(newBoardObject);
+    console.log(backgroundSelected);
 
     dispatch(addBoard(newBoardObject));
     closeModal();
@@ -110,12 +111,12 @@ export const NewBoard = ({ closeModal }) => {
               <input
                 type="radio"
                 name="backgrounds"
-                data-source={bg.key}
+                data-source={bg}
                 className={styles.inputBack}
-                checked={backgroundSelected === bg.key}
+                checked={backgroundSelected === bg}
                 onChange={handleBackgroundChange}
               />
-              <img src={bg.source} alt={bg.alt} className={styles.img_back} />
+              <img src={bg.min} alt={bg.alt} className={styles.img_back} />
             </li>
           ))}
         </ul>

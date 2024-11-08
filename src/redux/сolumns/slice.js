@@ -1,16 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {  
+
+import {
   addColumn,
   updateColumn,
   deleteColumn,
   getBoardById,
-} from '../сolumns/operations.js';
-import {  
+} from "../сolumns/operations.js";
+import {
   addCard,
   updateCard,
   deleteCard,
   replaceCard,
-} from '../cards/operations.js';
+} from "../cards/operations.js";
 
 const columnsSlice = createSlice({
   name: "columns",
@@ -25,17 +26,23 @@ const columnsSlice = createSlice({
       // Обробка отримання даних про дошку з колонками та картками
       .addCase(getBoardById.fulfilled, (state, action) => {
         const { columnsAll } = action.payload.data;
-        
+
         // Оновлюємо стан колонок, отриманих з відповіді сервера
         state.columns = columnsAll.map((column) => ({
-          ...column,       // зберігаємо всі дані колонки
+          ...column, // зберігаємо всі дані колонки
           cards: column.cards || [], // додаємо картки в колонку, якщо вони є
         }));
       })
-      
+
       // Додавання нової колонки
+
       .addCase(addColumn.fulfilled, (state, action) => {
-        state.columns.push(action.payload);  // Додаємо нову колонку
+        const newColumn = {
+          ...action.payload.data, // данные колонки с сервера
+          cards: [], // добавляем пустой массив `cards` только в Redux
+        };
+        state.columns.push(newColumn);
+        // Додаємо нову колонку
       })
 
       // Оновлення колонки
@@ -51,14 +58,14 @@ const columnsSlice = createSlice({
           (column) => column._id !== action.payload
         );
       })
-      
+
       // Додавання картки
       .addCase(addCard.fulfilled, (state, action) => {
         const column = state.columns.find(
-          (col) => col._id === action.payload.columnId
+          (col) => col._id === action.payload.data.columnId
         );
         if (column) {
-          column.cards.push(action.payload);  // Додаємо картку в колонку
+          column.cards.push(action.payload.data); // Додаємо картку в колонку
         }
       })
 
@@ -96,7 +103,7 @@ const columnsSlice = createSlice({
             card._id === action.payload._id ? action.payload : card
           );
         }
-      })
+      });
   },
 });
 
