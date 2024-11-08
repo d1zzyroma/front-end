@@ -1,23 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {  
-  getBoardById,
-  addBoard,
-  updateBoard,
-  deleteBoard,
-} from "./operations";
+import { getBoardById, addBoard, updateBoard, deleteBoard } from "./operations";
 import {
   getColumns,
   addColumn,
   updateColumn,
   deleteColumn,
-} from '../сolumns/operations.js';
+} from "../сolumns/operations.js";
 import {
   getCards,
   addCard,
   updateCard,
   deleteCard,
   replaceCard,
-} from '../cards/operations.js';
+} from "../cards/operations.js";
 import { userCurrent } from "../auth/operations.js";
 
 const boardsSlice = createSlice({
@@ -27,91 +22,90 @@ const boardsSlice = createSlice({
       {
         boardName: "Bords name",
         id: "1",
-  columns: [
-    {
-      columnTitle: "Column title 1",
-      id: "1",
-      bordId: "1",
-      cards: [
-        {
-          cardTitle: "Card 1",
-          columnId: "1",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-        {
-          cardTitle: "Card 2",
-          columnId: "1",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-        {
-          cardTitle: "Card 3",
-          columnId: "1",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-        {
-          cardTitle: "Card 4",
-          columnId: "1",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-        {
-          cardTitle: "Card 5",
-          columnId: "1",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-        {
-          cardTitle: "Card 6",
-          columnId: "1",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-      ],
-    },
-    {
-      columnTitle: "Column title 2",
-      id: "2",
-      bordId: "1",
-      cards: [
-        {
-          cardTitle: "Card 1",
-          columnId: "2",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-      ],
-    },
-    {
-      columnTitle: "Column title 3",
-      id: "3",
-      bordId: "1",
-      cards: [
-        {
-          cardTitle: "Card 1",
-          columnId: "3",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-        {
-          cardTitle: "Card 2",
-          columnId: "3",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-        {
-          cardTitle: "Card 3",
-          columnId: "3",
-          cardDescr:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
-        },
-      ],
-    },
-  ],
-},
-
+        columns: [
+          {
+            columnTitle: "Column title 1",
+            id: "1",
+            bordId: "1",
+            cards: [
+              {
+                cardTitle: "Card 1",
+                columnId: "1",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+              {
+                cardTitle: "Card 2",
+                columnId: "1",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+              {
+                cardTitle: "Card 3",
+                columnId: "1",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+              {
+                cardTitle: "Card 4",
+                columnId: "1",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+              {
+                cardTitle: "Card 5",
+                columnId: "1",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+              {
+                cardTitle: "Card 6",
+                columnId: "1",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+            ],
+          },
+          {
+            columnTitle: "Column title 2",
+            id: "2",
+            bordId: "1",
+            cards: [
+              {
+                cardTitle: "Card 1",
+                columnId: "2",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+            ],
+          },
+          {
+            columnTitle: "Column title 3",
+            id: "3",
+            bordId: "1",
+            cards: [
+              {
+                cardTitle: "Card 1",
+                columnId: "3",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+              {
+                cardTitle: "Card 2",
+                columnId: "3",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+              {
+                cardTitle: "Card 3",
+                columnId: "3",
+                cardDescr:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla deserunt quisquam fugiat laudantium sequi. Aliquam error cumque fugiat illum, reiciendis laudantium sit culpa magni corrupti quo saepe. Minima, alias laudantium.",
+              },
+            ],
+          },
+        ],
+      },
     ],
     loading: false,
     error: null,
@@ -121,7 +115,7 @@ const boardsSlice = createSlice({
     builder
       .addCase(userCurrent.pending, (state) => {
         state.loading = true;
-      })    
+      })
       .addCase(userCurrent.fulfilled, (state, action) => {
         state.boards = action.payload.boards;
         state.loading = false;
@@ -159,9 +153,9 @@ const boardsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(addColumn.fulfilled, (state, action) => {
-        state.columns.push(action.payload);
-      })
+      // .addCase(addColumn.fulfilled, (state, action) => {
+      //   state.columns.push(action.payload);
+      // })
       .addCase(updateColumn.fulfilled, (state, action) => {
         state.columns = state.columns.map((column) =>
           column.id === action.payload.id ? action.payload : column
@@ -172,7 +166,7 @@ const boardsSlice = createSlice({
           (column) => column.id !== action.payload
         );
       })
-       .addCase(getCards.pending, (state) => {
+      .addCase(getCards.pending, (state) => {
         state.loading = true;
       })
       .addCase(getCards.fulfilled, (state, action) => {
@@ -192,15 +186,13 @@ const boardsSlice = createSlice({
         );
       })
       .addCase(deleteCard.fulfilled, (state, action) => {
-        state.cards = state.cards.filter(
-          (card) => card.id !== action.payload
-        );
+        state.cards = state.cards.filter((card) => card.id !== action.payload);
       })
       .addCase(replaceCard.fulfilled, (state, action) => {
         state.cards = state.cards.map((card) =>
           card.id === action.payload.id ? action.payload : card
         );
-      })
+      });
   },
 });
 

@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SvgIcon from "../SvgIcon/SvgIcon.jsx";
 
-const AddCardForm = ({ closeModal }) => {
+const AddCardForm = ({ closeModal, columnId }) => {
   const initialValues = {
     title: "",
     description: "",
@@ -22,6 +22,7 @@ const AddCardForm = ({ closeModal }) => {
 
   const handleSubmit = (values) => {
     console.log("Form Data:", values);
+    console.log(columnId);
   };
   const labelOptions = [
     { color: "#8fa1d0", priority: "low" },

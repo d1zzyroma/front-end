@@ -19,10 +19,10 @@ export const addColumn = createAsyncThunk(
   "columns/addColumn",
   async ({ id, title }, thunkAPI) => {
     try {
-      console.log(title);
       const response = await taskProApi.post(`/columns/${id}`, {
         title,
       });
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
