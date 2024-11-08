@@ -56,7 +56,9 @@ export const deleteBoard = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      await taskProApi.delete(`/board/${boardId}`);
+      // console.log(boardId);
+
+      await taskProApi.delete(`/boards/${boardId}`);
       return boardId; // повертаємо ID для видалення
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
