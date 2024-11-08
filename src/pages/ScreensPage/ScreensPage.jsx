@@ -1,82 +1,3 @@
-// import { useParams } from "react-router-dom";
-// import s from "./ScreensPage.module.css";
-// import MainDashBoard from "../../components/MainDashBoard/MainDashBoard.jsx";
-// import SvgIcon from "../../components/SvgIcon/SvgIcon.jsx";
-// import Filter from "../../components/Filters/Filters.jsx";
-// import { useState } from "react";
-// import {
-//   loadingColumns,
-//   selectedBoardInfo,
-// } from "../../redux/сolumns/selectors.js";
-// import { useSelector } from "react-redux";
-// import { BallTriangle } from "react-loader-spinner";
-// import backgrounds from "../../images/background/background.js";
-
-// const ScreensPage = () => {
-//   const { boardId } = useParams();
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const loadCollumn = useSelector(loadingColumns);
-//   const boardInfo = useSelector(selectedBoardInfo);
-
-//   const openModal = () => setIsModalOpen(true);
-//   const closeModal = () => setIsModalOpen(false);
-
-//   const backgroundID = boardInfo.background;
-//   const selectedBackground = backgrounds.find(
-//     (bg) => bg.id === Number(backgroundID)
-//   );
-
-//   const containerStyle = {
-//     backgroundImage: selectedBackground
-//       ? `url(${selectedBackground.desktop})`
-//       : "none",
-//     backgroundSize: "cover",
-//     backgroundRepeat: "no-repeat",
-//   };
-
-//   return (
-//     <div
-//       className={s.cont}
-//       style={{
-//         ...containerStyle,
-//         "@media (min-width: 768px)": {
-//           backgroundImage: selectedBackground
-//             ? `url(${selectedBackground.tablet})`
-//             : "none",
-//         },
-//         "@media (min-width: 1440px)": {
-//           backgroundImage: selectedBackground
-//             ? `url(${selectedBackground.desktop})`
-//             : "none",
-//         },
-//       }}
-//     >
-//       <div className={s.boardTitleBox}>
-//         <h2 className={s.boardTitle}>{boardInfo.title} </h2>
-//         <button onClick={openModal} className={s.filterBox}>
-//           <SvgIcon id="icon-filter" className={s.filterIcon} />
-//           <h3 className={s.filter}>Filters</h3>
-//         </button>
-//         {isModalOpen && <Filter closeModal={closeModal} />}
-//       </div>
-
-//       {!loadCollumn ? (
-//         <MainDashBoard boardId={boardId} />
-//       ) : (
-//         <BallTriangle
-//           height={100}
-//           width={100}
-//           radius={5}
-//           color="#4fa94d"
-//           ariaLabel="ball-triangle-loading"
-//           visible={true}
-//         />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ScreensPage;
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
@@ -97,16 +18,16 @@ const Container = styled.div`
   font-family: "Poppins", sans-serif;
   width: 375px;
   height: 812px;
-  background-image: ${(props) =>
-    props.bgImage ? `url(${props.bgImage.mobile})` : "none"};
+  background-image: ${({ hasBackground, mobile }) =>
+    hasBackground ? `url(${mobile})` : "none"};
   background-size: cover;
   background-repeat: no-repeat;
 
   @media screen and (min-width: 765px) {
     width: 768px;
     height: 1024px;
-    background-image: ${(props) =>
-      props.bgImage ? `url(${props.bgImage.tablet})` : "none"};
+    background-image: ${({ hasBackground, tablet }) =>
+      hasBackground ? `url(${tablet})` : "none"};
   }
 
   @media screen and (min-width: 1439px) {
@@ -114,8 +35,8 @@ const Container = styled.div`
     height: 770px;
     max-width: calc(100vw - 260px);
     height: calc(100vh - 68px);
-    background-image: ${(props) =>
-      props.bgImage ? `url(${props.bgImage.desktop})` : "none"};
+    background-image: ${({ hasBackground, desktop }) =>
+      hasBackground ? `url(${desktop})` : "none"};
   }
 `;
 
@@ -198,7 +119,12 @@ const ScreensPage = () => {
   );
 
   return (
-    <Container bgImage={selectedBackground}>
+    <Container
+      hasBackground={Boolean(selectedBackground)}
+      desktop={selectedBackground?.desktop}
+      tablet={selectedBackground?.tablet}
+      mobile={selectedBackground?.mobile}
+    >
       <BoardTitleBox>
         <BoardTitle>{boardInfo.title}</BoardTitle>
         <FilterBox onClick={openModal}>
