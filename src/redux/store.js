@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { authReducer } from './auth/slice';
 import { boardsReducer } from './boards/slice.js';
 import sideBarReducer from './sideBar/slice.js';
+import { columnsReducer } from './сolumns/slice.js';
 
 const authPersistConfig = {
   key: 'auth',
@@ -15,6 +16,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),    
     boards: boardsReducer,
+    columns: columnsReducer,
     visibilitySideBar: sideBarReducer,
   },
   middleware: (getDefaultMiddleware) =>
