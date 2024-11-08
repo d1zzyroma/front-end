@@ -74,28 +74,46 @@ const columnsSlice = createSlice({
         }
       })
 
-      // Оновлення картки
       .addCase(updateCard.fulfilled, (state, action) => {
-        const column = state.columns.find(
-          (col) => col._id === action.payload.columnId
-        );
+        const { _id, columnId, title, description, deadline, priority } =
+          action.payload.data;
+
+        const column = state.columns.find((col) => col._id === columnId);
+
         if (column) {
-          column.cards = column.cards.map((card) =>
-            card._id === action.payload._id ? action.payload : card
-          );
+          const cardIndex = column.cards.findIndex((card) => card._id === _id);
+
+          if (cardIndex !== -1) {
+            column.cards[cardIndex] = {
+              _id,
+              title,
+              description,
+              deadline,
+              priority,
+              columnId,
+            };
+          }
         }
       })
 
       // Видалення картки
       .addCase(deleteCard.fulfilled, (state, action) => {
-        const column = state.columns.find(
-          (col) => col._id === action.payload.columnId
-        );
-        if (column) {
-          column.cards = column.cards.filter(
-            (card) => card._id !== action.payload._id
+        const cardId = action.meta.arg;
+
+        state.columns.forEach((column) => {
+          const cardIndex = column.cards.findIndex(
+            (card) => card._id === cardId
           );
-        }
+
+          if (cardIndex !== -1) {
+            column.cards.splice(cardIndex, 1);
+          }
+        });
+
+        console.log(
+          "Обновлённое состояние колонок:",
+          JSON.stringify(state.columns, null, 2)
+        );
       })
 
       // Переміщення картки

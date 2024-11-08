@@ -12,6 +12,7 @@ import { allColumnsByBoard } from "../../redux/сolumns/selectors.js";
 import EditColumnForm from "../EditColumnForm/EditColumnForm.jsx";
 import { useDispatch } from "react-redux";
 import { deleteColumn } from "../../redux/сolumns/operations.js";
+import { deleteCard } from "../../redux/cards/operations.js";
 
 const MainDashBoard = () => {
   const { boardId } = useParams();
@@ -31,9 +32,14 @@ const MainDashBoard = () => {
   const [openModalEditIndex, setOpenModalEditIndex] = useState(null);
   const [openModalAddIndex, setOpenModalAddColumn] = useState(null);
 
+  ////cards update and delete
+  const [openModalEditId, setOpenModalEditId] = useState(null);
+  const openModalEdit = (cardId) => setOpenModalEditId(cardId);
+  const closeModalEdit = () => setOpenModalEditId(null);
+
   // 4. Функції для керування модальними вікнами
-  const openModalEdit = (index) => setOpenModalEditIndex(index);
-  const closeModalEdit = () => setOpenModalEditIndex(null);
+  // const openModalEdit = (index) => setOpenModalEditIndex(index);
+  // const closeModalEdit = () => setOpenModalEditIndex(null);
   const openModalAddColumn = () => setOpenModalAddColumn(true);
   const closeModalAddColumn = () => setOpenModalAddColumn(null);
   const openModal = (index) => setOpenModalIndex(index);
@@ -52,9 +58,10 @@ const MainDashBoard = () => {
     // Запускаем действие удаления через dispatch
     dispatch(deleteColumn(id));
   };
-  // const board = useSelector(selectBoards);
-  // const boardIds = board._id;
 
+  const handleDeleteCard = (cardId) => {
+    dispatch(deleteCard(cardId));
+  };
   // 5. Логіка Drag and Drop для переміщення карток між колонками
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -204,17 +211,31 @@ const MainDashBoard = () => {
                                         className={s.columnIcons}
                                       />
                                       <button
-                                        onClick={() => openModalEdit(index)}
+                                        onClick={() => openModalEdit(card._id)}
                                       >
                                         <SvgIcon
                                           id="icon-pencil"
                                           className={s.columnIcons}
                                         />
                                       </button>
-                                      <SvgIcon
-                                        id="icon-trash"
-                                        className={s.columnIcons}
-                                      />
+                                      <button
+                                        onClick={() =>
+                                          handleDeleteCard(card._id)
+                                        }
+                                      >
+                                        <SvgIcon
+                                          id="icon-trash"
+                                          className={s.columnIcons}
+                                        />
+                                      </button>
+                                      {openModalEditId === card._id && (
+                                        <EditCardForm
+                                          cardInfo={card}
+                                          closeModal={closeModalEdit}
+                                          cardId={openModalEditId}
+                                          columnId={column.id}
+                                        />
+                                      )}
                                     </div>
                                   </div>
                                 </div>
@@ -247,9 +268,6 @@ const MainDashBoard = () => {
                         closeModal={closeModal}
                         columnId={column._id}
                       />
-                    )}
-                    {openModalEditIndex === index && (
-                      <EditCardForm closeModal={closeModalEdit} />
                     )}
                   </div>
                 )}
