@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import ThemeSwitcher from "../Themes/ThemeSwitcher/ThemeSwitcher";
 import EditProfile from "../EditProfile/EditProfile.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUserName, selectUserTheme } from "../../redux/auth/selectors.js";
+import {
+  selectUserAvatar,
+  selectUserName,
+  selectUserTheme,
+} from "../../redux/auth/selectors.js";
 import icons from "../../images/icons/icons.svg";
 import s from "./Header.module.css";
 import { toggleSideBar } from "../../redux/sideBar/slice.js";
-import userAva from "../../images/user.png";
+import userAvaDefault from "../../images/user.png";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -15,6 +19,7 @@ const Header = () => {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
   const userName = useSelector(selectUserName);
+  const userAva = useSelector(selectUserAvatar);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -77,7 +82,11 @@ const Header = () => {
               >
                 {/* {userName} */}
 
-                <img src={userAva} alt="avatar" className={s.profile_avatar} />
+                <img
+                  src={userAva || userAvaDefault}
+                  alt="avatar"
+                  className={s.profile_avatar}
+                />
               </button>
             </div>
           </div>
