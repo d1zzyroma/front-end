@@ -4,6 +4,9 @@ import MainDashBoard from "../../components/MainDashBoard/MainDashBoard.jsx";
 import SvgIcon from "../../components/SvgIcon/SvgIcon.jsx";
 import Filter from "../../components/Filters/Filters.jsx";
 import { useState } from "react";
+import { loadingColumns } from "../../redux/сolumns/selectors.js";
+import { useSelector } from "react-redux";
+import { BallTriangle } from "react-loader-spinner";
 
 const ScreensPage = () => {
   const { boardId } = useParams();
@@ -11,6 +14,8 @@ const ScreensPage = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const loadCollumn = useSelector(loadingColumns);
+  console.log(loadCollumn + "load");
 
   return (
     <div className={s.cont}>
@@ -25,7 +30,19 @@ const ScreensPage = () => {
 
       {/* <p>Нижче створюйте вже колонки {boardId}</p>
       <p>Десь тут ще хедер борда{boardId}</p> */}
-      <MainDashBoard boardId={boardId} />
+      {!loadCollumn ? (
+        <MainDashBoard boardId={boardId} />
+      ) : (
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#4fa94d"
+          ariaLabel="ball-triangle-loading"
+          visible={true}
+        />
+      )}
+      {/* <MainDashBoard boardId={boardId} /> */}
       {/* <div>Відмалюємо дошку з id : {boardId} з даних запиту</div> */}
     </div>
   );

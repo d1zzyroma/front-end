@@ -4,43 +4,41 @@
 // import { Formik, Form, Field } from "formik";
 // import { useSelector, } from 'react-redux';
 // import { useState } from "react";
-import { useState } from "react"
-import { useSelector, useDispatch } from 'react-redux';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import css from './AddEditBoard.module.css';
-import useTheme from '../ThemeContext/ThemeContext.jsx';
-import { selectBoards } from '../../redux/boards/slice.js'; 
-import { addBoard, updateBoardById } from '../../redux/boards/slice.js'; 
-import IconPicker from '../IconPicker/IconPicker'; 
-import BackgroundPicker from '../BackgroundPicker/BackgroundPicker'; 
-import AddIconButton from '../AddIconButton/AddIconButton'; 
-import iconDefs from '../../images/icons/icons.svg"'; 
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import css from "./EditBoard.module.css";
+import useTheme from "../ThemeContext/ThemeContext.jsx";
+import { selectBoards } from "../../redux/boards/slice.js";
+import { addBoard, updateBoardById } from "../../redux/boards/slice.js";
+import IconPicker from "../IconPicker/IconPicker";
+import BackgroundPicker from "../BackgroundPicker/BackgroundPicker";
+import AddIconButton from "../AddIconButton/AddIconButton";
+import iconDefs from '../../images/icons/icons.svg"';
 
 const boardSchema = Yup.object().shape({
-  title: Yup.string().required('Title is required'),
+  title: Yup.string().required("Title is required"),
 });
-
-
 
 export default function AddEditBoard({ onClose, boardId }) {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const [icon, setIcon] = useState('icon-board-icon-1');
-  const [background, setBackground] = useState('');
-  const isEditing = useSelector(state => state.modal.isModalDisplayed);
+  const [icon, setIcon] = useState("icon-board-icon-1");
+  const [background, setBackground] = useState("");
+  const isEditing = useSelector((state) => state.modal.isModalDisplayed);
   // const board = useSelector(selectCurrentBoard);
   const boards = useSelector(selectBoards);
 
-  const board = boards.find(item => item._id === boardId);
+  const board = boards.find((item) => item._id === boardId);
 
-  const handleSelectedIconChange = selectedIcon => {
+  const handleSelectedIconChange = (selectedIcon) => {
     setIcon(selectedIcon);
   };
 
-  const handleSelectedBackgroundChange = selectedBackground => {
-    if (selectedBackground === 'default') {
-      setBackground('');
+  const handleSelectedBackgroundChange = (selectedBackground) => {
+    if (selectedBackground === "default") {
+      setBackground("");
     } else {
       setBackground(selectedBackground);
     }
@@ -85,11 +83,11 @@ export default function AddEditBoard({ onClose, boardId }) {
         </svg>
       </button>
       <h3 style={{ color: theme.popUp.titleColor }} className={css.titleBoard}>
-        {!isEditing ? 'New board' : 'Edit board'}
+        {!isEditing ? "New board" : "Edit board"}
       </h3>
       <Formik
         initialValues={{
-          title: isEditing ? board.title : '',
+          title: isEditing ? board.title : "",
           icon: isEditing ? board.icon : icon,
           background: isEditing ? board.background : background,
         }}
@@ -107,7 +105,7 @@ export default function AddEditBoard({ onClose, boardId }) {
               style={{
                 color: theme.popUp.inputTextColor,
                 borderColor: theme.popUp.inputBorderColor,
-                '::placeholder': { color: theme.popUp.inputPlaceholderColor },
+                "::placeholder": { color: theme.popUp.inputPlaceholderColor },
               }}
               className={css.input}
               type="text"
@@ -126,13 +124,13 @@ export default function AddEditBoard({ onClose, boardId }) {
           <AddIconButton
             buttonType="submit"
             className={css.btn}
-            theme={'light'}
+            theme={"light"}
           >
             <span
               style={{ color: theme.popUp.buttonTextColor }}
               className={css.btnSumbitAction}
             >
-              {!isEditing ? 'Create' : 'Edit'}
+              {!isEditing ? "Create" : "Edit"}
             </span>
           </AddIconButton>
         </Form>

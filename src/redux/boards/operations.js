@@ -1,48 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { taskProApi, setAuthHeader } from "../../config/taskProApi";
 
-// Отримати всі борди
-export const getBoards = createAsyncThunk(
-  "boards/getBoards",
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue("Token not found");
-    }
-
-    try {
-      setAuthHeader(token);
-      const response = await taskProApi.get("/boards");
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-// Отримати борд за ID
-export const getBoardById = createAsyncThunk(
-  "boards/getBoardById",
-  async (boardId, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue("Token not found");
-    }
-
-    try {
-      setAuthHeader(token);
-      const response = await taskProApi.get(`/boards/${boardId}`);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 // Додати борд
 export const addBoard = createAsyncThunk(
   "boards/addBoard",
@@ -98,7 +56,9 @@ export const deleteBoard = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      await taskProApi.delete(`/board/${boardId}`);
+      // console.log(boardId);
+
+      await taskProApi.delete(`/boards/${boardId}`);
       return boardId; // повертаємо ID для видалення
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

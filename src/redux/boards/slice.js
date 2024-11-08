@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  getBoards,
-  getBoardById,
-  addBoard,
-  updateBoard,
-  deleteBoard,
-} from "./operations";
+import { addBoard, updateBoard, deleteBoard } from "./operations";
 import { userCurrent } from "../auth/operations.js";
 
 const boardsSlice = createSlice({
@@ -18,24 +12,16 @@ const boardsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getBoards.pending, (state) => {
+      .addCase(userCurrent.pending, (state) => {
         state.loading = true;
-      })
-      .addCase(getBoards.fulfilled, (state, action) => {
-        state.loading = false;
-        state.boards = action.payload;
-      })
-      .addCase(getBoards.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
       })
       .addCase(userCurrent.fulfilled, (state, action) => {
         state.boards = action.payload.boards;
+        state.loading = false;
       })
-      .addCase(getBoardById.fulfilled, (state, action) => {
-        state.boards = state.boards.map((board) =>
-          board.id === action.payload.data.board._id ? action.payload : board
-        );
+      .addCase(userCurrent.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.boards;
       })
       .addCase(addBoard.fulfilled, (state, action) => {
         state.boards.push(action.payload.data);
@@ -46,9 +32,27 @@ const boardsSlice = createSlice({
         );
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {
-        state.boards = state.boards.filter(
-          (board) => board.id !== action.meta.arg
+        // console.log(
+        //   "Список досок до удаления:",
+        //   JSON.stringify(state.boards, null, 2)
+        // );
+        // console.log("ID для удаления:", action.meta.arg);
+
+        // state.boards = state.boards.filter((board) => {
+        //   console.log(`Проверка: ${board._id} !== ${action.meta.arg}`);
+        //   return board._id !== action.meta.arg;
+        // });
+
+        // console.log(
+        //   "Список досок после удаления:",
+        //   JSON.stringify(state.boards, null, 2)
+        // );
+        const updatedBoards = state.boards.filter(
+          (board) => board._id !== action.meta.arg
         );
+
+        // Перезаписываем массив, чтобы Redux зафиксировал изменения
+        state.boards = [...updatedBoards];
       });
   },
 });

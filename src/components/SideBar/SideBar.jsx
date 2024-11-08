@@ -3,7 +3,7 @@ import s from "./SideBar.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import cactusImg from "../../images/Sidebar/cactus.png";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBoard, getBoardById } from "../../redux/boards/operations";
+import { deleteBoard } from "../../redux/boards/operations";
 import { useState } from "react";
 import NeedHelpForm from "../NeedHelpForm/NeedHelpForm";
 import { logOut } from "../../redux/auth/operations.js";
@@ -12,6 +12,7 @@ import { selectSideBarVisibility } from "../../redux/sideBar/selectors.js";
 import { toggleSideBar } from "../../redux/sideBar/slice.js";
 import { selectBoards } from "../../redux/boards/selectors.js";
 import { selectUser } from "../../redux/auth/selectors.js";
+import { getBoardById } from "../../redux/сolumns/operations.js";
 
 const SideBar = () => {
   const isSideBarVisible = useSelector(selectSideBarVisibility);
@@ -41,8 +42,11 @@ const SideBar = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const [isAddBoardOpen, setIsAddBoardOpen] = useState(false);
+  const [isEditBoardOpen, setIsEditBoardOpen] = useState(false);
   const openAddBoard = () => setIsAddBoardOpen(true);
+  const openEditBoard = () => setIsEditBoardOpen(true);
   const closeAddBoard = () => setIsAddBoardOpen(false);
+  const closeEditBoard = () => setIsAddBoardOpen(false);
   return (
     <>
       {isSideBarVisible && (
@@ -65,13 +69,12 @@ const SideBar = () => {
           </div>
           <ul className={s.boardsList}>
             {boards.map((board) => (
-              <li
-                key={board.id}
-                className={s.boardItem}
-                onClick={() => getBoardInfo(board._id)}
-              >
+              <li key={board._id} className={s.boardItem}>
                 <NavLink to={`/home/${board._id}`} className={s.link}>
-                  <div className={s.linkContent}>
+                  <div
+                    className={s.linkContent}
+                    onClick={() => getBoardInfo(board._id)}
+                  >
                     <SvgIcon
                       id={`icon-${board.icon}`}
                       className={s.projectIcon}
@@ -79,12 +82,12 @@ const SideBar = () => {
                     {board.title}
                   </div>
                   <div className={s.btnGroup}>
-                    <button type="button">
+                    <button type="button" onClick={openEditBoard}>
                       <SvgIcon id="icon-pencil" className={s.iconPencil} />
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleDelete(board.id)}
+                      onClick={() => handleDelete(board._id)}
                     >
                       <SvgIcon id="icon-trash" className={s.iconTrash} />
                     </button>
@@ -120,6 +123,11 @@ const SideBar = () => {
         {isAddBoardOpen && (
           <div>
             <NewBoard closeModal={closeAddBoard} userId={userId._id} />
+          </div>
+        )}
+        {isEditBoardOpen && (
+          <div>
+            <NewBoard closeModal={closeEditBoard} userId={userId._id} />
           </div>
         )}
       </div>

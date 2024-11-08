@@ -16,8 +16,6 @@ const Header = () => {
 
   const userName = useSelector(selectUserName);
 
-  console.log("User Name:", userName);
-
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -53,8 +51,8 @@ const Header = () => {
         <div className={s.divRight}>
           <div className={s.divLabel}>
             <p className={s.pTheme}>Theme</p>
-            <button onClick={toggleDropdown} className={s.iconButton}>
-              <svg className={s.icon}>
+            <button onClick={toggleDropdown} className={s.btnTheme}>
+              <svg className={`${s.icon} ${isOpen ? s.rotated : ""}`}>
                 <use href={`${icons}#icon-down`} />
               </svg>
             </button>

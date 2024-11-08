@@ -117,7 +117,7 @@ import s from "./RegisterForm.module.css";
 import icons from "../../images/icons/icons.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { register, logIn, userCurrent } from "../../redux/auth/operations.js"; // Імпортуйте logIn та userCurrent
+import { register, logIn, userCurrent } from "../../redux/auth/operations.js";
 
 // Валідація
 const registerSchema = yup.object().shape({
@@ -183,7 +183,7 @@ const RegisterForm = () => {
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
         validationSchema={registerSchema}
-        onSubmit={handleRegister} // Викликаємо handleRegister
+        onSubmit={handleRegister}
       >
         {({ isSubmitting }) => (
           <Form className={s.form}>
@@ -220,7 +220,11 @@ const RegisterForm = () => {
                 style={{ cursor: "pointer" }}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                <use href={`${icons}#icon-eyes`}></use>
+                <use
+                  href={`${icons}#${
+                    showPassword ? "icon-eyes" : "icon-eyes-closed"
+                  }`}
+                ></use>
               </svg>
               <ErrorMessage
                 name="password"
