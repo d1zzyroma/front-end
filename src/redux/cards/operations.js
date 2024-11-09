@@ -47,12 +47,31 @@ export const deleteCard = createAsyncThunk(
 );
 
 // PATCH cards/:id - Застосовує часткові зміни до картки за її ID (cardId) з новими даними (data).
+// export const replaceCard = createAsyncThunk(
+//   "cards/replaceCard",
+//   async ({ cardId, newColumnId, columnId }, thunkAPI) => {
+//     try {
+//       const data = { columnId: newColumnId };
+//       console.log(data);
+
+//       const response = await taskProApi.patch(`/cards/replace/${cardId}`, data);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const replaceCard = createAsyncThunk(
   "cards/replaceCard",
-  async ({ cardId, data }, thunkAPI) => {
+  async ({ cardId, newColumnId, columnId }, thunkAPI) => {
     try {
-      const response = await taskProApi.patch(`/cards/${cardId}`, data);
-      return response.data;
+      const data = { columnId: newColumnId };
+      console.log(data);
+
+      const response = await taskProApi.patch(`/cards/replace/${cardId}`, data);
+
+      // Додаємо старий columnId до об'єкта, щоб передати його в slice
+      return { ...response.data, oldColumnId: columnId };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

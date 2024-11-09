@@ -131,14 +131,33 @@ const columnsSlice = createSlice({
       })
 
       // Переміщення картки
+      // .addCase(replaceCard.fulfilled, (state, action) => {
+      //   const column = state.columns.find(
+      //     (col) => col._id === action.payload.columnId
+      //   );
+      //   if (column) {
+      //     column.cards = column.cards.map((card) =>
+      //       card._id === action.payload._id ? action.payload : card
+      //     );
+      //   }
+      // });
       .addCase(replaceCard.fulfilled, (state, action) => {
-        const column = state.columns.find(
-          (col) => col._id === action.payload.columnId
-        );
-        if (column) {
-          column.cards = column.cards.map((card) =>
-            card._id === action.payload._id ? action.payload : card
+        const { data, oldColumnId } = action.payload;
+
+        // Знаходимо стару колонку та видаляємо картку з неї
+        const oldColumn = state.columns.find((col) => col._id === oldColumnId);
+        if (oldColumn) {
+          oldColumn.cards = oldColumn.cards.filter(
+            (card) => card._id !== data._id
           );
+        }
+
+        // Додаємо картку в нову колонку
+        const newColumn = state.columns.find(
+          (col) => col._id === data.columnId
+        );
+        if (newColumn) {
+          newColumn.cards.push(data);
         }
       });
   },
