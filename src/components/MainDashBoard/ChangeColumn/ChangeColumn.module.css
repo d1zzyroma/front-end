@@ -1,7 +1,7 @@
 .container {
-  min-width: 135px;
-  max-width: 290px;
-  height: 100px;
+  /* min-width: 135px; */
+  /* max-width: 290px; */
+  /* height: 100px; */
   padding: 18px;
   background-color: var(--bg-screen);
   position: absolute;
@@ -37,9 +37,10 @@
   }
 }
 
-.icon {
+.columnIcons {
   width: 16px;
   height: 16px;
+  fill: none;
   stroke: var(--text-primary);
 }
 

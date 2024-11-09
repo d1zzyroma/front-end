@@ -9,10 +9,12 @@ import AddColumnForm from "../AddColumnForm/AddColumnForm.jsx";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { allColumnsByBoard } from "../../redux/сolumns/selectors.js";
-import EditColumnForm from "../EditColumnForm/EditColumnForm.jsx";
+
 import { useDispatch } from "react-redux";
 import { deleteColumn } from "../../redux/сolumns/operations.js";
 import { deleteCard } from "../../redux/cards/operations.js";
+import EditColumnForm from "../EditColumnForm/EditColumnForm.jsx";
+import ChangeColumn from "./ChangeColumn/ChangeColumn.jsx";
 
 const MainDashBoard = () => {
   const { boardId } = useParams();
@@ -31,7 +33,9 @@ const MainDashBoard = () => {
   const [openModalIndex, setOpenModalIndex] = useState(null);
   const [openModalEditIndex, setOpenModalEditIndex] = useState(null);
   const [openModalAddIndex, setOpenModalAddColumn] = useState(null);
-
+  const [openChangeCardsFromColumn, setOpenChangeCardsFromColumn] =
+    useState(null);
+  const [columnIdForChange, setColumnIdForChange] = useState(null);
   ////cards update and delete
   const [openModalEditId, setOpenModalEditId] = useState(null);
   const openModalEdit = (cardId) => setOpenModalEditId(cardId);
@@ -130,13 +134,6 @@ const MainDashBoard = () => {
                         </button>
                       </div>
                     </div>
-                    {editColumnId === column._id && (
-                      <EditColumnForm
-                        title={column.title}
-                        closeEditColumn={closeEditColumn}
-                        columnId={column._id}
-                      />
-                    )}
 
                     {/* Список карточек в колонке */}
                     <div className={s.cardList}>
@@ -205,10 +202,21 @@ const MainDashBoard = () => {
 
                                     {/* Иконки для редактирования, перемещения и удаления карточек */}
                                     <div className={s.cardIcons}>
-                                      <SvgIcon
-                                        id="icon-arrow-circle-broken-right"
-                                        className={s.columnIcons}
-                                      />
+                                      <button
+                                        onClick={() => {
+                                          setOpenChangeCardsFromColumn(
+                                            card._id
+                                          );
+                                          setColumnIdForChange(column._id);
+                                          // console.log(column._id);
+                                        }}
+                                      >
+                                        <SvgIcon
+                                          id="icon-arrow-circle-broken-right"
+                                          className={s.columnIcons}
+                                        />
+                                      </button>
+
                                       <button
                                         onClick={() => openModalEdit(card._id)}
                                       >
@@ -227,6 +235,7 @@ const MainDashBoard = () => {
                                           className={s.columnIcons}
                                         />
                                       </button>
+
                                       {openModalEditId === card._id && (
                                         <EditCardForm
                                           cardInfo={card}
@@ -237,6 +246,13 @@ const MainDashBoard = () => {
                                       )}
                                     </div>
                                   </div>
+                                  {openChangeCardsFromColumn === card._id && (
+                                    <ChangeColumn
+                                      closeEditColumn={closeEditColumn}
+                                      cardId={card._id}
+                                      columnId={columnIdForChange}
+                                    />
+                                  )}
                                 </div>
                               )}
                             </Draggable>
