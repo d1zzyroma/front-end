@@ -1,6 +1,8 @@
 import { Formik, Form } from "formik";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import s from "./Filter.module.css";
+import { useDispatch } from "react-redux";
+import { filterCardsByPriority } from "../../redux/сolumns/operations.js";
 
 const labelOptions = [
   { color: "#656565", priority: "Without priority" },
@@ -10,6 +12,7 @@ const labelOptions = [
 ];
 
 const Filter = ({ closeModal }) => {
+  const dispatch = useDispatch();
   return (
     <Formik
       initialValues={{
@@ -32,7 +35,7 @@ const Filter = ({ closeModal }) => {
                 type="button"
                 className={s.showAllBtn}
                 onClick={() => {
-                  console.log("Show all");
+                  dispatch(filterCardsByPriority({ priority: "all" }));
                 }}
               >
                 Show all
@@ -50,6 +53,7 @@ const Filter = ({ closeModal }) => {
                     onClick={() => {
                       setFieldValue("labelColor", color);
                       setFieldValue("priority", priority);
+                      dispatch(filterCardsByPriority({ priority }));
                     }}
                   >
                     <span className={s.priorityLabel}>{priority}</span>

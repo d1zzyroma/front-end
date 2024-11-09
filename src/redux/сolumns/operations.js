@@ -65,3 +65,24 @@ export const deleteColumn = createAsyncThunk(
     }
   }
 );
+export const filterCardsByPriority = createAsyncThunk(
+  "columns/filterCardsByPriority",
+  async ({ priority }, { getState }) => {
+    const state = getState();
+    const { allColumns } = state.columns;
+    console.log(priority);
+
+    // Фільтруємо картки в колонках на основі пріоритету
+    if (priority === "all") {
+      return allColumns;
+    } else {
+      const filteredColumns = allColumns.map((column) => ({
+        ...column,
+        cards: column.cards.filter((card) => card.priority === priority),
+      }));
+      console.log(filteredColumns);
+
+      return filteredColumns;
+    }
+  }
+);

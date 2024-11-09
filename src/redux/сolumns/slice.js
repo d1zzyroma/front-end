@@ -5,6 +5,7 @@ import {
   updateColumn,
   deleteColumn,
   getBoardById,
+  filterCardsByPriority,
 } from "../сolumns/operations.js";
 import {
   addCard,
@@ -21,6 +22,7 @@ const columnsSlice = createSlice({
     columns: [],
     loading: false,
     error: null,
+    allColumns: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -35,6 +37,7 @@ const columnsSlice = createSlice({
           ...column, // зберігаємо всі дані колонки
           cards: column.cards || [], // додаємо картки в колонку, якщо вони є
         }));
+        state.allColumns = columnsAll;
       })
       .addCase(deleteBoard.fulfilled, (state) => {
         state.selectedBoard = {};
@@ -122,6 +125,9 @@ const columnsSlice = createSlice({
           "Обновлённое состояние колонок:",
           JSON.stringify(state.columns, null, 2)
         );
+      })
+      .addCase(filterCardsByPriority.fulfilled, (state, action) => {
+        state.columns = action.payload;
       })
 
       // Переміщення картки
