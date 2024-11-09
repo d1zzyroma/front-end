@@ -211,6 +211,21 @@
 .boardItem:hover::after {
   width: 4px;
 }
+
+.activeBoardItem {
+  background-color: var(--accent-sidebar);
+}
+
+.activeBoardItem::after {
+  width: 4px; /* ширина, яку має займати псевдоелемент в активному стані */
+  background-color: var(--hover-sidebar-element);
+}
+.activeBoardItem .linkContent {
+  color: var(--accent-sidebar-color);
+}
+.activeBoardItem .projectIcon {
+  stroke: var(--accent-sidebar-color);
+}
 .btnGroup {
   display: none;
   position: absolute;
