@@ -145,7 +145,16 @@ const MainDashBoard = () => {
                           const cardBackgroundColor = cardPriority
                             ? cardPriority.color
                             : "#fff";
+                          const deadline = card.deadline;
+                          const currentDate = new Date();
 
+                          const isDeadlinePassed = currentDate > deadline;
+
+                          if (isDeadlinePassed) {
+                            console.log("Дедлайн пройшов");
+                          } else {
+                            console.log("Дедлайн ще не настав");
+                          }
                           return (
                             <Draggable
                               key={cardIndex}
@@ -195,13 +204,19 @@ const MainDashBoard = () => {
                                       <div className={s.cardDeadline}>
                                         <p className={s.deadline}>Deadline</p>
                                         <p className={s.deadlineDate}>
-                                          31/10/2024
+                                          {card.deadline.split("T")[0]}
                                         </p>
                                       </div>
                                     </div>
 
                                     {/* Иконки для редактирования, перемещения и удаления карточек */}
                                     <div className={s.cardIcons}>
+                                      {!isDeadlinePassed && (
+                                        <SvgIcon
+                                          id="icon-bell"
+                                          className={s.columnIcons}
+                                        />
+                                      )}
                                       <button
                                         onClick={() => {
                                           setOpenChangeCardsFromColumn(
