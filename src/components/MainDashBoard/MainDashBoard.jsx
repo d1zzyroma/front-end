@@ -248,7 +248,9 @@ const MainDashBoard = () => {
                                   </div>
                                   {openChangeCardsFromColumn === card._id && (
                                     <ChangeColumn
-                                      closeEditColumn={closeEditColumn}
+                                      closeEditColumn={
+                                        setOpenChangeCardsFromColumn
+                                      }
                                       cardId={card._id}
                                       columnId={columnIdForChange}
                                     />

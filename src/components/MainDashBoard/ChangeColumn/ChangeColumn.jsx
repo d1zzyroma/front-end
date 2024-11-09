@@ -9,11 +9,12 @@ const ChangeColumn = ({ closeEditColumn, columnId, cardId }) => {
   const columns = useSelector(allColumnsByBoard);
   const newColumns = columns.filter((column) => column._id !== columnId);
   const dispatch = useDispatch();
+
   return (
     <div
       className={css.container}
       onClick={(e) => {
-        if (e.target === e.currentTarget) closeEditColumn(false);
+        if (e.target === e.currentTarget) closeEditColumn(null);
       }}
     >
       <ul className={css.list}>
@@ -33,6 +34,7 @@ const ChangeColumn = ({ closeEditColumn, columnId, cardId }) => {
                     );
                     const newColumnId = el._id;
                     dispatch(replaceCard({ cardId, newColumnId, columnId }));
+                    closeEditColumn(null);
                   }}
                 >
                   {el.title}
