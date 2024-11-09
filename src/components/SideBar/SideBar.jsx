@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import s from "./SideBar.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import cactusImg from "../../images/Sidebar/cactus.png";
@@ -62,6 +62,9 @@ const SideBar = () => {
   const closeEditBoard = () => {
     setEditBoardId(null);
   };
+
+  const location = useLocation();
+
   return (
     <>
       {isSideBarVisible && (
@@ -84,8 +87,20 @@ const SideBar = () => {
           </div>
           <ul className={s.boardsList}>
             {boards.map((board) => (
-              <li key={board._id} className={s.boardItem}>
-                <NavLink to={`/home/${board._id}`} className={s.link}>
+              <li
+                key={board._id}
+                className={`${s.boardItem} ${
+                  location.pathname === `/home/${board._id}`
+                    ? s.activeBoardItem
+                    : ""
+                }`}
+              >
+                <NavLink
+                  to={`/home/${board._id}`}
+                  className={({ isActive }) =>
+                    `${s.link} ${isActive ? s.activeLink : ""}`
+                  }
+                >
                   <div
                     className={s.linkContent}
                     onClick={() => getBoardInfo(board._id)}
