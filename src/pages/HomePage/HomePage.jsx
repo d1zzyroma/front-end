@@ -57,9 +57,6 @@ const HomePage = () => {
         <div className={s.testcont}>
           <Header />
           <ScreensPage />
-          {/* Тут можна використовувати дані користувача */}
-          {user && <div>Привіт, {user.name}!</div>}{" "}
-          {/* Відображення імені користувача */}
         </div>
       </Layout>
     </div>
