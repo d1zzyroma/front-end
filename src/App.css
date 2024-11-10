@@ -60,6 +60,14 @@
   --text-light: rgba(22, 22, 22, 0.5);
 
   --icon-hover: #bedbb0;
+
+  --column-icons: #161616;
+  --column-icons-hover: #bedbb0;
+  --add-card-icon: #fff;
+  --add-icon-wrapper: #161616;
+  --add-column-btn: #fff;
+  --add-column-icon: #fff;
+  --column-icon-wrapper: #161616;
 }
 #root {
   display: flex;
@@ -123,6 +131,14 @@
   --text-light: rgba(255, 255, 255, 0.5);
 
   --icon-hover: #bedbb0;
+
+  --column-icons: #fff;
+  --column-icons-hover: #bedbb0;
+  --add-card-icon: #fff;
+  --add-icon-wrapper: #161616;
+  --add-column-btn: #121212;
+  --add-column-icon: #121212;
+  --column-icon-wrapper: #fff;
 }
 
 /* Для фіолетової теми */
@@ -171,6 +187,14 @@
   --text-light: rgba(22, 22, 22, 0.5);
 
   --icon-hover: #5255bc;
+
+  --column-icons: #161616;
+  --column-icons-hover: #5255bc;
+  --add-card-icon: #161616;
+  --add-icon-wrapper: #fff;
+  --add-column-btn: #fff;
+  --add-column-icon: #fff;
+  --column-icon-wrapper: #5255bc;
 }
 
 .datePicker {

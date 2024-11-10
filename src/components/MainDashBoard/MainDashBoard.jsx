@@ -531,8 +531,8 @@ const MainDashBoard = () => {
                   onClick={() => openModal(index)}
                 >
                   <span className={s.btnWrapper}>
-                    <span className={s.btnIconWrapper}>
-                      <SvgIcon id="icon-plus" className={s.columnIcons} />
+                    <span className={s.addIconWrapper}>
+                      <SvgIcon id="icon-plus" className={s.addCardIcon} />
                     </span>
                     <span>Add another card</span>
                   </span>
@@ -551,8 +551,8 @@ const MainDashBoard = () => {
           {/* Кнопка для додавання нової колонки */}
           <button className={s.addColumnBtn} onClick={openModalAddColumn}>
             <span className={s.btnColumnWrapper}>
-              <span className={s.btnIconWrapper}>
-                <SvgIcon id="icon-plus" className={s.columnIcons} />
+              <span className={s.columnIconWrapper}>
+                <SvgIcon id="icon-plus" className={s.addColumnIcon} />
               </span>
               <span>Add another column</span>
             </span>
