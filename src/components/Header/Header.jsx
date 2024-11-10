@@ -20,6 +20,7 @@ const Header = () => {
 
   const userName = useSelector(selectUserName);
   const userAva = useSelector(selectUserAvatar);
+  console.log(userAva + "avatar from header");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
