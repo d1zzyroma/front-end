@@ -388,7 +388,7 @@ const MainDashBoard = () => {
                             const isDeadlinePassed = currentDate > deadline;
 
                             return (
-                              <div key={cardIndex} className={s.card}>
+                              <div key={cardIndex}>
                                 <Draggable
                                   draggableId={card._id}
                                   index={index}
@@ -399,6 +399,7 @@ const MainDashBoard = () => {
                                       {...provided.dragHandleProps}
                                       {...provided.draggableProps}
                                       ref={provided.innerRef}
+                                      className={s.card}
                                     >
                                       <div
                                         className={s.cardStatusSpanWrapper}
