@@ -521,31 +521,27 @@ const MainDashBoard = () => {
                           <p></p> // Повідомлення при відсутності карток
                         )}
                       </div>
-
-                      {/* Кнопка для додавання картки */}
-                      <button
-                        className={s.addCardBtn}
-                        onClick={() => openModal(index)}
-                      >
-                        <span className={s.btnWrapper}>
-                          <span className={s.btnIconWrapper}>
-                            <SvgIcon id="icon-plus" className={s.columnIcons} />
-                          </span>
-                          <span>Add another card</span>
-                        </span>
-                      </button>
-
-                      {/* Модальні вікна для додавання і редагування карток */}
-                      {openModalIndex === index && (
-                        <AddCardForm
-                          closeModal={closeModal}
-                          columnId={column._id}
-                        />
-                      )}
                       {provided.placeholder}
                     </div>
                   )}
                 </Droppable>
+                {/* Кнопка для додавання картки */}
+                <button
+                  className={s.addCardBtn}
+                  onClick={() => openModal(index)}
+                >
+                  <span className={s.btnWrapper}>
+                    <span className={s.btnIconWrapper}>
+                      <SvgIcon id="icon-plus" className={s.columnIcons} />
+                    </span>
+                    <span>Add another card</span>
+                  </span>
+                </button>
+
+                {/* Модальні вікна для додавання і редагування карток */}
+                {openModalIndex === index && (
+                  <AddCardForm closeModal={closeModal} columnId={column._id} />
+                )}
               </div>
             ))
           ) : (
