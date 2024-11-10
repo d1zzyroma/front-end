@@ -11,6 +11,7 @@ import {
   loadingColumns,
   selectedBoardInfo,
 } from "../../redux/сolumns/selectors.js";
+import ScreenPageEmpty from "./ScreenPageEmpty.jsx";
 
 // Стилізовані компоненти
 const Container = styled.div`
@@ -135,7 +136,8 @@ const ScreensPage = () => {
       </BoardTitleBox>
 
       {!loadCollumn ? (
-        <MainDashBoard boardId={boardId} />
+        // <MainDashBoard boardId={boardId} />
+        <ScreenPageEmpty />
       ) : (
         <BallTriangle
           height={100}
