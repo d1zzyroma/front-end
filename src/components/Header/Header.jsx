@@ -21,6 +21,10 @@ const Header = () => {
   const userName = useSelector(selectUserName);
   const userAva = useSelector(selectUserAvatar);
 
+  // Log the user data to check
+  console.log("User Name:", userName);
+  console.log("User Avatar:", userAva);
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -63,16 +67,12 @@ const Header = () => {
             </button>
             {isOpen && (
               <div className={s.dropdown}>
-                <ThemeSwitcher
-                  // theme={theme}
-                  // setTheme={setTheme}
-                  closeDropdown={closeDropdown}
-                />
+                <ThemeSwitcher closeDropdown={closeDropdown} />
               </div>
             )}
           </div>
           <div className={s.divUser}>
-            <p className={s.p}>{userName}</p>
+            <p className={s.p}>{userName || "Guest"}</p>
 
             <div className={s.divImg}>
               <button
@@ -80,8 +80,6 @@ const Header = () => {
                 type="button"
                 onClick={openEditProfile}
               >
-                {/* {userName} */}
-
                 <img
                   src={userAva || userAvaDefault}
                   alt="avatar"
