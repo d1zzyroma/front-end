@@ -72,6 +72,11 @@ const BoardTitle = styled.h2`
   letter-spacing: -0.02em;
   color: var(--text-primary);
 
+  padding: ${({ hasBackground }) => (hasBackground ? "10px" : "none")};
+  border-radius: ${({ hasBackground }) => (hasBackground ? "8px" : "none")};
+  background-color: ${({ hasBackground }) =>
+    hasBackground ? "var(--background-paper)" : "transparent"};
+
   @media screen and (min-width: 765px) {
     font-size: 18px;
   }
@@ -83,6 +88,11 @@ const FilterBox = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+
+  padding: ${({ hasBackground }) => (hasBackground ? "10px" : "none")};
+  border-radius: ${({ hasBackground }) => (hasBackground ? "8px" : "none")};
+  background-color: ${({ hasBackground }) =>
+    hasBackground ? "var(--background-paper)" : "transparent"};
 `;
 
 const FilterText = styled.h3`
@@ -127,8 +137,13 @@ const ScreensPage = () => {
       mobile={selectedBackground?.mobile}
     >
       <BoardTitleBox>
-        <BoardTitle>{boardInfo.title}</BoardTitle>
-        <FilterBox onClick={openModal}>
+        <BoardTitle hasBackground={Boolean(selectedBackground)}>
+          {boardInfo.title}
+        </BoardTitle>
+        <FilterBox
+          onClick={openModal}
+          hasBackground={Boolean(selectedBackground)}
+        >
           <FilterIcon id="icon-filter" />
           <FilterText>Filters</FilterText>
         </FilterBox>
