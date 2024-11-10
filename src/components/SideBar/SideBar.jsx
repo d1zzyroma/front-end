@@ -14,10 +14,11 @@ import { selectBoards } from "../../redux/boards/selectors.js";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { getBoardById } from "../../redux/сolumns/operations.js";
 import EditBoard from "../EditBoard/EditBoard.jsx";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const isSideBarVisible = useSelector(selectSideBarVisibility);
-
+  const navigate = useNavigate();
   const handleClose = () => {
     dispatch(toggleSideBar());
   };
@@ -29,6 +30,7 @@ const SideBar = () => {
       const firstBoardId = boards[0]._id;
 
       dispatch(getBoardById(firstBoardId));
+      navigate(`/home/${firstBoardId}`);
     }
   }, []);
   const dispatch = useDispatch();
