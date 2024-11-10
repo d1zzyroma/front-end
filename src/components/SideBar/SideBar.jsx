@@ -30,7 +30,7 @@ const SideBar = () => {
       const firstBoardId = boards[0]._id;
 
       dispatch(getBoardById(firstBoardId));
-      navigate(`/home/${firstBoardId}`);
+      navigate(`/home/${boards[0].title}`);
     }
   }, []);
   const dispatch = useDispatch();
@@ -92,13 +92,13 @@ const SideBar = () => {
               <li
                 key={board._id}
                 className={`${s.boardItem} ${
-                  location.pathname === `/home/${board._id}`
+                  location.pathname === `/home/${board.title}`
                     ? s.activeBoardItem
                     : ""
                 }`}
               >
                 <NavLink
-                  to={`/home/${board._id}`}
+                  to={`/home/${board.title}`}
                   className={({ isActive }) =>
                     `${s.link} ${isActive ? s.activeLink : ""}`
                   }

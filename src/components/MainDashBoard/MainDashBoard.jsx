@@ -254,7 +254,7 @@ import EllipsisText from "react-ellipsis-text";
 import AddCardForm from "../AddCard/AddCard.jsx";
 import EditCardForm from "../EditCard/EditCard.jsx";
 import AddColumnForm from "../AddColumnForm/AddColumnForm.jsx";
-import { useParams } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import { allColumnsByBoard } from "../../redux/сolumns/selectors.js";
 import { deleteColumn } from "../../redux/сolumns/operations.js";
@@ -264,8 +264,9 @@ import ChangeColumn from "./ChangeColumn/ChangeColumn.jsx";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 // Компонент основної дошки для управління колонками та картками
-const MainDashBoard = () => {
-  const { boardId } = useParams();
+const MainDashBoard = ({ boardId }) => {
+  // const { boardId } = useParams();
+
   const dispatch = useDispatch();
 
   // Параметри для пріоритетів карток

@@ -3,6 +3,7 @@ export const allColumnsByBoard = (state) => state.columns.columns;
 
 export const selectedBoardInfo = (state) => state.columns.selectedBoard;
 
+export const selectedBoardId = (state) => state.columns.selectedBoard._id;
 export const loadingColumns = (state) => state.columns.loading;
 // Отримання певної колонки за її _id
 export const selectColumnById = (state, columnId) => {
