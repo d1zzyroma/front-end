@@ -21,6 +21,7 @@
 .btn {
   width: 100%;
   display: flex;
+  gap: 8px;
   justify-content: space-between;
   align-items: center;
   color: var(--text-primary);
@@ -31,7 +32,14 @@
 
   &:hover {
     color: var(--hover-modal-btn);
-    .icon {
+    .columnIcons {
+      stroke: var(--hover-modal-btn);
+    }
+  }
+
+  &:active {
+    color: var(--hover-modal-btn);
+    .columnIcons {
       stroke: var(--hover-modal-btn);
     }
   }

@@ -136,9 +136,9 @@ const ScreensPage = () => {
       </BoardTitleBox>
 
       {!loadCollumn ? (
-        // <MainDashBoard boardId={boardId} />
-        <ScreenPageEmpty />
+        <MainDashBoard boardId={boardId} />
       ) : (
+        // <ScreenPageEmpty />
         <BallTriangle
           height={100}
           width={100}
