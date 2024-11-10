@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { taskProApi, setAuthHeader } from "../../config/taskProApi";
+import { toast } from "react-toastify";
 
 // Додати борд
 export const addBoard = createAsyncThunk(
@@ -17,8 +18,38 @@ export const addBoard = createAsyncThunk(
       console.log(data);
 
       const response = await taskProApi.post("/boards", data);
+
+      toast.success(
+              'The board is created!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return response.data;
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -42,8 +73,38 @@ export const updateBoard = createAsyncThunk(
         `/boards/${boardId}`,
         editedBoardObject
       );
+
+      toast.success(
+              'Board updated!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return response.data;
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -65,8 +126,38 @@ export const deleteBoard = createAsyncThunk(
       // console.log(boardId);
 
       await taskProApi.delete(`/boards/${boardId}`);
+
+      toast.success(
+              'The board is removed!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return boardId; // повертаємо ID для видалення
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+      
       return thunkAPI.rejectWithValue(error.message);
     }
   }

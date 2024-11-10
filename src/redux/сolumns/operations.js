@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setAuthHeader, taskProApi } from "../../config/taskProApi";
+import { toast } from "react-toastify";
 
 // GET Отримати колонки борда за ID
 export const getBoardById = createAsyncThunk(
@@ -31,8 +32,37 @@ export const addColumn = createAsyncThunk(
         title,
       });
 
+       toast.success(
+              'Column created!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+            );
+
       return response.data;
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      );
+      
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -46,8 +76,38 @@ export const updateColumn = createAsyncThunk(
 
     try {
       const response = await taskProApi.patch(`/columns/${columnId}`, dataSend);
+
+      toast.success(
+              'Column updated!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      );
+      
       return response.data;
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      );
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -59,8 +119,38 @@ export const deleteColumn = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       await taskProApi.delete(`/columns/${id}`);
+
+      toast.success(
+              'Column removed!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      );
+
       return id; // Повертаємо ID для видалення з локального стану
     } catch (error) {
+
+       toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      );
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
