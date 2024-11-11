@@ -103,6 +103,7 @@ const AddCardForm = ({ closeModal, columnId }) => {
                     placeholderText="Select Date"
                     dateFormat="EEEE, MMMM dd"
                     minDate={startDate}
+                    value={startDate}
                     showPopperArrow={false}
                     onFocus={(e) => e.target.blur()}
                     onKeyDown={(e) => e.preventDefault()}

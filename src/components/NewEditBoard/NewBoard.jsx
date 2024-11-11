@@ -9,7 +9,7 @@ import icons from "../../images/icons/icons.js";
 import backgrounds from "../../images/background/background.js";
 
 export const NewBoard = ({ closeModal }) => {
-  const [iconsSelected, setIconsSelected] = useState("icon-Project");
+  const [iconsSelected, setIconsSelected] = useState("Project");
   const [backgroundSelected, setBackgroundSelected] = useState("0"); // Изменили на null
   const [title, setTitle] = useState("");
 
