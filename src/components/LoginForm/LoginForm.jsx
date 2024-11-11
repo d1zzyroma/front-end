@@ -117,7 +117,7 @@ const LoginForm = () => {
         )}
       </Formik>
 
-      <GoogleLogin
+      {/* <GoogleLogin
         onSuccess={(response) => {
           console.log(response);
           const data = response.credential;
@@ -125,7 +125,7 @@ const LoginForm = () => {
           dispatch(googleLogIn(data));
         }}
         onError={() => console.log("Login Failed")}
-      />
+      /> */}
     </div>
   );
 };
