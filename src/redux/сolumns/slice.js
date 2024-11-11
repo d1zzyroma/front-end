@@ -83,6 +83,7 @@ const columnsSlice = createSlice({
         if (column) {
           column.cards.push(action.payload.data); // Додаємо картку в колонку
         }
+        state.allColumns = state.columns;
       })
 
       .addCase(updateCard.fulfilled, (state, action) => {
