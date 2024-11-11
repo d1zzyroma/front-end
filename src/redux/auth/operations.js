@@ -204,9 +204,19 @@ export const updateUserProfile = createAsyncThunk(
       if (credentials.avatarUrl) {
         formData.append("avatar", credentials.avatarUrl); // додавання файлу
       }
-      formData.append("name", credentials.name);
-      formData.append("email", credentials.email);
-      formData.append("password", credentials.password);
+      if (credentials.name) {
+        formData.append("name", credentials.name);
+      }
+      if (credentials.email) {
+        formData.append("email", credentials.email);
+      }
+      if (credentials.password) {
+        formData.append("password", credentials.password);
+      }
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+      // console.log(formData);
 
       // Відправка даних з заголовком для форм
       const res = await taskProApi.patch("user/profile", formData, {
