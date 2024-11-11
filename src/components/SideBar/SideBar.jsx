@@ -14,10 +14,11 @@ import { selectBoards } from "../../redux/boards/selectors.js";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { getBoardById } from "../../redux/сolumns/operations.js";
 import EditBoard from "../EditBoard/EditBoard.jsx";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const isSideBarVisible = useSelector(selectSideBarVisibility);
-
+  const navigate = useNavigate();
   const handleClose = () => {
     dispatch(toggleSideBar());
   };
@@ -29,6 +30,7 @@ const SideBar = () => {
       const firstBoardId = boards[0]._id;
 
       dispatch(getBoardById(firstBoardId));
+      navigate(`/home/${boards[0].title}`);
     }
   }, []);
   const dispatch = useDispatch();
@@ -90,13 +92,13 @@ const SideBar = () => {
               <li
                 key={board._id}
                 className={`${s.boardItem} ${
-                  location.pathname === `/home/${board._id}`
+                  location.pathname === `/home/${board.title}`
                     ? s.activeBoardItem
                     : ""
                 }`}
               >
                 <NavLink
-                  to={`/home/${board._id}`}
+                  to={`/home/${board.title}`}
                   className={({ isActive }) =>
                     `${s.link} ${isActive ? s.activeLink : ""}`
                   }

@@ -20,6 +20,7 @@ const Header = () => {
 
   const userName = useSelector(selectUserName);
   const userAva = useSelector(selectUserAvatar);
+  console.log(userAva + "avatar from header");
 
   // Log the user data to check
   console.log("User Name:", userName);

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { taskProApi } from "../../config/taskProApi";
+import { toast } from "react-toastify";
 
 // POST cards - Додає нову картку до дошки з ідентифікатором boardId. Дані картки передаються в data.
 export const addCard = createAsyncThunk(
@@ -10,8 +11,38 @@ export const addCard = createAsyncThunk(
     console.log(data);
     try {
       const response = await taskProApi.post(`/cards/${columnId}`, data);
+
+      toast.success(
+              'The card is created!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return response.data;
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -26,8 +57,38 @@ export const updateCard = createAsyncThunk(
 
     try {
       const response = await taskProApi.patch(`/cards/${cardId}`, data);
+
+      toast.success(
+              'Card updated!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return response.data;
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -39,8 +100,38 @@ export const deleteCard = createAsyncThunk(
   async (cardId, thunkAPI) => {
     try {
       await taskProApi.delete(`/cards/${cardId}`);
+
+      toast.success(
+              'Card removed!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return cardId; // Повертаємо ID для видалення з локального стану
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -70,9 +161,38 @@ export const replaceCard = createAsyncThunk(
 
       const response = await taskProApi.patch(`/cards/replace/${cardId}`, data);
 
+      toast.success(
+              'Card moved!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+
       // Додаємо старий columnId до об'єкта, щоб передати його в slice
       return { ...response.data, oldColumnId: columnId };
     } catch (error) {
+
+      toast.error(
+              'Error, please try again later!',
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+              }
+      ); 
+      
       return thunkAPI.rejectWithValue(error.message);
     }
   }

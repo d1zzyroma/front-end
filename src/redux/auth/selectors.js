@@ -1,4 +1,4 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from "@reduxjs/toolkit";
 export const selectAuthState = (state) => state.auth;
 
 // Вказує, чи є користувач увійшовим в систему. Повертає булеве значення (true або false).
@@ -8,34 +8,22 @@ export const selectIsLoggedIn = createSelector(
 );
 
 // Вибирає інформацію про користувача з стану аутентифікації. Повертає об'єкт user, що містить дані про поточного користувача.
-export const selectUser = createSelector(
-  selectAuthState,
-  (auth) => auth.user
-);
+export const selectUser = createSelector(selectAuthState, (auth) => auth.user);
 
 // Використовує selectUser для отримання імені користувача. Повертає значення name з об'єкта user.
-export const selectUserName = createSelector(
-  selectUser,
-  (user) => user.name
-);
+export const selectUserName = createSelector(selectUser, (user) => user.name);
 
 // Для отримання електронної пошти користувача. Повертає значення email з об'єкта user.
-export const selectUserEmail = createSelector(
-  selectUser,
-  (user) => user.email
-);
+export const selectUserEmail = createSelector(selectUser, (user) => user.email);
 
 // Для отримання URL-адреси аватара користувача. Повертає значення avatar з об'єкта user.
 export const selectUserAvatar = createSelector(
   selectUser,
-  (user) => user.avatar
+  (user) => user.avatarURL
 );
 
 // Для отримання теми, яку обрав користувач. Повертає значення theme з об'єкта user.
-export const selectUserTheme = createSelector(
-  selectUser,
-  (user) => user.theme
-);
+export const selectUserTheme = createSelector(selectUser, (user) => user.theme);
 
 // Для отримання токена авторизації. Повертає значення token, яке використовується для аутентифікації запитів до API.
 export const selectToken = createSelector(
