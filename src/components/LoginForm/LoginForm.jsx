@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logIn, userCurrent } from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
 import { GoogleLogin } from "@react-oauth/google";
-
+import { useGoogleLogin } from "@react-oauth/google";
 // Валідація
 const loginSchema = yup.object().shape({
   email: yup
@@ -51,6 +51,11 @@ const LoginForm = () => {
       setSubmitting(false);
     }
   };
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => console.log(codeResponse),
+    flow: "auth-code",
+  });
 
   return (
     <div className={s.cont}>
@@ -107,6 +112,7 @@ const LoginForm = () => {
           </Form>
         )}
       </Formik>
+
       <GoogleLogin
         onSuccess={(response) => console.log(response)}
         onError={() => console.log("Login Failed")}
