@@ -5,32 +5,35 @@ import { updateUserProfile } from "../../redux/auth/operations.js";
 import {
   selectUserName,
   selectUserAvatar,
+  selectUserEmail,
 } from "../../redux/auth/selectors.js";
 import userAvaDefault from "../../images/user.png";
 import s from "./EditProfile.module.css";
 import icons from "../../images/icons/icons.svg";
 
-const EditProfile = ({ onClose, initialEmail = "" }) => {
+const EditProfile = ({ onClose }) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const userAva = useSelector(selectUserAvatar);
+  const userEmail = useSelector(selectUserEmail);
 
   const [showPassword, setShowPassword] = useState(false);
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
-  const [name, setName] = useState(userName || ""); // Ініціалізація з Redux або пустим рядком
-  const [email, setEmail] = useState(initialEmail || ""); // Ініціалізація email
-  const [isLoading, setIsLoading] = useState(false); // Додаємо стан для лоудера
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Оновлюємо аватарку лише в разі зміни userAva
+    setName(userName || "");
+    setEmail(userEmail || "");
     setAvatarPreview(userAva || userAvaDefault);
-  }, [userAva]);
+  }, [userName, userEmail, userAva]);
 
   const handleAvatarChange = (event) => {
     const file = event.currentTarget.files[0];
     setAvatarFile(file);
-    setAvatarPreview(file ? URL.createObjectURL(file) : null); // Показуємо попередній перегляд
+    setAvatarPreview(file ? URL.createObjectURL(file) : null);
   };
 
   const togglePasswordVisibility = () => {
@@ -41,21 +44,17 @@ const EditProfile = ({ onClose, initialEmail = "" }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const updatedFields = {};
+    const updatedFields = {
+      name: name || userName,
+      email: email || userEmail,
+    };
 
-    if (name && name !== userName) updatedFields.name = name;
-    if (email && email !== initialEmail) updatedFields.email = email;
     if (avatarFile) updatedFields.avatarUrl = avatarFile;
 
-    if (Object.keys(updatedFields).length > 0) {
-      dispatch(updateUserProfile(updatedFields)).finally(() => {
-        setIsLoading(false);
-        onClose();
-      });
-    } else {
+    dispatch(updateUserProfile(updatedFields)).finally(() => {
       setIsLoading(false);
       onClose();
-    }
+    });
   };
 
   return (
@@ -105,7 +104,7 @@ const EditProfile = ({ onClose, initialEmail = "" }) => {
                 type="text"
                 name="name"
                 value={name}
-                onChange={(e) => setName(e.target.value)} // Обробка зміни імені
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Name"
               />
             </label>
@@ -115,7 +114,7 @@ const EditProfile = ({ onClose, initialEmail = "" }) => {
                 type="email"
                 name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)} // Обробка зміни email
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
               />
             </label>
@@ -154,8 +153,6 @@ const EditProfile = ({ onClose, initialEmail = "" }) => {
 
 EditProfile.propTypes = {
   onClose: PropTypes.func.isRequired,
-  initialName: PropTypes.string,
-  initialEmail: PropTypes.string,
 };
 
 export default EditProfile;
