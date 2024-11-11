@@ -4,7 +4,11 @@ import s from "./LoginForm.module.css";
 import icons from "../../images/icons/icons.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logIn, userCurrent } from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
+import {
+  googleLogIn,
+  logIn,
+  userCurrent,
+} from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
 import { GoogleLogin } from "@react-oauth/google";
 import { useGoogleLogin } from "@react-oauth/google";
 // Валідація
@@ -114,7 +118,11 @@ const LoginForm = () => {
       </Formik>
 
       <GoogleLogin
-        onSuccess={(response) => console.log(response)}
+        onSuccess={(response) => {
+          console.log(response);
+          const credentials = { code: response.credential };
+          dispatch(googleLogIn(credentials));
+        }}
         onError={() => console.log("Login Failed")}
       />
     </div>

@@ -316,3 +316,42 @@ export const needHelp = createAsyncThunk(
     }
   }
 );
+export const googleLogIn = createAsyncThunk(
+  "auth/googleLogin",
+  async (credentials, thunkAPI) => {
+    try {
+      const res = await taskProApi.post("/auth/verify-oauth", credentials);
+      setAuthHeader(res.data.data.accessToken);
+
+      setTimeout(() => {
+        toast.success(`${res.data.data.user.name}, welcome to TaskPro! 🚀`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
+      }, 1000);
+
+      return res.data;
+    } catch (error) {
+      setTimeout(() => {
+        toast.error("Incorrect email or password. Please try again.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
+      }, 1000);
+
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
