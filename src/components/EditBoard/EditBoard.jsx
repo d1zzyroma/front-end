@@ -10,8 +10,8 @@ import backgrounds from "../../images/background/background.js";
 import { getBoardById } from "../../redux/сolumns/operations.js";
 
 export const EditBoard = ({ closeEditBoard, boardId }) => {
-  const [iconsSelected, setIconsSelected] = useState("icon-Project");
-  const [backgroundSelected, setBackgroundSelected] = useState("1"); // Змінюємо на ID як в NewBoard
+  const [iconsSelected, setIconsSelected] = useState("Project");
+  const [backgroundSelected, setBackgroundSelected] = useState("0"); // Змінюємо на ID як в NewBoard
   const [title, setTitle] = useState("");
 
   const dispatch = useDispatch();

@@ -4,7 +4,11 @@ import s from "./LoginForm.module.css";
 import icons from "../../images/icons/icons.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logIn, userCurrent } from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
+import {
+  googleLogIn,
+  logIn,
+  userCurrent,
+} from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
 import { GoogleLogin } from "@react-oauth/google";
 import { useGoogleLogin } from "@react-oauth/google";
 // Валідація
@@ -112,12 +116,14 @@ const LoginForm = () => {
           </Form>
         )}
       </Formik>
+
       <button type="button" className={s.btnGoogleLogin}>
         <svg className={s.iconGoogle}>
           <use href={`${icons}#icon-google`}></use>
         </svg>
         Google
       </button>
+
     </div>
   );
 };

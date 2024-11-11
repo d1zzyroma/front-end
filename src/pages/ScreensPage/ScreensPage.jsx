@@ -77,14 +77,6 @@ const BoardTitle = styled.h2`
   }
 `;
 
-const FilterBox = styled.button`
-  display: flex;
-  gap: 2px;
-  background: none;
-  border: none;
-  cursor: pointer;
-`;
-
 const FilterText = styled.h3`
   font-weight: 500;
   font-size: 14px;
@@ -103,6 +95,22 @@ const FilterIcon = styled(SvgIcon)`
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+`;
+
+const FilterBox = styled.button`
+  display: flex;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover ${FilterText} {
+    color: var(--hover-btn);
+  }
+
+  &:hover ${FilterIcon} {
+    stroke: var(--hover-btn);
+  }
 `;
 
 const ScreensPage = () => {
