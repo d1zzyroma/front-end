@@ -4,9 +4,13 @@ import s from "./LoginForm.module.css";
 import icons from "../../images/icons/icons.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logIn, userCurrent } from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
+import {
+  googleLogIn,
+  logIn,
+  userCurrent,
+} from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
 import { GoogleLogin } from "@react-oauth/google";
-
+import { useGoogleLogin } from "@react-oauth/google";
 // Валідація
 const loginSchema = yup.object().shape({
   email: yup
@@ -51,6 +55,11 @@ const LoginForm = () => {
       setSubmitting(false);
     }
   };
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => console.log(codeResponse),
+    flow: "auth-code",
+  });
 
   return (
     <div className={s.cont}>
@@ -107,10 +116,16 @@ const LoginForm = () => {
           </Form>
         )}
       </Formik>
-      <GoogleLogin
-        onSuccess={(response) => console.log(response)}
+
+      {/* <GoogleLogin
+        onSuccess={(response) => {
+          console.log(response);
+          const data = response.credential;
+          console.log(data);
+          dispatch(googleLogIn(data));
+        }}
         onError={() => console.log("Login Failed")}
-      />
+      /> */}
     </div>
   );
 };
