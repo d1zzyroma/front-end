@@ -194,3 +194,8 @@
   z-index: 999;
   opacity: 0;
 }
+.errorText {
+  color: red;
+  margin-top: -15px;
+  font-size: 12px;
+}

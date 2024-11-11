@@ -193,3 +193,8 @@
   z-index: 999;
   opacity: 0;
 }
+.error {
+  margin-top: -15px;
+  color: red;
+  font-size: 12px;
+}
