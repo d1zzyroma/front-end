@@ -42,7 +42,6 @@
 
   border-radius: 8px;
   max-width: 350px;
-  max-height: 522px;
 }
 .title {
   font-weight: 500;
@@ -137,4 +136,8 @@
 }
 .btntext {
   color: var(--text-selected-day);
+}
+.error {
+  color: red;
+  font-size: 12px;
 }
