@@ -120,9 +120,9 @@ const LoginForm = () => {
       <GoogleLogin
         onSuccess={(response) => {
           console.log(response);
-          const credentials = { code: response.credential };
-          console.log(response);
-          dispatch(googleLogIn(credentials));
+          const code = response.credential;
+          console.log(code);
+          dispatch(googleLogIn(code));
         }}
         onError={() => console.log("Login Failed")}
       />
