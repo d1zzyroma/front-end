@@ -112,11 +112,12 @@ const LoginForm = () => {
           </Form>
         )}
       </Formik>
-
-      <GoogleLogin
-        onSuccess={(response) => console.log(response)}
-        onError={() => console.log("Login Failed")}
-      />
+      <button type="button" className={s.btnGoogleLogin}>
+        <svg className={s.iconGoogle}>
+          <use href={`${icons}#icon-google`}></use>
+        </svg>
+        Google
+      </button>
     </div>
   );
 };
