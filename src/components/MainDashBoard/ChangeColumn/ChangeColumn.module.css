@@ -1,7 +1,7 @@
 .container {
-  /* min-width: 135px; */
+  min-width: 135px;
   /* max-width: 290px; */
-  /* height: 100px; */
+  min-height: 86px;
   padding: 18px;
   background-color: var(--bg-screen);
   position: absolute;
@@ -10,12 +10,13 @@
   z-index: 100;
   border-radius: 8px;
   overflow-y: auto;
+  font-family: "Poppins", sans-serif;
 }
 .list {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
 .btn {
@@ -23,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-size: 14px;
   font-style: normal;
   line-height: normal;
@@ -31,9 +32,7 @@
 
   &:hover {
     color: var(--hover-modal-btn);
-    .icon {
-      stroke: var(--hover-modal-btn);
-    }
+    stroke: var(--hover-modal-btn);
   }
 }
 
@@ -42,6 +41,10 @@
   height: 16px;
   fill: none;
   stroke: var(--text-primary);
+  &:hover {
+    color: var(--hover-modal-btn);
+    stroke: var(--hover-modal-btn);
+  }
 }
 
 /* Стилі для смуги прокрутки */
