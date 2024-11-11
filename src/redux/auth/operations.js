@@ -319,7 +319,7 @@ export const needHelp = createAsyncThunk(
 export const googleLogIn = createAsyncThunk(
   "auth/googleLogin",
   async (data, thunkAPI) => {
-    const code = { code: "4/" + data };
+    const code = { code: data };
     try {
       const res = await taskProApi.post("/auth/verify-oauth", code);
       setAuthHeader(res.data.data.accessToken);
