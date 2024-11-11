@@ -318,7 +318,7 @@ export const needHelp = createAsyncThunk(
 );
 export const googleLogIn = createAsyncThunk(
   "auth/googleLogin",
-  async (code, thunkAPI) => {
+  async ({ code }, thunkAPI) => {
     console.log(code + "operstions google data");
 
     try {
