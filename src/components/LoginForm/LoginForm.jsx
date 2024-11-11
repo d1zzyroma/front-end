@@ -121,6 +121,7 @@ const LoginForm = () => {
         onSuccess={(response) => {
           console.log(response);
           const credentials = { code: response.credential };
+          console.log(response);
           dispatch(googleLogIn(credentials));
         }}
         onError={() => console.log("Login Failed")}
