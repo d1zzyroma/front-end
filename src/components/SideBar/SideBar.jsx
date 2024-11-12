@@ -133,6 +133,7 @@ const SideBar = () => {
                     <EditBoard
                       closeEditBoard={closeEditBoard}
                       boardId={board._id}
+                      boardTitle={board.title}
                     />
                   </div>
                 )}
@@ -141,6 +142,11 @@ const SideBar = () => {
           </ul>
         </div>
         <div>
+          {isAddBoardOpen && (
+            <div>
+              <NewBoard closeModal={closeAddBoard} userId={userId._id} />
+            </div>
+          )}
           <div className={s.needHelpContainer}>
             <img src={cactusImg} className={s.cactus} />
             <p className={s.needHelpText}>
@@ -163,11 +169,6 @@ const SideBar = () => {
             Log out
           </button>
         </div>
-        {isAddBoardOpen && (
-          <div>
-            <NewBoard closeModal={closeAddBoard} userId={userId._id} />
-          </div>
-        )}
       </div>
     </>
   );

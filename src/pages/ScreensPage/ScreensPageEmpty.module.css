@@ -1,0 +1,19 @@
+.container {
+  font-family: "Poppins", sans-serif;
+  margin-top: 281px;
+  margin-left: 370px;
+  margin-right: 370px;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.coloredText {
+  color: var(--modal-btn);
+}

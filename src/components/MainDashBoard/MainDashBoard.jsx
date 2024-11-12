@@ -49,7 +49,6 @@
 //   };
 
 //   const closeEditColumn = () => {
-//     console.log("zbs");
 
 //     setEditColumnId(null);
 //   };
@@ -325,7 +324,6 @@ const MainDashBoard = ({ boardId }) => {
       };
       //source , staryii id
       //destination newId
-      console.log(payload);
 
       dispatch(replaceCard(payload));
     }
@@ -365,15 +363,14 @@ const MainDashBoard = ({ boardId }) => {
                             />
                           </button>
                         </div>
-                        {editColumnId === column._id && (
-                          <EditColumnForm
-                            title={column.title}
-                            closeModal={closeEditColumn}
-                            columnId={column._id}
-                          />
-                        )}
                       </div>
-
+                      {editColumnId === column._id && (
+                        <EditColumnForm
+                          title={column.title}
+                          closeModal={closeEditColumn}
+                          columnId={column._id}
+                        />
+                      )}
                       {/* Список карток в колонці */}
                       <div className={s.cardList}>
                         {column.cards && column.cards.length > 0 ? (

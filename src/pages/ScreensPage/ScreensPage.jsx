@@ -5,13 +5,13 @@ import MainDashBoard from "../../components/MainDashBoard/MainDashBoard.jsx";
 import SvgIcon from "../../components/SvgIcon/SvgIcon.jsx";
 import Filter from "../../components/Filters/Filters.jsx";
 import { useSelector } from "react-redux";
-import { BallTriangle } from "react-loader-spinner";
+
 import backgrounds from "../../images/background/background.js";
 import {
-  loadingColumns,
   selectedBoardId,
   selectedBoardInfo,
 } from "../../redux/сolumns/selectors.js";
+import ScreenPageEmpty from "./ScreenPageEmpty.jsx";
 
 // Стилізовані компоненти
 const Container = styled.div`
@@ -72,9 +72,27 @@ const BoardTitle = styled.h2`
   letter-spacing: -0.02em;
   color: var(--text-primary);
 
+  padding: ${({ hasBackground }) => (hasBackground ? "10px" : "none")};
+  border-radius: ${({ hasBackground }) => (hasBackground ? "8px" : "none")};
+  background-color: ${({ hasBackground }) =>
+    hasBackground ? "var(--background-paper)" : "transparent"};
+
   @media screen and (min-width: 765px) {
     font-size: 18px;
   }
+`;
+
+const FilterBox = styled.button`
+  display: flex;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  padding: ${({ hasBackground }) => (hasBackground ? "10px" : "none")};
+  border-radius: ${({ hasBackground }) => (hasBackground ? "8px" : "none")};
+  background-color: ${({ hasBackground }) =>
+    hasBackground ? "var(--background-paper)" : "transparent"};
 `;
 
 const FilterText = styled.h3`
@@ -97,26 +115,26 @@ const FilterIcon = styled(SvgIcon)`
   transition: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 `;
 
-const FilterBox = styled.button`
-  display: flex;
-  gap: 2px;
-  background: none;
-  border: none;
-  cursor: pointer;
+// const FilterBox = styled.button`
+//   display: flex;
+//   gap: 2px;
+//   background: none;
+//   border: none;
+//   cursor: pointer;
 
-  &:hover ${FilterText} {
-    color: var(--hover-btn);
-  }
+//   &:hover ${FilterText} {
+//     color: var(--hover-btn);
+//   }
 
-  &:hover ${FilterIcon} {
-    stroke: var(--hover-btn);
-  }
-`;
+//   &:hover ${FilterIcon} {
+//     stroke: var(--hover-btn);
+//   }
+// `;
 
 const ScreensPage = () => {
   // const { boardId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const loadCollumn = useSelector(loadingColumns);
+  const loadCollumn = useSelector(selectedBoardInfo);
   const boardInfo = useSelector(selectedBoardInfo);
   const boardId = useSelector(selectedBoardId);
   const openModal = () => setIsModalOpen(true);
@@ -135,25 +153,22 @@ const ScreensPage = () => {
       mobile={selectedBackground?.mobile}
     >
       <BoardTitleBox>
-        <BoardTitle>{boardInfo.title}</BoardTitle>
-        <FilterBox onClick={openModal}>
+        <BoardTitle hasBackground={Boolean(selectedBackground)}>
+          {boardInfo.title}
+        </BoardTitle>
+        <FilterBox
+          onClick={openModal}
+          hasBackground={Boolean(selectedBackground)}
+        >
           <FilterIcon id="icon-filter" />
           <FilterText>Filters</FilterText>
         </FilterBox>
         {isModalOpen && <Filter closeModal={closeModal} />}
       </BoardTitleBox>
-
-      {!loadCollumn ? (
+      {loadCollumn && Object.keys(loadCollumn).length > 0 ? (
         <MainDashBoard boardId={boardId} />
       ) : (
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#4fa94d"
-          ariaLabel="ball-triangle-loading"
-          visible={true}
-        />
+        <ScreenPageEmpty />
       )}
     </Container>
   );

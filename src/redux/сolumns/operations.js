@@ -139,10 +139,6 @@ export const filterCardsByPriority = createAsyncThunk(
   async ({ priority }, { getState }) => {
     const state = getState();
     const { allColumns } = state.columns;
-    console.log(allColumns + "all columns");
-
-    console.log(priority + "priority");
-    console.log(state + "state");
 
     // Фільтруємо картки в колонках на основі пріоритету
     if (priority === "all") {
@@ -152,7 +148,6 @@ export const filterCardsByPriority = createAsyncThunk(
         ...column,
         cards: column.cards.filter((card) => card.priority === priority),
       }));
-      console.log(filteredColumns);
 
       return filteredColumns;
     }

@@ -43,6 +43,7 @@ const columnsSlice = createSlice({
         state.selectedBoard = {};
       })
       .addCase(addBoard.fulfilled, (state, action) => {
+        state.columns = [];
         state.selectedBoard = action.payload.data;
       })
       // Додавання нової колонки
@@ -121,11 +122,6 @@ const columnsSlice = createSlice({
             column.cards.splice(cardIndex, 1);
           }
         });
-
-        console.log(
-          "Обновлённое состояние колонок:",
-          JSON.stringify(state.columns, null, 2)
-        );
       })
       .addCase(filterCardsByPriority.fulfilled, (state, action) => {
         state.columns = action.payload;
