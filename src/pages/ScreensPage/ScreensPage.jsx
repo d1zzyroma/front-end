@@ -116,21 +116,21 @@ const FilterIcon = styled(SvgIcon)`
   transition: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 `;
 
-const FilterBox = styled.button`
-  display: flex;
-  gap: 2px;
-  background: none;
-  border: none;
-  cursor: pointer;
+// const FilterBox = styled.button`
+//   display: flex;
+//   gap: 2px;
+//   background: none;
+//   border: none;
+//   cursor: pointer;
 
-  &:hover ${FilterText} {
-    color: var(--hover-btn);
-  }
+//   &:hover ${FilterText} {
+//     color: var(--hover-btn);
+//   }
 
-  &:hover ${FilterIcon} {
-    stroke: var(--hover-btn);
-  }
-`;
+//   &:hover ${FilterIcon} {
+//     stroke: var(--hover-btn);
+//   }
+// `;
 
 const ScreensPage = () => {
   // const { boardId } = useParams();
