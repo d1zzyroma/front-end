@@ -44,12 +44,12 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(googleLogIn.fulfilled, (state, action) => {
-        const { name, email, avatar, theme, accessToken } = action.payload.data;
-        state.user = { name, email, avatar, theme };
+        const { accessToken } = action.payload.data;
+        // state.user = { name, email, avatar, theme };
 
         state.token = accessToken;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
+        // state.isLoggedIn = true;
+        // state.isRefreshing = false;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = initialState.user;

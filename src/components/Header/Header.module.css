@@ -58,14 +58,14 @@
   width: 100px;
   height: 107px;
   padding: 18px 44px 18px 18px;
-  top: 100%; /* Позиціонує меню прямо під кнопкою */
+  top: 100%;
   left: 0;
   background-color: var(--background-paper);
 
   border: 1px solid var(--primary-main);
   border-radius: 8px;
   box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.1);
-  z-index: 1000; /* Забезпечує, щоб меню було поверх інших елементів */
+  z-index: 1000;
 }
 
 .mobileMenu {
@@ -81,7 +81,7 @@
   gap: 14px;
 }
 .divLabel {
-  position: relative; /* Контейнер для абсолютного позиціонування випадаючого меню */
+  position: relative;
   display: flex;
 }
 
@@ -104,7 +104,6 @@
 .divImg {
   width: 32px;
   height: 32px;
-  /* background-color: var(--label-blue); */
 }
 
 @media screen and (min-width: 768px) {
