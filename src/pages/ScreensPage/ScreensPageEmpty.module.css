@@ -1,14 +1,14 @@
 .container {
   font-family: "Poppins", sans-serif;
-  margin-top: 281px;
-  margin-left: 370px;
-  margin-right: 370px;
+  margin-top: 292px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .text {
   font-weight: 400;
-  font-size: 14px;
-  line-height: 129%;
+  font-size: 12px;
+  line-height: 133%;
   letter-spacing: -0.02em;
   text-align: center;
   color: var(--text-secondary);
@@ -16,4 +16,25 @@
 
 .coloredText {
   color: var(--modal-btn);
+}
+
+@media screen and (min-width: 765px) {
+  .container {
+    margin-top: 408px;
+    margin-left: 141px;
+    margin-right: 141px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 129%;
+  }
+}
+
+@media screen and (min-width: 1439px) {
+  .container {
+    margin-top: 281px;
+    margin-left: 347px;
+    margin-right: 347px;
+  }
 }
