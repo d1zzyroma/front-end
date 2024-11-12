@@ -17,10 +17,10 @@ const AddCardForm = ({ closeModal, columnId }) => {
 
   const startDate = Date.now();
   const validationSchema = Yup.object({
-    title: Yup.string().required("Title is required"),
+    title: Yup.string().min(3).required("Title is required"),
     description: Yup.string().required("Description is required"),
-    labelColor: Yup.string().required("Color is required"),
-    deadline: Yup.date().required("Deadline is required"),
+    labelColor: Yup.string(),
+    deadline: Yup.date(),
   });
 
   const dispatch = useDispatch();
