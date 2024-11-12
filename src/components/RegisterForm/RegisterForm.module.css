@@ -106,7 +106,7 @@
 }
 .icon:hover,
 .icon:focus {
-  fill: white;
+  /* fill: white; */
 }
 
 @media (min-width: 375px) {
