@@ -20,7 +20,7 @@ const ChangeColumn = ({ closeEditColumn, columnId, cardId }) => {
       <ul className={css.list}>
         {newColumns.length !== 0
           ? newColumns.map((el) => (
-              <li key={el._id}>
+              <li key={el._id} className={css.buttonWrapper}>
                 <button
                   className={css.btn}
                   onClick={() => {
@@ -37,12 +37,13 @@ const ChangeColumn = ({ closeEditColumn, columnId, cardId }) => {
                     closeEditColumn(null);
                   }}
                 >
-                  {el.title}
+                  <p>{el.title}</p>
                   <SvgIcon
                     id="icon-arrow-circle-broken-right"
                     className={css.columnIcons}
                   />
                 </button>
+
                 {/* {isMenuOpen && openMenuId === el._id && (
                   <div className={css.menu}>
                     <p>Вміст меню для {el.title}</p>
