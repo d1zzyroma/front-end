@@ -43,6 +43,7 @@ const columnsSlice = createSlice({
         state.selectedBoard = {};
       })
       .addCase(addBoard.fulfilled, (state, action) => {
+        state.columns = [];
         state.selectedBoard = action.payload.data;
       })
       // Додавання нової колонки
