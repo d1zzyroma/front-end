@@ -57,7 +57,17 @@ const LoginForm = () => {
   };
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => console.log(codeResponse),
+    onSuccess: async (response) => {
+      try {
+        const data = response.credential;
+        await dispatch(googleLogIn(data));
+        await dispatch(userCurrent());
+      } catch (error) {
+        console.error("Login Failed:", error);
+      }
+    },
+    onError: () => console.log("Login Failed"),
+    useOneTap: false,
     flow: "auth-code",
   });
 
@@ -117,14 +127,12 @@ const LoginForm = () => {
         )}
       </Formik>
 
-
-      <button type="button" className={s.btnGoogleLogin}>
+      <button type="button" className={s.btnGoogleLogin} onClick={login}>
         <svg className={s.iconGoogle}>
           <use href={`${icons}#icon-google`}></use>
         </svg>
         Google
       </button>
-
 
       <GoogleLogin
         onSuccess={(response) => {
@@ -136,7 +144,6 @@ const LoginForm = () => {
         useOneTap={false} // вимикає One Tap, щоб спрацювала auth-code
         flow="auth-code" // використовує auth-code flow для отримання authorization code
       />
-
     </div>
   );
 };
