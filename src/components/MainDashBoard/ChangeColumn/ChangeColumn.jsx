@@ -24,14 +24,6 @@ const ChangeColumn = ({ closeEditColumn, columnId, cardId }) => {
                 <button
                   className={css.btn}
                   onClick={() => {
-                    console.log(
-                      columnId +
-                        " Old column" +
-                        el._id +
-                        " New column" +
-                        cardId +
-                        " CardId"
-                    );
                     const newColumnId = el._id;
                     dispatch(replaceCard({ cardId, newColumnId, columnId }));
                     closeEditColumn(null);

@@ -5,10 +5,9 @@ import MainDashBoard from "../../components/MainDashBoard/MainDashBoard.jsx";
 import SvgIcon from "../../components/SvgIcon/SvgIcon.jsx";
 import Filter from "../../components/Filters/Filters.jsx";
 import { useSelector } from "react-redux";
-import { BallTriangle } from "react-loader-spinner";
+
 import backgrounds from "../../images/background/background.js";
 import {
-  loadingColumns,
   selectedBoardId,
   selectedBoardInfo,
 } from "../../redux/сolumns/selectors.js";
@@ -135,7 +134,7 @@ const FilterIcon = styled(SvgIcon)`
 const ScreensPage = () => {
   // const { boardId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const loadCollumn = useSelector(loadingColumns);
+  const loadCollumn = useSelector(selectedBoardInfo);
   const boardInfo = useSelector(selectedBoardInfo);
   const boardId = useSelector(selectedBoardId);
   const openModal = () => setIsModalOpen(true);
@@ -166,19 +165,10 @@ const ScreensPage = () => {
         </FilterBox>
         {isModalOpen && <Filter closeModal={closeModal} />}
       </BoardTitleBox>
-
-      {!loadCollumn ? (
+      {loadCollumn && Object.keys(loadCollumn).length > 0 ? (
         <MainDashBoard boardId={boardId} />
       ) : (
-        // <ScreenPageEmpty />
-        <BallTriangle
-          height={100}
-          width={100}
-          radius={5}
-          color="#4fa94d"
-          ariaLabel="ball-triangle-loading"
-          visible={true}
-        />
+        <ScreenPageEmpty />
       )}
     </Container>
   );

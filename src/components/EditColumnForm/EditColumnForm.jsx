@@ -18,7 +18,6 @@ const EditColumnForm = ({ title, columnId, closeModal }) => {
 
   const handleSubmit = (values, { resetForm }) => {
     const { title } = values;
-    console.log(title + "title", columnId + "column id");
 
     dispatch(updateColumn({ columnId, title }));
 

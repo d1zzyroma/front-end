@@ -151,7 +151,7 @@ export const userCurrent = createAsyncThunk(
 
 //     try {
 //       setAuthHeader(persistedToken);
-//       console.log(credentials);
+//
 
 //       // const res = await taskProApi.patch("user/profile", credentials);
 //       const res = await taskProApi.patch("user/profile", credentials, {
@@ -213,10 +213,6 @@ export const updateUserProfile = createAsyncThunk(
       if (credentials.password) {
         formData.append("password", credentials.password);
       }
-      formData.forEach((value, key) => {
-        console.log(`${key}: ${value}`);
-      });
-      // console.log(formData);
 
       // Відправка даних з заголовком для форм
       const res = await taskProApi.patch("user/profile", formData, {

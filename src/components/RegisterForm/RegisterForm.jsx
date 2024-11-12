@@ -48,7 +48,7 @@
 //         initialValues={{ name: "", email: "", password: "" }}
 //         validationSchema={registerSchema}
 //         onSubmit={(values, { setSubmitting }) => {
-//           console.log(values);
+//
 //           dispatch(register(values));
 //           setSubmitting(false);
 //         }}
