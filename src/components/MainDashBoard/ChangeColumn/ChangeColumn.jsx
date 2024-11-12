@@ -43,7 +43,7 @@ const ChangeColumn = ({ closeEditColumn, columnId, cardId }) => {
                 )} */}
               </li>
             ))
-          : "not column"}
+          : "No column"}
       </ul>
     </div>
   );
