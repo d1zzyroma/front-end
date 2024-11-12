@@ -82,3 +82,7 @@ img {
   max-width: 100%;
   height: auto;
 }
+[data-rbd-droppable-context-id="0"] {
+  max-height: 78vh;
+  overflow: hidden;
+}
