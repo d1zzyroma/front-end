@@ -59,6 +59,8 @@ const LoginForm = () => {
   const login = useGoogleLogin({
     onSuccess: async (response) => {
       try {
+        console.log(response);
+
         const data = response.credential;
         await dispatch(googleLogIn(data));
         await dispatch(userCurrent());
