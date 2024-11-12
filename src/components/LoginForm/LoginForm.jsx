@@ -9,7 +9,7 @@ import {
   logIn,
   userCurrent,
 } from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
-import { GoogleLogin, useGoogleOneTapLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { useGoogleLogin } from "@react-oauth/google";
 // Валідація
 const loginSchema = yup.object().shape({
@@ -56,7 +56,7 @@ const LoginForm = () => {
     }
   };
 
-  const login = useGoogleOneTapLogin({
+  const login = useGoogleLogin({
     onSuccess: async (response) => {
       try {
         console.log(response);
@@ -69,8 +69,8 @@ const LoginForm = () => {
       }
     },
     onError: () => console.log("Login Failed"),
-    // useOneTap: true,
-    // flow: "auth-code",
+    useOneTap: false,
+    flow: "implicit",
   });
 
   return (
