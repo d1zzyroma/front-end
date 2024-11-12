@@ -125,6 +125,8 @@ const LoginForm = () => {
           dispatch(googleLogIn(data));
         }}
         onError={() => console.log("Login Failed")}
+        useOneTap={false} // вимикає One Tap, щоб спрацювала auth-code
+        flow="auth-code" // використовує auth-code flow для отримання authorization code
       />
     </div>
   );
