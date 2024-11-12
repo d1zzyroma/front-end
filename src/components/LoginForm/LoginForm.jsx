@@ -56,22 +56,22 @@ const LoginForm = () => {
     }
   };
 
-  const login = useGoogleLogin({
-    onSuccess: async (response) => {
-      try {
-        console.log(response);
+  // const login = useGoogleLogin({
+  //   onSuccess: async (response) => {
+  //     try {
+  //       console.log(response);
 
-        const data = response.credential;
-        await dispatch(googleLogIn(data));
-        await dispatch(userCurrent());
-      } catch (error) {
-        console.error("Login Failed:", error);
-      }
-    },
-    onError: () => console.log("Login Failed"),
-    useOneTap: false,
-    flow: "implicit",
-  });
+  //       const data = response.credential;
+  //       await dispatch(googleLogIn(data));
+  //       await dispatch(userCurrent());
+  //     } catch (error) {
+  //       console.error("Login Failed:", error);
+  //     }
+  //   },
+  //   onError: () => console.log("Login Failed"),
+  //   useOneTap: false,
+  //   flow: "implicit",
+  // });
 
   return (
     <div className={s.cont}>
@@ -129,23 +129,36 @@ const LoginForm = () => {
         )}
       </Formik>
 
-      <button type="button" className={s.btnGoogleLogin} onClick={login}>
+      {/* <button type="button" className={s.btnGoogleLogin} onClick={login}>
         <svg className={s.iconGoogle}>
           <use href={`${icons}#icon-google`}></use>
         </svg>
         Google
-      </button>
+      </button> */}
 
-      <GoogleLogin
-        onSuccess={(response) => {
-          const data = response.credential;
+      <div className={s.btnGoogleLogin}>
+        <GoogleLogin
+          theme="filled_black"
+          onSuccess={async (response) => {
+            try {
+              console.log(response);
 
-          dispatch(googleLogIn(data));
-        }}
-        onError={() => console.log("Login Failed")}
-        useOneTap={false} // вимикає One Tap, щоб спрацювала auth-code
-        flow="auth-code" // використовує auth-code flow для отримання authorization code
-      />
+              const data = response.credential;
+              await dispatch(googleLogIn(data));
+              await dispatch(userCurrent());
+            } catch (error) {
+              console.error("Login Failed:", error);
+            }
+          }}
+          onError={() => console.log("Login Failed")}
+          useOneTap={false} // вимикає One Tap, щоб спрацювала auth-code
+          logo_alignment="center"
+          shape="circle"
+          size="large"
+          text="Sign in with Google"
+          // використовує auth-code flow для отримання authorization code
+        />
+      </div>
     </div>
   );
 };
