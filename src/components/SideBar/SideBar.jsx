@@ -133,6 +133,7 @@ const SideBar = () => {
                     <EditBoard
                       closeEditBoard={closeEditBoard}
                       boardId={board._id}
+                      boardTitle={board.title}
                     />
                   </div>
                 )}
