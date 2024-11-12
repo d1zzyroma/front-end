@@ -1,5 +1,5 @@
 import s from "./EditCard.module.css";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,10 +16,10 @@ const EditCardForm = ({ cardInfo, closeModal, cardId }) => {
   };
   const startDate = Date.now();
   const validationSchema = Yup.object({
-    title: Yup.string().required("Required"),
-    description: Yup.string(),
-    labelColor: Yup.string().required("Required"),
-    deadline: Yup.date().required("Required"),
+    title: Yup.string().required("Title is required"),
+    description: Yup.string().required("Description is required"),
+    labelColor: Yup.string().required("Color is required"),
+    deadline: Yup.date().required("Deadline is required"),
   });
   const dispatch = useDispatch();
   const handleSubmit = (values) => {
@@ -58,6 +58,11 @@ const EditCardForm = ({ cardInfo, closeModal, cardId }) => {
               <Form className={s.form}>
                 <div className={s.input}>
                   <Field name="title" placeholder="Title" className={s.field} />
+                  <ErrorMessage
+                    name="title"
+                    component="p"
+                    className={s.error}
+                  />
                 </div>
 
                 <div className={s.input}>
@@ -67,28 +72,36 @@ const EditCardForm = ({ cardInfo, closeModal, cardId }) => {
                     placeholder="Description"
                     className={s.fielddescr}
                   />
+                  <ErrorMessage
+                    name="description"
+                    component="p"
+                    className={s.error}
+                  />
                 </div>
 
                 <div className={s.input}>
-                  <div className={s.input}>
-                    <label>Label color</label>
-                    <div className={s.labelColors}>
-                      {labelOptions.map(({ color, priority }) => (
-                        <button
-                          key={color}
-                          type="button"
-                          className={`${s.colorButton} ${
-                            values.labelColor === color ? s.selectedColor : ""
-                          }`}
-                          style={{ color: color, backgroundColor: color }}
-                          onClick={() => {
-                            setFieldValue("labelColor", color);
-                            setFieldValue("priority", priority);
-                          }}
-                        />
-                      ))}
-                    </div>
+                  <label>Label color</label>
+                  <div className={s.labelColors}>
+                    {labelOptions.map(({ color, priority }) => (
+                      <button
+                        key={color}
+                        type="button"
+                        className={`${s.colorButton} ${
+                          values.labelColor === color ? s.selectedColor : ""
+                        }`}
+                        style={{ color: color, backgroundColor: color }}
+                        onClick={() => {
+                          setFieldValue("labelColor", color);
+                          setFieldValue("priority", priority);
+                        }}
+                      />
+                    ))}
                   </div>
+                  <ErrorMessage
+                    name="labelColor"
+                    component="p"
+                    className={s.error}
+                  />
                 </div>
 
                 <div className={s.input}>
@@ -102,6 +115,11 @@ const EditCardForm = ({ cardInfo, closeModal, cardId }) => {
                     showPopperArrow={false}
                     onFocus={(e) => e.target.blur()}
                     onKeyDown={(e) => e.preventDefault()}
+                  />
+                  <ErrorMessage
+                    name="deadline"
+                    component="p"
+                    className={s.error}
                   />
                 </div>
 

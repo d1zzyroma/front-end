@@ -1,7 +1,7 @@
 .container {
-  /* min-width: 135px; */
+  min-width: 135px;
   /* max-width: 290px; */
-  /* height: 100px; */
+  min-height: 86px;
   padding: 18px;
   background-color: var(--bg-screen);
   position: absolute;
@@ -10,12 +10,13 @@
   z-index: 100;
   border-radius: 8px;
   overflow-y: auto;
+  font-family: "Poppins", sans-serif;
 }
 .list {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
 .btn {
@@ -24,7 +25,7 @@
   gap: 8px;
   justify-content: space-between;
   align-items: center;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-size: 14px;
   font-style: normal;
   line-height: normal;
@@ -50,6 +51,10 @@
   height: 16px;
   fill: none;
   stroke: var(--text-primary);
+  &:hover {
+    color: var(--hover-modal-btn);
+    stroke: var(--hover-modal-btn);
+  }
 }
 
 /* Стилі для смуги прокрутки */
@@ -63,15 +68,14 @@
   border-radius: 8px;
 
   /* Колір фону смуги прокрутки */
-  /* position: fixed;
-  right: 20px; */
+  position: fixed;
+  right: 20px;
 }
 
 .container::-webkit-scrollbar-thumb {
   background-color: var(--scroll-color-horiz); /* Колір самої смуги прокрутки */
   border-radius: 8px; /* Закруглені кути смуги прокрутки */
 }
-
 /* Змінити колір смуги прокрутки при наведенні */
 .container::-webkit-scrollbar-thumb:hover {
   background-color: var(--scroll-hover);

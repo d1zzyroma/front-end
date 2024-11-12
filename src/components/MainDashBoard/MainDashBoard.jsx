@@ -254,7 +254,7 @@ import EllipsisText from "react-ellipsis-text";
 import AddCardForm from "../AddCard/AddCard.jsx";
 import EditCardForm from "../EditCard/EditCard.jsx";
 import AddColumnForm from "../AddColumnForm/AddColumnForm.jsx";
-import { useParams } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import { allColumnsByBoard } from "../../redux/сolumns/selectors.js";
 import { deleteColumn } from "../../redux/сolumns/operations.js";
@@ -264,8 +264,9 @@ import ChangeColumn from "./ChangeColumn/ChangeColumn.jsx";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 // Компонент основної дошки для управління колонками та картками
-const MainDashBoard = () => {
-  const { boardId } = useParams();
+const MainDashBoard = ({ boardId }) => {
+  // const { boardId } = useParams();
+
   const dispatch = useDispatch();
 
   // Параметри для пріоритетів карток
@@ -388,7 +389,7 @@ const MainDashBoard = () => {
                             const isDeadlinePassed = currentDate > deadline;
 
                             return (
-                              <div key={cardIndex} className={s.card}>
+                              <div key={cardIndex}>
                                 <Draggable
                                   draggableId={card._id}
                                   index={index}
@@ -399,6 +400,7 @@ const MainDashBoard = () => {
                                       {...provided.dragHandleProps}
                                       {...provided.draggableProps}
                                       ref={provided.innerRef}
+                                      className={s.card}
                                     >
                                       <div
                                         className={s.cardStatusSpanWrapper}
@@ -531,8 +533,8 @@ const MainDashBoard = () => {
                   onClick={() => openModal(index)}
                 >
                   <span className={s.btnWrapper}>
-                    <span className={s.btnIconWrapper}>
-                      <SvgIcon id="icon-plus" className={s.columnIcons} />
+                    <span className={s.addIconWrapper}>
+                      <SvgIcon id="icon-plus" className={s.addCardIcon} />
                     </span>
                     <span>Add another card</span>
                   </span>
@@ -551,8 +553,8 @@ const MainDashBoard = () => {
           {/* Кнопка для додавання нової колонки */}
           <button className={s.addColumnBtn} onClick={openModalAddColumn}>
             <span className={s.btnColumnWrapper}>
-              <span className={s.btnIconWrapper}>
-                <SvgIcon id="icon-plus" className={s.columnIcons} />
+              <span className={s.columnIconWrapper}>
+                <SvgIcon id="icon-plus" className={s.addColumnIcon} />
               </span>
               <span>Add another column</span>
             </span>

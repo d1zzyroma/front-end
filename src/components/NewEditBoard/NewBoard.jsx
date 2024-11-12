@@ -9,26 +9,31 @@ import icons from "../../images/icons/icons.js";
 import backgrounds from "../../images/background/background.js";
 
 export const NewBoard = ({ closeModal }) => {
-  const [iconsSelected, setIconsSelected] = useState("icon-Project");
+  const [iconsSelected, setIconsSelected] = useState("Project");
   const [backgroundSelected, setBackgroundSelected] = useState("0"); // Изменили на null
   const [title, setTitle] = useState("");
+  const [titleError, setTitleError] = useState("");
 
   const dispatch = useDispatch();
 
-  const handleTitleChange = (event) => setTitle(event.target.value);
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+    if (event.target.value.trim()) {
+      setTitleError("");
+    }
+  };
+
   const handleIconChange = (event) =>
     setIconsSelected(event.currentTarget.dataset.source);
 
   // Обработчик выбора фона
   const handleBackgroundChange = (event) => {
     const selectedBackgroundId = event.currentTarget.dataset.source;
-    console.log("Selected background ID:", selectedBackgroundId); // Для проверки
 
     // Ищем сам объект фона по ID
     const selectedBackground = backgrounds.find(
       (bg) => bg.id === parseInt(selectedBackgroundId)
     );
-    console.log("Selected background:", selectedBackground);
 
     // Сохраняем только ID выбранного фона
     setBackgroundSelected(selectedBackground ? selectedBackground.id : "0");
@@ -42,6 +47,11 @@ export const NewBoard = ({ closeModal }) => {
   };
 
   const createNewBoard = () => {
+    if (!title.trim()) {
+      setTitleError("Title is required");
+      return;
+    }
+
     dispatch(addBoard(newBoardObject));
 
     closeModal();
@@ -63,6 +73,7 @@ export const NewBoard = ({ closeModal }) => {
           value={title}
           onChange={handleTitleChange}
         />
+        {titleError && <p className={styles.error}>{titleError}</p>}
         <button onClick={closeModal}>
           <SvgIcon id="icon-close" className={styles.iconclose} />
         </button>

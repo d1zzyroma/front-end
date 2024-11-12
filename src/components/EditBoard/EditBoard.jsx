@@ -9,10 +9,11 @@ import icons from "../../images/icons/icons.js";
 import backgrounds from "../../images/background/background.js";
 import { getBoardById } from "../../redux/сolumns/operations.js";
 
-export const EditBoard = ({ closeEditBoard, boardId }) => {
-  const [iconsSelected, setIconsSelected] = useState("icon-Project");
-  const [backgroundSelected, setBackgroundSelected] = useState("1"); // Змінюємо на ID як в NewBoard
-  const [title, setTitle] = useState("");
+export const EditBoard = ({ closeEditBoard, boardId, boardTitle }) => {
+  const [iconsSelected, setIconsSelected] = useState("Project");
+  const [backgroundSelected, setBackgroundSelected] = useState("0"); // Змінюємо на ID як в NewBoard
+  const [title, setTitle] = useState(boardTitle);
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
 
@@ -23,13 +24,11 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
   // Обробник вибору фону, аналогічний NewBoard
   const handleBackgroundChange = (event) => {
     const selectedBackgroundId = event.currentTarget.dataset.source;
-    console.log("Selected background ID:", selectedBackgroundId); // Для перевірки
 
     // Знаходимо фон за ID
     const selectedBackground = backgrounds.find(
       (bg) => bg.id === parseInt(selectedBackgroundId)
     );
-    console.log("Selected background:", selectedBackground);
 
     // Зберігаємо лише ID вибраного фону
     setBackgroundSelected(
@@ -44,7 +43,12 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
   };
 
   const createUpdatedBoard = async () => {
-    console.log("Board object to dispatch:", editedBoardObject);
+    if (!title.trim()) {
+      setError("Title is required!");
+      return;
+    }
+    setError("");
+
     dispatch(updateBoard({ boardId, editedBoardObject }));
     await dispatch(getBoardById(boardId));
     closeEditBoard();
@@ -66,6 +70,7 @@ export const EditBoard = ({ closeEditBoard, boardId }) => {
           value={title}
           onChange={handleTitleChange}
         />
+        {error && <p className={styles.errorText}>{error}</p>}
         <button onClick={closeEditBoard}>
           <SvgIcon id="icon-close" className={styles.iconclose} />
         </button>

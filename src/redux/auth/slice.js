@@ -7,6 +7,7 @@ import {
   updateUserProfile,
   updateUserTheme,
   needHelp,
+  googleLogIn,
 } from "./operations";
 
 const initialState = {
@@ -42,6 +43,16 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
+      .addCase(googleLogIn.fulfilled, (state, action) => {
+        const { name, email, avatar, theme, accessToken } = action.payload.data;
+        state.user = { name, email, avatar, theme };
+        console.log(state.user + "google auth user");
+        console.log(accessToken + "token in slice");
+
+        state.token = accessToken;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
       .addCase(logOut.fulfilled, (state) => {
         state.user = initialState.user;
         state.token = null;
@@ -58,7 +69,7 @@ const authSlice = createSlice({
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
         const { name, email, avatarUrl, theme } = action.payload.date;
-        state.user = { name, email, avatar: avatarUrl, theme };
+        state.user = { name, email, avatarURL: avatarUrl, theme };
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })

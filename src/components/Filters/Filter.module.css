@@ -40,8 +40,11 @@
   top: 14px;
   right: 14px;
   fill: var(--text-primary);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+.closeIcon:hover {
+  fill: var(--hover-btn);
+}
 .subtitleWrapper {
   display: flex;
   justify-content: space-between;

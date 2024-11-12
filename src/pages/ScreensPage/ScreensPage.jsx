@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+
 import { useState } from "react";
 import MainDashBoard from "../../components/MainDashBoard/MainDashBoard.jsx";
 import SvgIcon from "../../components/SvgIcon/SvgIcon.jsx";
@@ -9,6 +9,7 @@ import { BallTriangle } from "react-loader-spinner";
 import backgrounds from "../../images/background/background.js";
 import {
   loadingColumns,
+  selectedBoardId,
   selectedBoardInfo,
 } from "../../redux/сolumns/selectors.js";
 import ScreenPageEmpty from "./ScreenPageEmpty.jsx";
@@ -115,12 +116,28 @@ const FilterIcon = styled(SvgIcon)`
   transition: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 `;
 
+const FilterBox = styled.button`
+  display: flex;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover ${FilterText} {
+    color: var(--hover-btn);
+  }
+
+  &:hover ${FilterIcon} {
+    stroke: var(--hover-btn);
+  }
+`;
+
 const ScreensPage = () => {
-  const { boardId } = useParams();
+  // const { boardId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const loadCollumn = useSelector(loadingColumns);
   const boardInfo = useSelector(selectedBoardInfo);
-
+  const boardId = useSelector(selectedBoardId);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 

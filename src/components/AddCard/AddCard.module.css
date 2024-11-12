@@ -31,10 +31,10 @@
   top: 14px;
   right: 14px;
   fill: var(--text-primary);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &&:hover {
-    transform: rotate(90deg);
-    transition: transform 0.5s;
+    fill: var(--hover-btn);
   }
 }
 .modalcontent {
@@ -42,7 +42,6 @@
 
   border-radius: 8px;
   max-width: 350px;
-  max-height: 522px;
 }
 .title {
   font-weight: 500;
@@ -137,4 +136,8 @@
 }
 .btntext {
   color: var(--text-selected-day);
+}
+.error {
+  color: red;
+  font-size: 12px;
 }

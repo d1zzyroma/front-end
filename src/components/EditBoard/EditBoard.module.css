@@ -30,6 +30,10 @@
   top: 14px;
   right: 14px;
   fill: var(--text-primary);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.iconclose:hover {
+  fill: var(--hover-btn);
 }
 .textNew {
   font-size: 18px;
@@ -193,4 +197,9 @@
   height: 26px;
   z-index: 999;
   opacity: 0;
+}
+.errorText {
+  color: red;
+  margin-top: -15px;
+  font-size: 12px;
 }

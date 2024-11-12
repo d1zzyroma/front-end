@@ -204,9 +204,19 @@ export const updateUserProfile = createAsyncThunk(
       if (credentials.avatarUrl) {
         formData.append("avatar", credentials.avatarUrl); // додавання файлу
       }
-      formData.append("name", credentials.name);
-      formData.append("email", credentials.email);
-      formData.append("password", credentials.password);
+      if (credentials.name) {
+        formData.append("name", credentials.name);
+      }
+      if (credentials.email) {
+        formData.append("email", credentials.email);
+      }
+      if (credentials.password) {
+        formData.append("password", credentials.password);
+      }
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+      // console.log(formData);
 
       // Відправка даних з заголовком для форм
       const res = await taskProApi.patch("user/profile", formData, {
@@ -302,6 +312,46 @@ export const needHelp = createAsyncThunk(
         progress: undefined,
         theme: "light",
       });
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const googleLogIn = createAsyncThunk(
+  "auth/googleLogin",
+  async (data, thunkAPI) => {
+    const code = { code: data };
+    try {
+      const res = await taskProApi.post("/auth/verify-oauth", code);
+      setAuthHeader(res.data.data.accessToken);
+
+      setTimeout(() => {
+        toast.success(`${res.data.data.user.name}, welcome to TaskPro! 🚀`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
+      }, 1000);
+
+      return res.data;
+    } catch (error) {
+      setTimeout(() => {
+        toast.error("Incorrect email or password. Please try again.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
+      }, 1000);
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
