@@ -42,12 +42,11 @@
   width: 18px;
   height: 18px;
   fill: var(--text-primary);
-  stroke: var(--text-primary);
-  transition: fill 0.3s, stroke 0.3s;
+  stroke: none;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
-    stroke: var(--primary-main);
-    fill: var(--primary-main);
+    fill: var(--hover-btn);
   }
 }
 
