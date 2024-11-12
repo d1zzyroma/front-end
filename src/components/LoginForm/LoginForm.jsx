@@ -70,7 +70,7 @@ const LoginForm = () => {
     },
     onError: () => console.log("Login Failed"),
     // useOneTap: false,
-    // flow: "auth-code",
+    flow: "auth-code",
   });
 
   return (
