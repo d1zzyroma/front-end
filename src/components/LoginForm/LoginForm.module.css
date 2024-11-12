@@ -95,12 +95,12 @@
   text-decoration: none;
   color: var(--primary-light);
   padding: 10px 40px 10px 40px;
-  border: 1px solid rgba(190, 219, 176, 0.9);
-  &:hover,
+  /* border: 1px solid rgba(190, 219, 176, 0.9); */
+  /* &:hover,
   &:focus {
     background-color: #1f1f1f;
     transition: background-color 0.3s;
-  }
+  } */
 }
 
 .iconGoogle {
