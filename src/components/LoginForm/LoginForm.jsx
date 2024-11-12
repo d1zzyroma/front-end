@@ -10,7 +10,7 @@ import {
   userCurrent,
 } from "../../redux/auth/operations.js"; // Імпортуйте userCurrent
 import { GoogleLogin } from "@react-oauth/google";
-import { useGoogleLogin } from "@react-oauth/google";
+
 // Валідація
 const loginSchema = yup.object().shape({
   email: yup

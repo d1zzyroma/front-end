@@ -117,7 +117,13 @@ import s from "./RegisterForm.module.css";
 import icons from "../../images/icons/icons.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { register, logIn, userCurrent } from "../../redux/auth/operations.js";
+import {
+  register,
+  logIn,
+  userCurrent,
+  googleLogIn,
+} from "../../redux/auth/operations.js";
+import { GoogleLogin } from "@react-oauth/google";
 
 // Валідація
 const registerSchema = yup.object().shape({
@@ -242,6 +248,29 @@ const RegisterForm = () => {
           </Form>
         )}
       </Formik>
+      <div className={s.btnGoogleLogin}>
+        <GoogleLogin
+          theme="filled_black"
+          onSuccess={async (response) => {
+            try {
+              console.log(response);
+
+              const data = response.credential;
+              await dispatch(googleLogIn(data));
+              await dispatch(userCurrent());
+            } catch (error) {
+              console.error("Login Failed:", error);
+            }
+          }}
+          onError={() => console.log("Login Failed")}
+          useOneTap={false} // вимикає One Tap, щоб спрацювала auth-code
+          logo_alignment="center"
+          shape="circle"
+          size="large"
+          text="Sign in with Google"
+          // використовує auth-code flow для отримання authorization code
+        />
+      </div>
     </div>
   );
 };

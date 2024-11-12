@@ -35,7 +35,33 @@
   background-color: rgba(15, 15, 15, 0.4);
   border: 1px solid rgba(190, 219, 176, 0.9);
 }
+.btnGoogleLogin {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 14px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+  color: var(--primary-light);
+  padding: 10px 40px 10px 40px;
+  border: 1px solid rgba(190, 219, 176, 0.9);
+  &:hover,
+  &:focus {
+    background-color: #1f1f1f;
+    transition: background-color 0.3s;
+  }
+}
 
+.iconGoogle {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
 .error {
   color: red;
   font-size: 10px;
