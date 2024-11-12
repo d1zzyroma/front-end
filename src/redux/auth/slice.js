@@ -44,7 +44,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(googleLogIn.fulfilled, (state, action) => {
-        const { name, email, avatar, theme, accessToken } = action.payload.data;
+        const { accessToken } = action.payload.data;
         // state.user = { name, email, avatar, theme };
 
         state.token = accessToken;
