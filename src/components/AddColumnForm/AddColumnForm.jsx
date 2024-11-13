@@ -9,7 +9,7 @@ const AddColumnForm = ({ closeModal, boardId }) => {
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
-    title: Yup.string().required("Title is required"),
+    title: Yup.string().min(3).required("Title is required"),
   });
 
   const initialValues = {

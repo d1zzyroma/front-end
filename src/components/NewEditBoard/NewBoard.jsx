@@ -18,8 +18,15 @@ export const NewBoard = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   const handleTitleChange = (event) => {
+    const value = event.target.value;
+
     setTitle(event.target.value);
-    if (event.target.value.trim()) {
+
+    if (!value.trim()) {
+      setTitleError("Title is required");
+    } else if (value.trim().length < 3) {
+      setTitleError("Title must be at least 3 characters");
+    } else {
       setTitleError("");
     }
   };
@@ -50,6 +57,11 @@ export const NewBoard = ({ closeModal }) => {
   const createNewBoard = () => {
     if (!title.trim()) {
       setTitleError("Title is required");
+      return;
+    }
+
+    if (title.trim().length < 3) {
+      setTitleError("Title must be at least 3 characters");
       return;
     }
 

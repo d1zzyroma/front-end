@@ -82,19 +82,6 @@ const BoardTitle = styled.h2`
   }
 `;
 
-const FilterBox = styled.button`
-  display: flex;
-  gap: 2px;
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  padding: ${({ hasBackground }) => (hasBackground ? "10px" : "none")};
-  border-radius: ${({ hasBackground }) => (hasBackground ? "8px" : "none")};
-  background-color: ${({ hasBackground }) =>
-    hasBackground ? "var(--background-paper)" : "transparent"};
-`;
-
 const FilterText = styled.h3`
   font-weight: 500;
   font-size: 14px;
@@ -115,21 +102,35 @@ const FilterIcon = styled(SvgIcon)`
   transition: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 `;
 
-// const FilterBox = styled.button`
-//   display: flex;
-//   gap: 2px;
-//   background: none;
-//   border: none;
-//   cursor: pointer;
+const FilterBox = styled.button`
+  display: flex;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
 
-//   &:hover ${FilterText} {
-//     color: var(--hover-btn);
-//   }
+  padding: ${({ hasBackground }) => (hasBackground ? "10px" : "none")};
+  border-radius: ${({ hasBackground }) => (hasBackground ? "8px" : "none")};
+  background-color: ${({ hasBackground }) =>
+    hasBackground ? "var(--background-paper)" : "transparent"};
+  transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
-//   &:hover ${FilterIcon} {
-//     stroke: var(--hover-btn);
-//   }
-// `;
+  &:hover {
+    ${({ hasBackground }) =>
+      hasBackground
+        ? `
+          background-color: var(--hover-btn);
+        `
+        : `
+          & ${FilterText} {
+            color: var(--hover-btn);
+          }
+          & ${FilterIcon} {
+            stroke: var(--hover-btn);
+          }
+        `}
+  }
+`;
 
 const ScreensPage = () => {
   // const { boardId } = useParams();

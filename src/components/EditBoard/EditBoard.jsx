@@ -17,7 +17,20 @@ export const EditBoard = ({ closeEditBoard, boardId, boardTitle }) => {
 
   const dispatch = useDispatch();
 
-  const handleTitleChange = (event) => setTitle(event.target.value);
+  const handleTitleChange = (event) => {
+    const value = event.target.value;
+
+    setTitle(event.target.value);
+
+    if (!value.trim()) {
+      setError("Title is required!");
+    } else if (value.trim().length < 3) {
+      setError("Title must be at least 3 characters!");
+    } else {
+      setError("");
+    }
+  };
+
   const handleIconChange = (event) =>
     setIconsSelected(event.currentTarget.dataset.source);
 
@@ -47,6 +60,12 @@ export const EditBoard = ({ closeEditBoard, boardId, boardTitle }) => {
       setError("Title is required!");
       return;
     }
+
+    if (title.trim().length < 3) {
+      setError("Title must be at least 3 characters!");
+      return;
+    }
+
     setError("");
 
     dispatch(updateBoard({ boardId, editedBoardObject }));

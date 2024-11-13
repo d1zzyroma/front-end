@@ -11,7 +11,7 @@
   z-index: 1000;
 }
 .modal {
-  background: var(--primary-light);
+  background: var(--modal-bg);
   color: var(--text-primary);
   --font-family: "Poppins", sans-serif;
   display: flex;
@@ -22,6 +22,8 @@
   line-height: 129%;
   letter-spacing: -0.02em;
   border-radius: 8px;
+  box-shadow: 0 4px 16px 0 rgba(22, 22, 22, 0.05);
+  border: 1px solid rgba(190, 219, 176, 0.5);
 }
 
 .iconclose {
@@ -62,12 +64,10 @@
   padding: 14px;
   padding-left: 18px;
   border-radius: 8px;
-  border: 1px solid var(--primary-main);
+  border: 1px solid var(--modal-input-border);
+  background: var(--modal-bg);
+  color: var(--text-primary);
   opacity: 0.4;
-  &&:focus {
-    opacity: 1;
-    outline: var(--modal-input-border);
-  }
 }
 .fielddescr {
   padding: 14px;
@@ -75,10 +75,12 @@
   border-radius: 8px;
   height: 154px;
   resize: none;
-  border: 1px solid var(--primary-main);
+  border: 1px solid var(--modal-input-border);
+  background: var(--modal-bg);
+  color: var(--text-primary);
   opacity: 0.4;
 }
-.field,
+.field:focus,
 .fielddescr:focus {
   opacity: 1;
   outline: var(--modal-input-border);
