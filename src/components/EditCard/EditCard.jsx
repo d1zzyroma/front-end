@@ -11,9 +11,12 @@ const EditCardForm = ({ cardInfo, closeModal, cardId }) => {
   const initialValues = {
     title: cardInfo.title,
     description: cardInfo.description,
-    labelColor: cardInfo.labelColor,
+
+    priority: cardInfo.priority,
     deadline: cardInfo.deadline,
   };
+  console.log();
+
   const startDate = Date.now();
   const validationSchema = Yup.object({
     title: Yup.string().required("Title is required"),
@@ -83,18 +86,22 @@ const EditCardForm = ({ cardInfo, closeModal, cardId }) => {
                   <label>Label color</label>
                   <div className={s.labelColors}>
                     {labelOptions.map(({ color, priority }) => (
-                      <button
+                      <label
                         key={color}
-                        type="button"
-                        className={`${s.colorButton} ${
+                        className={`${s.colorLabel} ${
                           values.labelColor === color ? s.selectedColor : ""
                         }`}
-                        style={{ color: color, backgroundColor: color }}
-                        onClick={() => {
-                          setFieldValue("labelColor", color);
-                          setFieldValue("priority", priority);
-                        }}
-                      />
+                      >
+                        <Field
+                          type="radio"
+                          name="labelColor"
+                          value={color}
+                          className={`${s.colorRadio} ${s.colorButton}`}
+                          style={{ background: color }}
+                          onClick={() => setFieldValue("priority", priority)}
+                          checked={priority === values.priority}
+                        />
+                      </label>
                     ))}
                   </div>
                   <ErrorMessage

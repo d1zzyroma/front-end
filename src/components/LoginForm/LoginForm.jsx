@@ -138,6 +138,7 @@ const LoginForm = () => {
 
       <div className={s.btnGoogleLogin}>
         <GoogleLogin
+          type="icon"
           theme="filled_black"
           onSuccess={async (response) => {
             try {
@@ -153,7 +154,7 @@ const LoginForm = () => {
           onError={() => console.log("Login Failed")}
           useOneTap={false} // вимикає One Tap, щоб спрацювала auth-code
           logo_alignment="center"
-          shape="circle"
+          shape="rectangular"
           size="large"
           text="Sign in with Google"
           // використовує auth-code flow для отримання authorization code

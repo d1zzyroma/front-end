@@ -6,19 +6,22 @@ import "react-datepicker/dist/react-datepicker.css";
 import SvgIcon from "../SvgIcon/SvgIcon.jsx";
 import { useDispatch } from "react-redux";
 import { addCard } from "../../redux/cards/operations.js";
+import { useState } from "react";
 
 const AddCardForm = ({ closeModal, columnId }) => {
   const initialValues = {
     title: "",
     description: "",
-    labelColor: "",
-    deadline: null,
+    labelColor: "#656565", // Цвет по умолчанию для "Without priority"
+    priority: "Without priority",
+    deadline: new Date(),
   };
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const startDate = Date.now();
   const validationSchema = Yup.object({
-    title: Yup.string().required("Title is required"),
-    description: Yup.string().required("Description is required"),
+    title: Yup.string().required("Title is required").min(3),
+    description: Yup.string().required("Description is required").min(3),
     labelColor: Yup.string().required("Color is required"),
     deadline: Yup.date().required("Deadline is required"),
   });
@@ -28,7 +31,7 @@ const AddCardForm = ({ closeModal, columnId }) => {
   const handleSubmit = (values) => {
     const { title, description, deadline, priority } = values;
     const data = { title, description, deadline, priority };
-    dispatch(addCard({ columnId, data })); // Передаем columnId и data в виде объекта
+    dispatch(addCard({ columnId, data }));
     closeModal();
   };
 
@@ -56,7 +59,7 @@ const AddCardForm = ({ closeModal, columnId }) => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit} // columnId доступен через замыкание
+            onSubmit={handleSubmit}
           >
             {({ setFieldValue, values }) => (
               <Form className={s.form}>
@@ -87,18 +90,21 @@ const AddCardForm = ({ closeModal, columnId }) => {
                   <label>Label color</label>
                   <div className={s.labelColors}>
                     {labelOptions.map(({ color, priority }) => (
-                      <button
+                      <label
                         key={color}
-                        type="button"
-                        className={`${s.colorButton} ${
+                        className={`${s.colorLabel} ${
                           values.labelColor === color ? s.selectedColor : ""
                         }`}
-                        style={{ color: color, backgroundColor: color }}
-                        onClick={() => {
-                          setFieldValue("labelColor", color);
-                          setFieldValue("priority", priority);
-                        }}
-                      />
+                      >
+                        <Field
+                          type="radio"
+                          name="labelColor"
+                          value={color}
+                          className={`${s.colorRadio} ${s.colorButton}`}
+                          style={{ background: color }}
+                          onClick={() => setFieldValue("priority", priority)}
+                        />
+                      </label>
                     ))}
                   </div>
                   <ErrorMessage
@@ -111,12 +117,14 @@ const AddCardForm = ({ closeModal, columnId }) => {
                 <div className={s.input}>
                   <label htmlFor="deadline">Deadline</label>
                   <DatePicker
-                    selected={values.deadline}
-                    onChange={(date) => setFieldValue("deadline", date)}
+                    selected={selectedDate}
+                    onChange={(date) => {
+                      setFieldValue("deadline", date);
+                      setSelectedDate(date);
+                    }}
                     placeholderText="Select Date"
                     dateFormat="EEEE, MMMM dd"
                     minDate={startDate}
-                    value={startDate}
                     showPopperArrow={false}
                     onFocus={(e) => e.target.blur()}
                     onKeyDown={(e) => e.preventDefault()}

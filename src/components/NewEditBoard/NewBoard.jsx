@@ -7,13 +7,14 @@ import noBack from "../../images/images-bg/images-bg-default.png";
 import { addBoard } from "../../redux/boards/operations.js";
 import icons from "../../images/icons/icons.js";
 import backgrounds from "../../images/background/background.js";
+import { useNavigate } from "react-router-dom";
 
 export const NewBoard = ({ closeModal }) => {
   const [iconsSelected, setIconsSelected] = useState("Project");
   const [backgroundSelected, setBackgroundSelected] = useState("0"); // Изменили на null
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState("");
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleTitleChange = (event) => {
@@ -53,7 +54,7 @@ export const NewBoard = ({ closeModal }) => {
     }
 
     dispatch(addBoard(newBoardObject));
-
+    navigate(`/home/${newBoardObject.title}`);
     closeModal();
   };
 

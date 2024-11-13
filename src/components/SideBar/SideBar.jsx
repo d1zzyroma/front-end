@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import s from "./SideBar.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import cactusImg from "../../images/Sidebar/cactus.png";
@@ -15,6 +15,7 @@ import { selectUser } from "../../redux/auth/selectors.js";
 import { getBoardById } from "../../redux/сolumns/operations.js";
 import EditBoard from "../EditBoard/EditBoard.jsx";
 import { useNavigate } from "react-router-dom";
+import { selectedBoardInfo } from "../../redux/сolumns/selectors.js";
 
 const SideBar = () => {
   const isSideBarVisible = useSelector(selectSideBarVisibility);
@@ -22,6 +23,7 @@ const SideBar = () => {
   const handleClose = () => {
     dispatch(toggleSideBar());
   };
+  const selectedBoard = useSelector(selectedBoardInfo);
   const reduxBoards = useSelector(selectBoards);
   const boards = reduxBoards.slice().reverse();
   const userId = useSelector(selectUser);
@@ -65,8 +67,6 @@ const SideBar = () => {
     setEditBoardId(null);
   };
 
-  const location = useLocation();
-
   return (
     <>
       {isSideBarVisible && (
@@ -92,9 +92,7 @@ const SideBar = () => {
               <li
                 key={board._id}
                 className={`${s.boardItem} ${
-                  location.pathname === `/home/${board.title}`
-                    ? s.activeBoardItem
-                    : ""
+                  selectedBoard._id === board._id ? s.activeBoardItem : ""
                 }`}
               >
                 <NavLink

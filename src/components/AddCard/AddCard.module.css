@@ -1,3 +1,21 @@
+.colorButton {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0 4px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  position: relative;
+  transition: all 0.2s;
+  z-index: 100;
+}
+
+.colorButton:checked {
+  box-shadow: inset 0 0 0 2px var(--primary-light);
+}
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -90,21 +108,6 @@
   align-items: center;
 }
 
-.colorButton {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin: 0 4px;
-  border: 2px solid transparent; /* Стандартная граница */
-  cursor: pointer;
-  transition: all 0.2s;
-  z-index: 100;
-}
-
-.colorButton.selectedColor {
-  border-color: currentColor; /* Устанавливаем границу в цвет кнопки */
-  box-shadow: inset 0 0 0 2px var(--primary-light); /* Внутренний круг */
-}
 .btn {
   display: flex;
   justify-content: center;
