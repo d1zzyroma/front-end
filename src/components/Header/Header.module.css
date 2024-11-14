@@ -130,3 +130,6 @@
     display: none;
   }
 }
+.profileAvatar {
+  border-radius: 8px;
+}

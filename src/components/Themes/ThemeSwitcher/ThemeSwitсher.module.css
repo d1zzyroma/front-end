@@ -19,3 +19,6 @@
     color: var(--primary-main);
   }
 }
+.active {
+  color: var(--primary-main);
+}

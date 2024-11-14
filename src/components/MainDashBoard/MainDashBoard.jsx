@@ -452,7 +452,7 @@ const MainDashBoard = ({ boardId }) => {
                                           {!isDeadlinePassed && (
                                             <SvgIcon
                                               id="icon-bell"
-                                              className={s.columnIcons}
+                                              className={s.accentBell}
                                             />
                                           )}
                                           <button
