@@ -132,6 +132,8 @@ const SideBar = () => {
                       closeEditBoard={closeEditBoard}
                       boardId={board._id}
                       boardTitle={board.title}
+                      boardBg={board.background}
+                      boardIcon={board.icon}
                     />
                   </div>
                 )}

@@ -9,9 +9,15 @@ import icons from "../../images/icons/icons.js";
 import backgrounds from "../../images/background/background.js";
 import { getBoardById } from "../../redux/сolumns/operations.js";
 
-export const EditBoard = ({ closeEditBoard, boardId, boardTitle }) => {
-  const [iconsSelected, setIconsSelected] = useState("Project");
-  const [backgroundSelected, setBackgroundSelected] = useState("0"); // Змінюємо на ID як в NewBoard
+export const EditBoard = ({
+  closeEditBoard,
+  boardId,
+  boardTitle,
+  boardBg,
+  boardIcon,
+}) => {
+  const [iconsSelected, setIconsSelected] = useState(boardIcon);
+  const [backgroundSelected, setBackgroundSelected] = useState(boardBg); // Змінюємо на ID як в NewBoard
   const [title, setTitle] = useState(boardTitle);
   const [error, setError] = useState("");
 
