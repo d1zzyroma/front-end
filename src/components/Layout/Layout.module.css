@@ -1,0 +1,10 @@
+.cont {
+  margin: 0 auto;
+  display: flex;
+  width: 320px;
+}
+@media screen and (min-width: 375px) {
+  .cont {
+    width: 100vw;
+  }
+}
