@@ -17,7 +17,7 @@ import ScreenPageEmpty from "./ScreenPageEmpty.jsx";
 const Container = styled.div`
   background: var(--bg-screen);
   font-family: "Poppins", sans-serif;
-  width: 375px;
+  max-width: 375px;
   height: 812px;
   background-image: ${({ hasBackground, mobile }) =>
     hasBackground ? `url(${mobile})` : "none"};
@@ -25,7 +25,7 @@ const Container = styled.div`
   background-repeat: no-repeat;
 
   @media screen and (min-width: 765px) {
-    width: 768px;
+    min-width: 768px;
     height: 1024px;
     background-image: ${({ hasBackground, tablet }) =>
       hasBackground ? `url(${tablet})` : "none"};
