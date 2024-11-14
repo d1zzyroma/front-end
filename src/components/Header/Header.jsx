@@ -79,7 +79,7 @@ const Header = () => {
                 <img
                   src={userAva || userAvaDefault}
                   alt="avatar"
-                  className={s.profile_avatar}
+                  className={s.profileAvatar}
                 />
               </button>
             </div>
