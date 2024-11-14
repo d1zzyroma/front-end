@@ -381,9 +381,10 @@ const MainDashBoard = ({ boardId }) => {
                             const cardBackgroundColor = cardPriority
                               ? cardPriority.color
                               : "#fff";
-                            const deadline = card.deadline;
+                            const deadline = new Date(card.deadline);
+
                             const currentDate = new Date();
-                            const isDeadlinePassed = currentDate > deadline;
+                            const isDeadlinePassed = currentDate < deadline;
 
                             return (
                               <div key={cardIndex}>
