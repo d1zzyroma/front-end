@@ -257,7 +257,11 @@
   margin: 0.4em 0 !important;
   color: var(--text-primary) !important;
 }
-
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  color: var(--text-primary) !important;
+}
 .react-datepicker__day--outside-month {
   color: var(--secondary-main) !important;
 }
