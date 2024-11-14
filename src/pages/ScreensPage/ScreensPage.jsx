@@ -33,7 +33,7 @@ const Container = styled.div`
 
   @media screen and (min-width: 1439px) {
     width: 1440px;
-    height: 770px;
+
     max-width: calc(100vw - 260px);
 
     background-image: ${({ hasBackground, desktop }) =>
