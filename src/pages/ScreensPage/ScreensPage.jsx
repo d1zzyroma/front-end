@@ -18,7 +18,7 @@ const Container = styled.div`
   background: var(--bg-screen);
   font-family: "Poppins", sans-serif;
   max-width: 375px;
-  height: 812px;
+  height: 100vh;
   background-image: ${({ hasBackground, mobile }) =>
     hasBackground ? `url(${mobile})` : "none"};
   background-size: cover;
@@ -26,7 +26,7 @@ const Container = styled.div`
 
   @media screen and (min-width: 765px) {
     min-width: 768px;
-    height: 1024px;
+
     background-image: ${({ hasBackground, tablet }) =>
       hasBackground ? `url(${tablet})` : "none"};
   }
@@ -35,7 +35,7 @@ const Container = styled.div`
     width: 1440px;
     height: 770px;
     max-width: calc(100vw - 260px);
-    height: calc(100vh - 68px);
+
     background-image: ${({ hasBackground, desktop }) =>
       hasBackground ? `url(${desktop})` : "none"};
   }
