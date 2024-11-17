@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const taskProApi = axios.create({
-  baseURL: 'https://task-manager-backend-y4a1.onrender.com',
+  baseURL: 'https://back-end-4-dfu1.onrender.com',
 });
 
 export const setAuthHeader = (token) => {
